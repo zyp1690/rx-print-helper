@@ -1,0 +1,2560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>处方打印助手</title>
+<style>
+  /* ===== 主题变量（默认：经典蓝） ===== */
+  :root{
+    --blue:#1667b8; --blue-dark:#0d4d8c; --bg:#eef2f6; --card:#ffffff;
+    --line:#c6d2e0; --text:#16222f; --muted:#4d5f74; --green:#0f8a5f;
+    --accent:#ffb02e; --accent-text:#5a3200;
+    --head-from:#0d4d8c; --head-to:#1667b8;
+    --preview-bg:#c9d3dd;
+    --chip-bg:#f6f9fc; --chip-text:#33465e;
+    --soft:#f2f8ff; --soft-line:#cbe2fa; --soft-text:#23507f;
+    --in-bg:#ffffff; --in-line:#c6d2e0; --row-line:#e4eaf2;
+    --radius:8px;
+  }
+  /* 皮肤：青竹 */
+  body[data-skin="bamboo"]{
+    --blue:#157a5a; --blue-dark:#0b553d; --bg:#eef4ef; --card:#ffffff;
+    --line:#c4d9cb; --text:#152218; --muted:#44604f; --green:#157a5a;
+    --accent:#e8a33d; --accent-text:#4a2c00;
+    --head-from:#0b553d; --head-to:#157a5a; --preview-bg:#c3d5c9;
+    --chip-bg:#f2f8f4; --chip-text:#2f4d3c;
+    --soft:#eff8f3; --soft-line:#c2e0d0; --soft-text:#165c42;
+    --in-bg:#ffffff; --in-line:#c4d9cb; --row-line:#e0ece4;
+  }
+  /* 皮肤：暖杏 */
+  body[data-skin="apricot"]{
+    --blue:#c26a2a; --blue-dark:#8a4213; --bg:#f8f2ea; --card:#ffffff;
+    --line:#e2d0bc; --text:#2e2115; --muted:#6f5a45; --green:#4c8b3f;
+    --accent:#c26a2a; --accent-text:#fff5ec;
+    --head-from:#96491a; --head-to:#c26a2a; --preview-bg:#dccfbe;
+    --chip-bg:#fdf8f2; --chip-text:#5a4530;
+    --soft:#fdf5ec; --soft-line:#ebd3b6; --soft-text:#8a4a13;
+    --in-bg:#ffffff; --in-line:#e2d0bc; --row-line:#f0e5d7;
+  }
+  /* 皮肤：墨玉 */
+  body[data-skin="ink"]{
+    --blue:#4a5568; --blue-dark:#232c3a; --bg:#edf0f4; --card:#ffffff;
+    --line:#c8d0da; --text:#151c26; --muted:#4f5b6b; --green:#3f7d5f;
+    --accent:#8a6d3b; --accent-text:#fff8ea;
+    --head-from:#222b38; --head-to:#4a5568; --preview-bg:#c4cbd4;
+    --chip-bg:#f5f7fa; --chip-text:#39424f;
+    --soft:#f4f6f9; --soft-line:#d3dae3; --soft-text:#2d3748;
+    --in-bg:#ffffff; --in-line:#c8d0da; --row-line:#e3e8ef;
+  }
+  /* 皮肤：樱粉 */
+  body[data-skin="sakura"]{
+    --blue:#c2506e; --blue-dark:#8e2b45; --bg:#faf0f3; --card:#ffffff;
+    --line:#eccdd8; --text:#311c25; --muted:#74525f; --green:#4c8b6a;
+    --accent:#c2506e; --accent-text:#fff2f5;
+    --head-from:#96334d; --head-to:#c2506e; --preview-bg:#ddc6ce;
+    --chip-bg:#fdf4f7; --chip-text:#5e3a47;
+    --soft:#fdf3f6; --soft-line:#efc9d7; --soft-text:#95243f;
+    --in-bg:#ffffff; --in-line:#eccdd8; --row-line:#f6e2e9;
+  }
+  /* 皮肤：深海 */
+  body[data-skin="ocean"]{
+    --blue:#0f6f8c; --blue-dark:#064052; --bg:#ecf3f6; --card:#ffffff;
+    --line:#c0d5de; --text:#12262e; --muted:#40606c; --green:#12796b;
+    --accent:#e0a63c; --accent-text:#463000;
+    --head-from:#08485c; --head-to:#0f6f8c; --preview-bg:#c0d0d8;
+    --chip-bg:#f1f8fa; --chip-text:#2e4d59;
+    --soft:#eef8fb; --soft-line:#bcdbe7; --soft-text:#0a556b;
+    --in-bg:#ffffff; --in-line:#c0d5de; --row-line:#dceaf0;
+  }
+  /* ===== 深色皮肤 ===== */
+  body[data-skin="dark-blue"]{
+    --blue:#4da3ff; --blue-dark:#8ec6ff; --bg:#0e1621; --card:#18222f;
+    --line:#2c3a4c; --text:#e8eef7; --muted:#93a5bb; --green:#43c78e;
+    --accent:#ffb02e; --accent-text:#4a2c00;
+    --head-from:#0f2138; --head-to:#1d3b5e; --preview-bg:#0a1017;
+    --chip-bg:#1e2b3b; --chip-text:#c3d1e2;
+    --soft:#1b2735; --soft-line:#2f4055; --soft-text:#9cc9ff;
+    --in-bg:#111a25; --in-line:#2f3f52; --row-line:#243140;
+    --dark:1;
+  }
+  body[data-skin="dark-green"]{
+    --blue:#3fc98d; --blue-dark:#7ee0b3; --bg:#0d1713; --card:#17231d;
+    --line:#2a3b32; --text:#e6f2ec; --muted:#8fa99b; --green:#3fc98d;
+    --accent:#e8b356; --accent-text:#3d2a00;
+    --head-from:#0c1f18; --head-to:#173a2c; --preview-bg:#080f0c;
+    --chip-bg:#1c2b24; --chip-text:#bdd6c8;
+    --soft:#1a2a22; --soft-line:#2c4036; --soft-text:#8fe3b8;
+    --in-bg:#101a15; --in-line:#2c3d34; --row-line:#22312a;
+    --dark:1;
+  }
+  body[data-skin="dark-purple"]{
+    --blue:#a98bff; --blue-dark:#c9b6ff; --bg:#141020; --card:#1e1830;
+    --line:#332a4c; --text:#ece8f7; --muted:#9d93b8; --green:#4fd6a8;
+    --accent:#ffb02e; --accent-text:#3d2a00;
+    --head-from:#1b1233; --head-to:#33245c; --preview-bg:#0c0916;
+    --chip-bg:#241c3a; --chip-text:#cbc0e4;
+    --soft:#221b36; --soft-line:#382c58; --soft-text:#c4b0ff;
+    --in-bg:#161125; --in-line:#352c50; --row-line:#281f3e;
+    --dark:1;
+  }
+  body[data-skin="dark"]{
+    --blue:#e8c469; --blue-dark:#f5d88f; --bg:#0d0d0f; --card:#17171a;
+    --line:#2e2e33; --text:#f2f2f4; --muted:#9b9ba5; --green:#4fd6a8;
+    --accent:#e8c469; --accent-text:#2b2100;
+    --head-from:#0a0a0c; --head-to:#26262c; --preview-bg:#070708;
+    --chip-bg:#1f1f23; --chip-text:#d4d4dc;
+    --soft:#1d1d21; --soft-line:#33333a; --soft-text:#e8c469;
+    --in-bg:#111114; --in-line:#33333a; --row-line:#242429;
+    --dark:1;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:var(--bg); color:var(--text); font-size:13px;}
+  button{cursor:pointer; font-family:inherit;}
+  /* ===== 输入框：加大字号/内边距/边框，突出可填写区域 ===== */
+  input,select,textarea{
+    font-family:inherit; font-size:13.5px; line-height:1.5;
+    padding:7px 10px; border:2px solid var(--in-line); border-radius:7px;
+    background:var(--in-bg); color:var(--text); outline:none;
+    box-shadow:inset 0 1px 2px rgba(16,34,51,.05);
+    transition:border-color .15s, box-shadow .15s, background .15s;
+  }
+  input:hover,select:hover,textarea:hover{ border-color:var(--blue); }
+  input:focus,select:focus,textarea:focus{
+    border-color:var(--blue); box-shadow:0 0 0 3px rgba(22,103,184,.22), inset 0 1px 2px rgba(16,34,51,.05);
+  }
+  input:disabled,select:disabled,textarea:disabled{ opacity:.6; cursor:not-allowed; }
+  select option{background:var(--in-bg); color:var(--text);}
+  ::placeholder{color:var(--muted); opacity:.85;}
+  /* ===== 顶栏 ===== */
+  .app-header{background:linear-gradient(90deg,var(--head-from),var(--head-to)); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .app-header h1{font-size:17px; font-weight:600; letter-spacing:1px;}
+  .app-header .sub{font-size:11px; opacity:.8;}
+  .app-header .spacer{flex:1;}
+  .btn{border:none; border-radius:5px; padding:7px 14px; font-size:13px; background:rgba(255,255,255,.16); color:#fff; transition:.15s;}
+  .btn:hover{background:rgba(255,255,255,.3);}
+  .btn.primary{background:#ffb02e; color:#5a3200; font-weight:600;}
+  .btn.primary:hover{background:#ffc258;}
+  .btn.ghost{background:#fff; color:var(--blue);}
+  /* ===== 布局 ===== */
+  .layout{display:flex; gap:0; padding:14px; align-items:flex-start;}
+  .sidebar{width:520px; min-width:0; flex-shrink:0; display:flex; flex-direction:column; gap:12px;}
+  /* 窄屏：上下堆叠，取消拖动 */
+  @media (max-width:859px){
+    .layout{flex-wrap:wrap;}
+    .sidebar{width:100% !important; flex-basis:100%;}
+    .resizer{display:none;}
+    .preview-area{flex-basis:100%; min-width:0; position:static; max-height:none;}
+  }
+  /* ===== 可拖动分割条 ===== */
+  .resizer{flex:0 0 14px; align-self:stretch; cursor:col-resize; position:relative; display:flex;
+    align-items:center; justify-content:center; background:transparent; user-select:none; touch-action:none;}
+  .resizer::before{content:""; width:4px; height:52px; border-radius:3px; background:var(--line); transition:.15s;}
+  .resizer:hover::before,.resizer.dragging::before{background:var(--blue); height:80px; width:5px;}
+  body.resizing{cursor:col-resize;}
+  body.resizing *{user-select:none !important;}
+  /* 拖动时关闭过渡与吸附，保证跟手 */
+  body.resizing .sidebar{transition:none;}
+  body.resizing .preview-area{transition:none; position:static;}
+  /* 分割条握把点 */
+  .resizer .dots{display:flex; flex-direction:column; gap:3px; position:absolute;}
+  .resizer .dots i{width:3px; height:3px; border-radius:50%; background:var(--muted); opacity:0; transition:.15s; display:block;}
+  .resizer:hover .dots i,.resizer.dragging .dots i{opacity:.75;}
+  .preview-area{flex:1; min-width:320px; background:var(--preview-bg); border-radius:8px; padding:0; overflow:hidden;
+    display:flex; flex-direction:column; max-height:calc(100vh - 90px); position:sticky; top:14px;}
+  .preview-bar{display:flex; align-items:center; gap:8px; padding:7px 12px; background:var(--card);
+    border-bottom:1px solid var(--line); flex:0 0 auto;}
+  .preview-bar .pv-label{font-size:11.5px; color:var(--muted);}
+  .preview-bar .pv-size{font-size:11.5px; color:var(--soft-text); background:var(--soft); border:1px solid var(--soft-line);
+    border-radius:11px; padding:1px 9px;}
+  .preview-bar .pv-spacer{flex:1;}
+  .preview-bar .pv-zoom{font-size:12px; color:var(--text); min-width:40px; text-align:center; font-variant-numeric:tabular-nums;}
+  .pv-btn{width:22px; height:22px; border:1px solid var(--line); background:var(--in-bg); color:var(--text);
+    border-radius:5px; font-size:13px; line-height:1; display:inline-flex; align-items:center; justify-content:center;}
+  .pv-btn:hover{border-color:var(--blue); color:var(--blue);}
+  .preview-scroll{flex:1; overflow:auto; padding:18px; display:flex; justify-content:center; align-items:flex-start;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px 14px;}
+  .card h2{font-size:13.5px; color:var(--blue-dark); margin-bottom:10px; display:flex; align-items:center; gap:6px;}
+  .card h2::before{content:""; width:4px; height:14px; background:var(--blue); border-radius:2px; display:inline-block;}
+  .card h2 .hint{font-weight:400; font-size:11px; color:var(--muted); margin-left:auto;}
+  details.card summary{cursor:pointer; font-size:13.5px; color:var(--blue-dark); font-weight:600; user-select:none; display:flex; align-items:center; gap:6px; list-style:none;}
+  details.card summary::-webkit-details-marker{display:none;}
+  details.card summary::before{content:"▸"; color:var(--blue); transition:.15s;}
+  details.card[open] summary::before{transform:rotate(90deg);}
+  details.card summary:hover{color:var(--blue);}
+  /* ===== 智能粘贴 ===== */
+  .paste-row{display:flex; gap:8px; margin-top:8px;}
+  #pasteBox{width:100%; height:120px; resize:vertical; font-size:13.5px; line-height:1.75; padding:10px 12px; border:2px solid var(--in-line);}
+  #pasteBox:focus{border-color:var(--blue); box-shadow:0 0 0 3px rgba(22,103,184,.22);}
+  .parse-report{margin-top:8px; font-size:12px; line-height:1.7; background:#f2f8ff; border:1px solid #d3e6fb; border-radius:5px; padding:7px 10px; color:#2c5c8f; display:none; white-space:pre-wrap;}
+  .parse-report.ok{display:block;}
+  .parse-report .warn{color:#b06000;}
+  /* ===== 表单 ===== */
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:8px 10px;}
+  .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px 10px;}
+  .field{display:flex; flex-direction:column; gap:3px;}
+  .field label{font-size:12px; color:var(--text); opacity:.85; font-weight:600;}
+  /* ===== 必填项：红色提示 ===== */
+  :root{ --req:#e23c3c; --req-soft:rgba(226,60,60,.06); }
+  body[data-skin^="dark"]{ --req:#ff6b6b; --req-soft:rgba(255,107,107,.12); }
+  .field.req label::after{content:" *"; color:var(--req); font-weight:700;}
+  .field.req input:not([type=checkbox]):not([type=radio]),
+  .field.req select,
+  .field.req textarea{border-color:var(--req) !important; background:var(--req-soft);}
+  .field.req input:focus, .field.req select:focus, .field.req textarea:focus{
+    border-color:var(--req) !important; box-shadow:0 0 0 2px var(--req-soft);}
+  /* 未填写时的醒目提示（输入后由 JS 移除 .empty） */
+  .field.req.empty input:not([type=checkbox]):not([type=radio]),
+  .field.req.empty select,
+  .field.req.empty textarea{border-color:var(--req) !important; background:var(--req-soft); box-shadow:0 0 0 1px var(--req);}
+  /* 性别 chips 未选时的红色提示 */
+  .chips.req-empty .chip{border-color:var(--req); background:var(--req-soft); color:var(--req);}
+  .field.req.empty .diag-selected{border:1px dashed var(--req) !important; background:var(--req-soft);}
+  .req-tip{color:var(--req); font-size:11px; margin:-1px 0 4px;}
+  /* 药品行内的必填输入框（剂量/用法） */
+  .req-inp{border-color:var(--req) !important; background:var(--req-soft);}
+  .req-inp.empty{box-shadow:0 0 0 1px var(--req);}
+  .req-inp:focus{border-color:var(--req) !important; box-shadow:0 0 0 2px var(--req-soft);}
+  .drug-row .req-inp::placeholder{color:var(--req); opacity:.85;}
+  /* 导入弹窗的必选字段 */
+  .imp-field .fkey.req{color:var(--req); font-weight:700;}
+  .imp-field.required span:first-of-type{color:var(--req);}
+  .chips{display:flex; gap:6px; flex-wrap:wrap;}
+  .chip{border:1px solid var(--line); background:#f6f9fc; border-radius:20px; padding:3px 12px; font-size:12px; color:#41526a; transition:.12s;}
+  .chip:hover{border-color:var(--blue); color:var(--blue);}
+  .chip.on{background:var(--blue); border-color:var(--blue); color:#fff;}
+  /* ===== 药品行 ===== */
+  .drug-row{border:1px solid var(--line); border-radius:7px; padding:9px 10px; margin-bottom:9px; background:var(--soft); position:relative;}
+  .drug-row .row-top{display:flex; gap:8px; align-items:center; margin-bottom:6px;}
+  .drug-row .row-top input[type=text]{flex:1;}
+  .drug-row .idx{background:var(--blue); color:#fff; width:18px; height:18px; border-radius:50%; font-size:11px; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .drug-row .del{background:none; border:none; color:#c33; font-size:15px; padding:2px 5px;}
+  .drug-row .del:hover{color:#e33;}
+  .mini{width:88px;} .mini2{width:72px;}
+  /* 药品行内输入框：保持紧凑，抵消全局放大的内边距 */
+  .drug-row input,.drug-row select{font-size:13px; padding:6px 8px;}
+  .quick-freq,.quick-use{display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;}
+  .quick-freq .chip,.quick-use .chip{padding:2px 9px; font-size:11px;}
+  .add-drug{width:100%; border:1px dashed var(--blue); background:var(--soft); color:var(--blue); border-radius:6px; padding:8px; font-size:13px;}
+  .add-drug:hover{background:var(--soft-line);}
+  /* ===== 药品搜索 ===== */
+  .db-results{position:absolute; z-index:50; left:0; right:0; top:calc(100% + 2px); background:#fff; border:1px solid var(--line);
+    border-radius:6px; max-height:280px; overflow:auto; box-shadow:0 6px 18px rgba(20,40,70,.16); display:none;}
+  .db-results.on{display:block;}
+  .db-item{padding:6px 10px; cursor:pointer; border-bottom:1px solid var(--soft); font-size:12px; line-height:1.5;}
+  .db-item:last-child{border-bottom:none;}
+  .db-item:hover,.db-item.active{background:var(--soft);}
+  .db-item .nm{font-weight:600; color:var(--text);}
+  .db-item .br{color:var(--blue); font-weight:400;}
+  .db-item .meta{color:var(--muted); font-size:11px;}
+  .db-empty{padding:8px 10px; font-size:12px; color:var(--muted);}
+  /* ===== 已选诊断：拖动排序 / 删除 ===== */
+  .diag-selected{display:flex; flex-wrap:wrap; gap:6px; min-height:32px; padding:6px; border:1px dashed var(--line);
+    border-radius:6px; background:var(--soft);}
+  .diag-selected:empty::before{content:"尚未添加诊断，可从下方常用诊断点选或手动输入"; color:var(--muted); font-size:11.5px;}
+  .diag-tag{display:inline-flex; align-items:center; gap:5px; background:var(--blue); color:#fff; border-radius:20px;
+    padding:3px 6px 3px 11px; font-size:12px; cursor:grab; user-select:none; box-shadow:0 1px 3px rgba(0,0,0,.12); transition:.15s;}
+  .diag-tag:hover{filter:brightness(1.08);}
+  .diag-tag.dragging{opacity:.4; cursor:grabbing;}
+  .diag-tag.drop-target{outline:2px dashed #fff; outline-offset:2px;}
+  .diag-tag .ord{background:rgba(255,255,255,.28); border-radius:50%; width:15px; height:15px; font-size:10px;
+    display:inline-flex; align-items:center; justify-content:center;}
+  .diag-tag .rm{background:rgba(255,255,255,.22); border:none; color:#fff; width:16px; height:16px; border-radius:50%;
+    font-size:11px; line-height:1; display:inline-flex; align-items:center; justify-content:center; cursor:pointer;}
+  .diag-tag .rm:hover{background:#e05252;}
+  .diag-add{display:flex; gap:6px;}
+  .diag-add input{flex:1;}
+  .btn-mini{border:1px solid var(--blue); background:#fff; color:var(--blue); border-radius:5px; padding:4px 11px; font-size:12px; white-space:nowrap;}
+  .btn-mini:hover{background:var(--blue); color:#fff;}
+  /* ===== 常用诊断：下拉选择 + 管理面板 ===== */
+  .diag-selbar{display:flex; gap:6px;}
+  .diag-selbar select{flex:1;}
+  .diag-manage{display:none; margin-top:7px; padding:9px; border:1px solid var(--line); border-radius:7px; background:var(--soft);}
+  .diag-manage.on{display:block;}
+  .dm-hint{font-size:11.5px; color:var(--muted); margin-bottom:6px;}
+  .dm-list{list-style:none; margin:0 0 8px; padding:0; max-height:210px; overflow-y:auto;}
+  .dm-item{display:flex; align-items:center; gap:7px; padding:4px 7px; margin-bottom:4px; background:#fff;
+    border:1px solid var(--line); border-radius:6px; font-size:12px; cursor:grab; transition:.12s;}
+  .dm-item:hover{border-color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.07);}
+  .dm-item.dragging{opacity:.4; cursor:grabbing;}
+  .dm-item.drop-target{border-color:var(--blue); border-style:dashed; background:#eef5fd;}
+  .dm-item .grip{color:var(--muted); font-size:13px; letter-spacing:-2px; user-select:none;}
+  .dm-item .num{min-width:17px; height:17px; border-radius:50%; background:var(--blue); color:#fff; font-size:10px;
+    display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .dm-item .nm{flex:1; padding:1px 3px; border-radius:4px; cursor:text; word-break:break-all;}
+  .dm-item .nm:hover{background:#f2f7fd;}
+  .dm-item .nm[contenteditable]{background:#fff; outline:1.5px solid var(--blue); cursor:text;}
+  .dm-item .del{border:none; background:transparent; color:#c25; font-size:13px; line-height:1; cursor:pointer;
+    padding:2px 5px; border-radius:4px;}
+  .dm-item .del:hover{background:#fbe4e9;}
+  .dm-empty{padding:8px; text-align:center; color:var(--muted); font-size:11.5px;}
+  /* ===== 皮肤选择器 ===== */
+  .skin-bar{display:flex; align-items:center; gap:7px;}
+  .skin-bar .lbl{font-size:12px; opacity:.85;}
+  .skin-dot{width:20px; height:20px; border-radius:50%; border:2px solid rgba(255,255,255,.75); cursor:pointer;
+    padding:0; position:relative; transition:.15s;}
+  .skin-dot:hover{transform:scale(1.15);}
+  .skin-dot.on{box-shadow:0 0 0 2px rgba(255,255,255,.95), 0 0 0 4px rgba(0,0,0,.12);}
+  .skin-dot[data-skin="classic"]{background:linear-gradient(135deg,#0d4d8c,#1667b8);}
+  .skin-dot[data-skin="bamboo"]{background:linear-gradient(135deg,#0b553d,#157a5a);}
+  .skin-dot[data-skin="apricot"]{background:linear-gradient(135deg,#96491a,#c26a2a);}
+  .skin-dot[data-skin="ink"]{background:linear-gradient(135deg,#222b38,#4a5568);}
+  .skin-dot[data-skin="sakura"]{background:linear-gradient(135deg,#96334d,#c2506e);}
+  .skin-dot[data-skin="ocean"]{background:linear-gradient(135deg,#08485c,#0f6f8c);}
+  .skin-dot[data-skin="dark-blue"]{background:linear-gradient(135deg,#0e1621,#4da3ff);}
+  .skin-dot[data-skin="dark-green"]{background:linear-gradient(135deg,#0d1713,#3fc98d);}
+  .skin-dot[data-skin="dark-purple"]{background:linear-gradient(135deg,#141020,#a98bff);}
+  .skin-dot[data-skin="dark"]{background:linear-gradient(135deg,#0d0d0f,#e8c469);}
+  .skin-sep{width:1px; height:18px; background:rgba(255,255,255,.35); margin:0 2px;}
+
+  /* ===== 导入数据库弹窗 ===== */
+  .modal-mask{display:none; position:fixed; inset:0; background:rgba(8,15,26,.55); z-index:200;
+    align-items:center; justify-content:center; backdrop-filter:blur(2px);}
+  .modal-mask.on{display:flex;}
+  .modal{width:620px; max-width:calc(100vw - 40px); max-height:88vh; background:var(--card); color:var(--text);
+    border:1px solid var(--line); border-radius:10px; box-shadow:0 12px 40px rgba(0,0,0,.38);
+    display:flex; flex-direction:column; overflow:hidden;}
+  .modal-head{display:flex; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line);}
+  .modal-head h3{font-size:14.5px; color:var(--blue-dark); font-weight:600;}
+  .modal-x{margin-left:auto; border:none; background:transparent; color:var(--muted); font-size:14px;
+    width:26px; height:26px; border-radius:5px; line-height:1;}
+  .modal-x:hover{background:var(--soft); color:var(--text);}
+  .modal-body{padding:14px 16px; overflow-y:auto; flex:1;}
+  .modal-foot{display:flex; align-items:center; gap:9px; padding:11px 16px; border-top:1px solid var(--line);}
+  .modal-foot .imp-status{font-size:12px; color:var(--muted); margin-right:auto;}
+  .imp-btn-cancel{background:var(--in-bg); color:var(--text); border:1px solid var(--line);}
+  .imp-btn-cancel:hover{background:var(--soft);}
+  .modal-foot .btn.primary{background:var(--blue); color:#fff; font-weight:600;}
+  .modal-foot .btn.primary:disabled{opacity:.42; cursor:not-allowed;}
+  .imp-step{margin-bottom:15px;}
+  .imp-step:last-child{margin-bottom:0;}
+  .imp-label{font-size:12.5px; font-weight:600; color:var(--text); margin-bottom:7px; display:flex; align-items:center; gap:8px;}
+  .imp-all{margin-left:auto; font-size:11.5px; font-weight:400; border:1px solid var(--line); background:var(--in-bg);
+    color:var(--blue); border-radius:5px; padding:2px 9px;}
+  .imp-all:hover{background:var(--soft);}
+  .imp-file{display:flex; align-items:center; gap:10px; padding:10px; border:1.5px dashed var(--line);
+    border-radius:7px; background:var(--soft);}
+  .imp-file input[type=file]{flex:1; border:none; background:transparent; color:var(--text); font-size:12px; padding:0;}
+  .imp-fname{font-size:11.5px; color:var(--muted); word-break:break-all;}
+  .imp-tip{margin-top:8px; font-size:11.5px; color:var(--muted); line-height:1.6;}
+  .imp-fields{display:grid; grid-template-columns:repeat(2,1fr); gap:6px 12px;}
+  .imp-field{display:flex; align-items:center; gap:7px; padding:6px 9px; border:1px solid var(--line);
+    border-radius:6px; background:var(--in-bg); font-size:12px; cursor:pointer;}
+  .imp-field:hover{border-color:var(--blue);}
+  .imp-field input{width:14px; height:14px; accent-color:var(--blue); flex:0 0 auto;}
+  .imp-field .fkey{color:var(--muted); font-size:11px; margin-left:auto;}
+  .imp-modes{display:flex; flex-direction:column; gap:6px;}
+  .imp-mode{display:flex; align-items:flex-start; gap:9px; padding:8px 10px; border:1px solid var(--line);
+    border-radius:6px; background:var(--in-bg); cursor:pointer; font-size:12px;}
+  .imp-mode:hover{border-color:var(--blue);}
+  .imp-mode input{margin-top:2px; accent-color:var(--blue);}
+  .imp-mode i{display:block; font-style:normal; color:var(--muted); font-size:11px; margin-top:2px;}
+  /* ===== 预览纸张 ===== */
+  #scaler{transform-origin:top center;}
+  #page{
+    background:#fff; box-shadow:0 3px 14px rgba(20,40,70,.25);
+    font-family:"SimSun","宋体",serif; color:#111;
+    display:flex; flex-direction:column; position:relative;
+  }
+  #page .p-head{display:flex; align-items:baseline; position:relative; margin-bottom:2px;}
+  #page .p-title{flex:1; text-align:center; font-size:14pt; font-weight:bold; letter-spacing:2px;}
+  #page .p-lian{position:absolute; right:0; top:0; font-size:8pt;}
+  #page .p-cardline{text-align:right; font-size:8.5pt; line-height:1.35;}
+  #page .p-info{font-size:9.5pt; line-height:1.5; margin-top:1px;}
+  #page .p-info .underline{display:inline-block; min-width:56px; text-align:center; border-bottom:1px solid #333; padding:0 5px;}
+  #page hr{border:none; border-top:1.5px solid #111; margin:3px 0;}
+  #page table{width:100%; border-collapse:collapse; font-size:9.5pt;}
+  #page table th{font-weight:bold; text-align:left; padding:2px 2px; border-bottom:1.5px solid #111;}
+  #page table td{padding:2.5px 2px; vertical-align:top;}
+  #page .rp-label{font-size:10pt; font-weight:bold; margin:3px 0 1px;}
+  #page .spec{font-size:8pt; color:#333; padding-left:2em; line-height:1.3;}
+  #page .use-note{font-size:8pt; color:#333;}
+  #page .num{text-align:right; font-variant-numeric:tabular-nums;}
+  #page .p-sign{display:flex; align-items:baseline; font-size:9pt; margin-top:5px; gap:4px;}
+  #page .p-sign .doc{display:inline-block; min-width:90px; border-bottom:1px solid #333; text-align:center;}
+  #page .p-date{margin-left:auto;}
+  #page .p-foot1{display:flex; justify-content:space-between; font-size:8pt; margin-top:4px; line-height:1.4;}
+  #page .p-fee{font-size:9pt; margin-top:2px;}
+  #page .p-note{font-size:6.5pt; line-height:1.45; color:#222; margin-top:4px; text-align:justify;}
+  /* ===== 深色皮肤局部适配 ===== */
+  body[data-skin^="dark"] .card{box-shadow:0 1px 3px rgba(0,0,0,.35);}
+  body[data-skin^="dark"] .btn{background:rgba(255,255,255,.1);}
+  body[data-skin^="dark"] .btn:hover{background:rgba(255,255,255,.2);}
+  body[data-skin^="dark"] .btn.ghost{background:var(--in-bg); color:var(--blue);}
+  body[data-skin^="dark"] .parse-report{background:var(--soft); border-color:var(--soft-line); color:var(--soft-text);}
+  body[data-skin^="dark"] .parse-report .warn{color:#ffc46b;}
+  body[data-skin^="dark"] .drug-row{background:var(--in-bg);}
+  body[data-skin^="dark"] .row-top .idx{background:var(--soft); color:var(--soft-text);}
+  body[data-skin^="dark"] .db-results{background:var(--card); box-shadow:0 6px 20px rgba(0,0,0,.5);}
+  body[data-skin^="dark"] .db-item.on{background:var(--soft);}
+  body[data-skin^="dark"] .db-item:hover{background:var(--soft);}
+  body[data-skin^="dark"] .dm-item{background:var(--in-bg);}
+  body[data-skin^="dark"] .dm-item .nm:hover{background:var(--soft);}
+  body[data-skin^="dark"] .dm-item .nm[contenteditable]{background:var(--in-bg);}
+  body[data-skin^="dark"] .dm-item.drop-target{background:var(--soft);}
+  body[data-skin^="dark"] #page{box-shadow:0 3px 20px rgba(0,0,0,.7);}
+  body[data-skin^="dark"] .add-drug{background:var(--in-bg); color:var(--blue); border-color:var(--line);}
+  body[data-skin^="dark"] .add-drug:hover{background:var(--soft);}
+  /* ===== 打印 ===== */
+  @media print{
+    body{background:#fff;}
+    .app-header,.sidebar,.preview-bar,.modal-mask,.resizer{display:none !important;}
+    .layout{padding:0; display:block;}
+    .preview-area{padding:0; background:#fff; overflow:visible; display:block; border-radius:0; max-height:none; position:static;}
+    .preview-scroll{padding:0; overflow:visible; display:block;}
+    #scaler{transform:none !important; width:auto !important; height:auto !important;}
+    #page{box-shadow:none; width:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <h1>处方打印助手</h1>
+  <span class="sub">智能识别粘贴内容 · 点击选择录入 · 药品库自动匹配</span>
+  <span class="spacer"></span>
+  <button class="btn" onclick="openImport()">导入数据库文件</button>
+  <div class="skin-bar" id="skinBar">
+    <span class="lbl">界面皮肤</span>
+    <button class="skin-dot" data-skin="classic" title="经典蓝（浅色）" onclick="setSkin('classic')"></button>
+    <button class="skin-dot" data-skin="bamboo" title="青竹绿（浅色）" onclick="setSkin('bamboo')"></button>
+    <button class="skin-dot" data-skin="apricot" title="暖杏橙（浅色）" onclick="setSkin('apricot')"></button>
+    <button class="skin-dot" data-skin="ink" title="墨玉灰（浅色）" onclick="setSkin('ink')"></button>
+    <button class="skin-dot" data-skin="sakura" title="樱粉红（浅色）" onclick="setSkin('sakura')"></button>
+    <button class="skin-dot" data-skin="ocean" title="深海蓝（浅色）" onclick="setSkin('ocean')"></button>
+    <span class="skin-sep"></span>
+    <button class="skin-dot dark-dot" data-skin="dark-blue" title="深色 · 曜石蓝" onclick="setSkin('dark-blue')"></button>
+    <button class="skin-dot dark-dot" data-skin="dark-green" title="深色 · 松墨绿" onclick="setSkin('dark-green')"></button>
+    <button class="skin-dot dark-dot" data-skin="dark-purple" title="深色 · 夜幕紫" onclick="setSkin('dark-purple')"></button>
+    <button class="skin-dot dark-dot" data-skin="dark" title="深色 · 纯黑金" onclick="setSkin('dark')"></button>
+  </div>
+  <button class="btn ghost" onclick="loadSample()">载入示例</button>
+  <button class="btn" onclick="clearAll()">清空</button>
+  <button class="btn primary" onclick="window.print()">打 印</button>
+</div>
+
+<!-- ===== 导入数据库文件弹窗 ===== -->
+<div class="modal-mask" id="importMask">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>导入数据库文件</h3>
+      <button class="modal-x" onclick="closeImport()" title="关闭">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="imp-step">
+        <div class="imp-label">第一步：选择文件</div>
+        <div class="imp-file">
+          <input type="file" id="impFile" accept=".xlsx,.xls,.csv,.txt,.json,.js" onchange="onImportFile(event)">
+          <span class="imp-fname" id="impFName">支持 Excel(.xlsx/.xls) / CSV / TXT / JSON / JS</span>
+        </div>
+        <div class="imp-tip" id="impTip">选择药品数据文件后，可勾选需要导入的字段，再点击「开始导入」。</div>
+      </div>
+
+      <div class="imp-step" id="impFieldsStep" style="display:none">
+        <div class="imp-label">第二步：选择要导入的内容
+          <button class="imp-all" onclick="toggleAllImportFields()">全选 / 全不选</button>
+        </div>
+        <div class="imp-fields" id="impFields"></div>
+      </div>
+
+      <div class="imp-step" id="impModeStep" style="display:none">
+        <div class="imp-label">第三步：导入方式</div>
+        <div class="imp-modes">
+          <label class="imp-mode"><input type="radio" name="impMode" value="merge" checked>
+            <span><b>合并</b>（推荐）<i>同名药品更新，新药品追加，不动原有数据</i></span></label>
+          <label class="imp-mode"><input type="radio" name="impMode" value="replace">
+            <span><b>替换</b><i>清空现有药品库，仅保留本次导入内容</i></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="imp-status" id="impStatus"></span>
+      <button class="btn imp-btn-cancel" onclick="closeImport()">取消</button>
+      <button class="btn primary" id="impConfirm" disabled onclick="doImport()">开始导入</button>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+
+    <!-- 智能粘贴 -->
+    <div class="card">
+      <h2>智能粘贴识别 <span class="hint">复制处方文字后按 Ctrl+V 粘贴到此处</span></h2>
+      <textarea id="pasteBox" placeholder="支持粘贴整张处方文字或单行药品，自动识别药品名称和规格，例如：&#10;美林混悬液/布洛芬混悬液 2g 100ML/瓶 10ML 必要时 口服 17.85 1瓶 17.85&#10;头孢地尼分散片 50mg*12片/盒 100MG 每日三次 口服 56.6 2盒&#10;姓名：张三 性别：男 年龄：10岁 科别：儿科门诊 病情及诊断：发热"></textarea>
+      <div class="paste-row">
+        <button class="btn" style="background:var(--blue)" onclick="parseWithClipboard()">识别并填入</button>
+        <button class="btn" id="btnPasteFromClip" style="background:#0f8a5f" onclick="pasteFromClipboard()">读取剪贴板</button>
+        <button class="btn" style="background:#e7ecf3;color:#41526a" onclick="document.getElementById('pasteBox').value='';hideReport()">清空粘贴框</button>
+      </div>
+      <div id="parseReport" class="parse-report"></div>
+    </div>
+
+    <!-- 患者信息 -->
+    <div class="card">
+      <h2>处方抬头 / 患者信息</h2>
+      <div class="grid2">
+        <div class="field req"><label>医院名称</label><input type="text" id="fHospital" placeholder="北京大学第一医院"></div>
+        <div class="field req"><label>姓名</label><input type="text" id="fName"></div>
+        <div class="field req"><label>性别</label>
+          <div class="chips" id="genderChips">
+            <button class="chip" data-v="男">男</button>
+            <button class="chip" data-v="女">女</button>
+          </div>
+        </div>
+        <div class="field req"><label>年龄</label><input type="text" id="fAge" placeholder="10岁"></div>
+        <div class="field req"><label>科别（点击选择）</label><input type="text" id="fDept" list="deptList" placeholder="儿科门诊"></div>
+        <div class="field"><label>就诊卡</label><input type="text" id="fCard"></div>
+        <div class="field"><label>病历号</label><input type="text" id="fMrn"></div>
+        <div class="field" style="grid-column:1 / -1"><label>患者地址</label><input type="text" id="fAddress" placeholder="XX省XX市XX县XX镇XX村"></div>
+      </div>
+      <div class="field" style="margin-top:8px"><label>科别快捷选择（下拉）</label>
+        <select id="deptSel"><option value="">— 快捷选择科别 —</option></select>
+      </div>
+      <div class="field req" style="margin-top:8px"><label>病情及诊断（已选诊断，可拖动排序、删除）</label>
+        <div class="diag-selected" id="diagSelected"></div>
+      </div>
+      <div class="field" style="margin-top:8px"><label>手动添加诊断</label>
+        <div class="diag-add">
+          <input type="text" id="diagInput" placeholder="输入诊断名称后回车或点添加" autocomplete="off">
+          <button class="btn-mini" onclick="addDiagFromInput()">＋ 添加</button>
+        </div>
+      </div>
+      <div class="field" style="margin-top:6px"><label>常用诊断（下拉选择，可编辑 / 删除 / 排序）</label>
+        <div class="diag-selbar">
+          <select id="diagSel"><option value="">— 从常用诊断中选择添加 —</option></select>
+          <button class="btn-mini" id="diagManageBtn" onclick="toggleDiagManage()">管理</button>
+        </div>
+        <div class="diag-manage" id="diagManage">
+          <div class="dm-hint">拖动条目可排序；双击文字可直接修改；点「✕」删除</div>
+          <ul class="dm-list" id="diagManageList"></ul>
+          <div class="diag-add">
+            <input type="text" id="diagNewItem" placeholder="新增常用诊断，回车或点添加" autocomplete="off">
+            <button class="btn-mini" onclick="addCommonDiag()">＋ 添加</button>
+          </div>
+        </div>
+      </div>
+      <datalist id="deptList">
+        <option>儿科门诊</option><option>普通内科</option><option>呼吸内科</option><option>消化内科</option>
+        <option>心血管内科</option><option>神经内科</option><option>内分泌科</option><option>普外科</option>
+        <option>骨科</option><option>皮肤科</option><option>眼科</option><option>耳鼻喉科</option>
+        <option>口腔科</option><option>妇产科</option><option>急诊科</option><option>发热门诊</option>
+      </datalist>
+    </div>
+
+    <!-- 药品 -->
+    <div class="card">
+      <h2>处方药品（Rp） <span class="hint">频次 / 用法 / 单位可直接下拉或点选</span></h2>
+      <div class="field" style="margin-bottom:9px"><label>从药品清单搜索添加（<span id="dbCount">0</span> 种企业商品，支持名称/品牌/助记码/厂家）</label>
+        <div style="position:relative">
+          <input type="text" id="dbSearch" placeholder="输入药品名 / 品牌 / 拼音首字母 / 厂家，如 阿莫西林、AMXL、乐药师" autocomplete="off">
+          <div id="dbResults" class="db-results"></div>
+        </div>
+      </div>
+      <div id="drugList"></div>
+      <button class="add-drug" onclick="addDrug()">＋ 添加药品</button>
+    </div>
+
+    <!-- 签发 -->
+    <div class="card">
+      <h2>签发信息</h2>
+      <div class="grid3">
+        <div class="field req"><label>处方医师</label><input type="text" id="fDoctor" placeholder="（签字或盖章有效）"></div>
+        <div class="field req"><label>日期</label><input type="date" id="fDate"></div>
+        <div class="field"><label>发药药房</label><input type="text" id="fPharmacy" placeholder="儿科门诊药房"></div>
+      </div>
+      <div class="field" style="margin-top:8px"><label>底部说明文字</label><textarea id="fNote" style="height:70px;font-size:11px"></textarea></div>
+    </div>
+
+  </div>
+
+  <div class="resizer" id="resizer" title="拖动调整左右宽度（双击恢复默认）">
+    <span class="dots"><i></i><i></i><i></i><i></i><i></i></span>
+  </div>
+
+  <div class="preview-area" id="previewArea">
+    <div class="preview-bar">
+      <span class="pv-label">预览</span>
+      <span class="pv-size" id="pvSize">210 × 148 mm（A5横）</span>
+      <span class="pv-spacer"></span>
+      <span class="pv-label">缩放</span>
+      <button class="pv-btn" onclick="stepZoom(-10)" title="缩小">－</button>
+      <span class="pv-zoom" id="pvZoom">100%</span>
+      <button class="pv-btn" onclick="stepZoom(10)" title="放大">＋</button>
+    </div>
+    <div class="preview-scroll">
+      <div id="scaler">
+        <div id="page"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<datalist id="freqList">
+  <option>每日一次</option><option>每日两次</option><option>每日三次</option><option>每日四次</option>
+  <option>每8小时一次</option><option>每6小时一次</option><option>每12小时一次</option>
+  <option>必要时服用</option><option>隔日一次</option><option>每晚一次</option><option>睡前一次</option><option>顿服</option>
+</datalist>
+<datalist id="useList">
+  <option>口服</option><option>静脉滴注</option><option>静脉注射</option><option>肌肉注射</option>
+  <option>皮下注射</option><option>雾化吸入</option><option>外用</option><option>含服</option>
+  <option>冲服</option><option>滴眼</option><option>滴鼻</option><option>吸入</option><option>灌肠</option>
+</datalist>
+<datalist id="catList">
+  <option>Rp</option><option>西药</option><option>中药</option><option>成药</option><option>输液</option><option>草约</option>
+</datalist>
+<datalist id="packList">
+  <option>瓶</option><option>盒</option><option>支</option><option>袋</option><option>片</option><option>粒</option><option>贴</option><option>丸</option><option>包</option><option>罐</option>
+</datalist>
+
+<!-- 企业商品清单数据（4000+ 条药品，含通用名/品牌别名/规格/单位/厂家/分类） -->
+<script src="药品清单库.js"></script>
+<script>
+/* ================= 状态 ================= */
+const DEFAULT_NOTE = "药师提示： 1、请遵医嘱服药；2、请在窗口处请药品；3、处方当日有效(如有特殊情况可延长至三日)；4、发出药品不予退换。注：实行双对方、双划价；医保患者、离、退休人员患高血压、糖尿病、冠心病、慢性肝炎、肝硬化、结核病、精神病、癌症、脑血管病、前列腺肥大疾病，且病情稳定需长期服用同一类药物的，药量可放宽到不超过一个月量。";
+
+let state = {
+  paper:{w:210, h:148, orient:"landscape", margin:8, zoom:100},
+  hospital:"", card:"", dept:"", mrn:"", address:"",
+  name:"", gender:"", age:"", diag:"",
+  doctor:"", date:"", pharmacy:"", note:DEFAULT_NOTE,
+  skin:"classic",
+  drugs:[]
+};
+
+function blankDrug(){
+  return {cat:"Rp", name:"", spec:"", dose:"", dunit:"", freq:"", usage:"", skin:false, price:"", qty:"", unit:"盒"};
+}
+
+/* ================= 表单渲染 ================= */
+const drugList = document.getElementById("drugList");
+
+function renderDrugs(){
+  drugList.innerHTML = "";
+  state.drugs.forEach((d,i)=>{
+    const div = document.createElement("div");
+    div.className = "drug-row";
+    div.innerHTML = `
+      <div class="row-top">
+        <span class="idx">${i+1}</span>
+        <input type="text" list="catList" value="${esc(d.cat)}" style="width:64px" data-i="${i}" data-k="cat" title="类别">
+        <input type="text" placeholder="药品名称" value="${esc(d.name)}" data-i="${i}" data-k="name">
+        <button class="del" title="删除" onclick="delDrug(${i})">✕</button>
+      </div>
+      <div class="row-top" style="margin-bottom:6px">
+        <input type="text" placeholder="规格：2g 100ML/瓶" value="${esc(d.spec)}" style="flex:1;font-size:11.5px" data-i="${i}" data-k="spec">
+      </div>
+      <div class="row-top" style="margin-bottom:2px">
+        <input type="text" placeholder="剂量 *" value="${esc(d.dose)}" class="mini2 req-inp${d.dose?"":" empty"}" data-i="${i}" data-k="dose" title="每次剂量（必填）">
+        <input type="text" list="dunitList" value="${esc(d.dunit)}" class="mini2 req-inp${d.dunit?"":" empty"}" data-i="${i}" data-k="dunit" title="剂量单位（必填）">
+        <input type="text" list="freqList" placeholder="频次" value="${esc(d.freq)}" style="flex:1" data-i="${i}" data-k="freq">
+        <input type="text" list="useList" placeholder="用法 *" value="${esc(d.usage)}" style="flex:1" class="req-inp${d.usage?"":" empty"}" data-i="${i}" data-k="usage" title="服用方法（必填）">
+      </div>
+      <div class="quick-freq">
+        ${["每日一次","每日两次","每日三次","每日四次","每8小时一次","必要时服用"].map(f=>`<button class="chip ${d.freq===f?"on":""}" onclick="setDrug(${i},'freq','${f}',this)">${f}</button>`).join("")}
+        <label style="font-size:11.5px;display:flex;align-items:center;gap:3px;margin-left:4px"><input type="checkbox" ${d.skin?"checked":""} onchange="setDrug(${i},'skin',this.checked)" style="padding:0">皮试</label>
+      </div>
+      <div class="row-top" style="margin-top:6px;margin-bottom:0">
+        <input type="number" step="0.01" min="0" placeholder="单价" value="${esc(d.price)}" class="mini" data-i="${i}" data-k="price">
+        <input type="number" step="1" min="0" placeholder="数量" value="${esc(d.qty)}" class="mini2" data-i="${i}" data-k="qty">
+        <input type="text" list="packList" value="${esc(d.unit)}" class="mini2" data-i="${i}" data-k="unit" title="数量单位">
+        <span style="margin-left:auto;font-size:12px;color:var(--muted)">金额：<b style="color:var(--green)">¥${(num(d.price)*num(d.qty)).toFixed(2)}</b></span>
+      </div>`;
+    drugList.appendChild(div);
+  });
+}
+const dunitDl = document.createElement("datalist"); dunitDl.id="dunitList";
+dunitDl.innerHTML = ["ML","MG","G","μg","IU","片","粒","袋","支","喷","丸","贴"].map(u=>`<option>${u}</option>`).join("");
+document.body.appendChild(dunitDl);
+
+function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");}
+function num(v){const n=parseFloat(v); return isNaN(n)?0:n;}
+
+function setDrug(i,k,v,btn){
+  state.drugs[i][k]=v;
+  if(btn){btn.parentElement.querySelectorAll(".chip").forEach(c=>c.classList.remove("on")); btn.classList.add("on");}
+  save(); renderPreview();
+}
+/* 输入/选择即时刷新"药品行必填框"红色状态（剂量 / 剂量单位 / 用法） */
+function refreshReqInputs(){
+  drugList.querySelectorAll(".req-inp").forEach(inp=>{
+    inp.classList.toggle("empty", !(inp.value||"").trim());
+  });
+}
+drugList.addEventListener("input", e=>{
+  const t=e.target; const i=t.dataset.i, k=t.dataset.k;
+  if(i!==undefined && k){ state.drugs[i][k]= t.type==="number"? t.value : t.value; save(); renderPreview(); }
+  if(t.classList.contains("req-inp")) t.classList.toggle("empty", !(t.value||"").trim());
+});
+function addDrug(){ state.drugs.push(blankDrug()); renderDrugs(); save(); }
+function delDrug(i){ state.drugs.splice(i,1); renderDrugs(); renderPreview(); save(); }
+
+/* 绑定普通字段 */
+const fieldMap = {fHospital:"hospital", fName:"name", fAge:"age", fDept:"dept", fCard:"card", fMrn:"mrn", fAddress:"address", fDoctor:"doctor", fDate:"date", fPharmacy:"pharmacy", fNote:"note"};
+Object.entries(fieldMap).forEach(([id,key])=>{
+  document.getElementById(id).addEventListener("input", e=>{
+    state[key]=e.target.value;
+    if(key==="dept") syncDeptSel();
+    save(); renderPreview();
+  });
+});
+/* 性别 chips */
+document.getElementById("genderChips").addEventListener("click", e=>{
+  if(!e.target.classList.contains("chip")) return;
+  state.gender = state.gender===e.target.dataset.v ? "" : e.target.dataset.v;
+  syncGender(); save(); renderPreview();
+});
+function syncGender(){
+  document.querySelectorAll("#genderChips .chip").forEach(c=>c.classList.toggle("on", c.dataset.v===state.gender));
+}
+
+/* ===== 科别（下拉选择）与诊断（多选点击） ===== */
+const DEPTS=["儿科门诊","普通内科","呼吸内科","消化内科","心血管内科","神经内科","内分泌科","普外科","骨科","皮肤科","眼科","耳鼻喉科","口腔科","妇产科","急诊科","发热门诊","中医科","康复科","泌尿外科","精神心理科","感染科","肛肠科","乳腺外科","疼痛科","老年科","全科"];
+const DEFAULT_DIAGS=["发热","咳嗽","咳痰","喘息","感冒","流行性感冒","急性上呼吸道感染","支气管炎","支气管肺炎","肺炎","哮喘","急性胃肠炎","腹泻","腹痛","腹胀","便秘","恶心","呕吐","咽炎","扁桃体炎","喉炎","过敏性鼻炎","鼻窦炎","中耳炎","结膜炎","口腔溃疡","尿路感染","湿疹","荨麻疹","皮疹","过敏性皮炎","接触性皮炎","头痛","头晕","偏头痛","失眠","贫血","软组织损伤","擦伤","挫伤","烧烫伤","高血压","2型糖尿病","高脂血症","冠心病","颈椎病","腰椎间盘突出","骨关节炎","关节痛"];
+/* 常用诊断库：用户可增删改排序，存 localStorage */
+let DIAGS=DEFAULT_DIAGS.slice();
+function loadDiags(){
+  try{
+    const raw=localStorage.getItem("rxDiagList_v1");
+    if(raw){ const arr=JSON.parse(raw); if(Array.isArray(arr)&&arr.length) DIAGS=arr.filter(x=>typeof x==="string"&&x.trim()); }
+  }catch(e){}
+}
+function saveDiags(){ try{ localStorage.setItem("rxDiagList_v1", JSON.stringify(DIAGS)); }catch(e){} }
+function buildChips(){
+  document.getElementById("deptSel").innerHTML='<option value="">— 快捷选择科别 —</option>'+DEPTS.map(d=>`<option>${d}</option>`).join("");
+  renderDiagSel(); renderDiagManage();
+}
+/* 下拉：常用诊断选项 */
+function renderDiagSel(){
+  const sel=document.getElementById("diagSel");
+  if(!sel) return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="">— 从常用诊断中选择添加 —</option>'
+    + DIAGS.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join("");
+  if(DIAGS.includes(cur)) sel.value=cur;
+}
+/* 管理面板列表 */
+function renderDiagManage(){
+  const ul=document.getElementById("diagManageList");
+  if(!ul) return;
+  if(!DIAGS.length){ ul.innerHTML='<li class="dm-empty">暂无常用诊断，请在下方添加</li>'; return; }
+  ul.innerHTML=DIAGS.map((d,i)=>`<li class="dm-item" draggable="true" data-i="${i}">
+    <span class="grip" title="拖动排序">⣿</span>
+    <span class="num">${i+1}</span>
+    <span class="nm" data-i="${i}" title="双击可修改">${esc(d)}</span>
+    <button class="del" data-i="${i}" title="删除">✕</button></li>`).join("");
+}
+function toggleDiagManage(){
+  const box=document.getElementById("diagManage");
+  box.classList.toggle("on");
+  document.getElementById("diagManageBtn").textContent=box.classList.contains("on")?"收起":"管理";
+}
+/* 新增常用诊断 */
+function addCommonDiag(){
+  const inp=document.getElementById("diagNewItem");
+  const vs=(inp.value||"").split(/[，,、;；\s]+/).map(s=>s.trim()).filter(Boolean);
+  if(!vs.length) return;
+  vs.forEach(v=>{ if(!DIAGS.includes(v)) DIAGS.push(v); });
+  inp.value=""; saveDiags(); renderDiagSel(); renderDiagManage();
+}
+/* 删除 / 双击改名 */
+document.getElementById("diagManageList").addEventListener("click", e=>{
+  const btn=e.target.closest(".del"); if(!btn) return;
+  DIAGS.splice(+btn.dataset.i,1);
+  saveDiags(); renderDiagSel(); renderDiagManage();
+});
+document.getElementById("diagManageList").addEventListener("dblclick", e=>{
+  const nm=e.target.closest(".nm"); if(!nm) return;
+  nm.setAttribute("contenteditable","true"); nm.focus();
+  document.execCommand&&document.execCommand("selectAll",false,null);
+  const i=+nm.dataset.i;
+  const commit=()=>{
+    nm.removeAttribute("contenteditable");
+    const v=(nm.textContent||"").trim();
+    if(!v){ nm.textContent=DIAGS[i]; return; }
+    if(v===DIAGS[i]) return;
+    DIAGS[i]=v; saveDiags(); renderDiagSel(); renderDiagManage();
+  };
+  nm.addEventListener("blur", commit, {once:true});
+  nm.addEventListener("keydown", ev=>{
+    if(ev.key==="Enter"){ ev.preventDefault(); nm.blur(); }
+    if(ev.key==="Escape"){ nm.textContent=DIAGS[i]; nm.blur(); }
+  });
+});
+/* 管理列表拖动排序 */
+let dmDragFrom=null;
+const dmList=document.getElementById("diagManageList");
+dmList.addEventListener("dragstart", e=>{
+  const it=e.target.closest(".dm-item"); if(!it) return;
+  dmDragFrom=+it.dataset.i; it.classList.add("dragging");
+  e.dataTransfer.effectAllowed="move";
+  try{ e.dataTransfer.setData("text/plain", String(dmDragFrom)); }catch(err){}
+});
+dmList.addEventListener("dragover", e=>{
+  const it=e.target.closest(".dm-item"); if(!it) return;
+  e.preventDefault(); e.dataTransfer.dropEffect="move";
+  dmList.querySelectorAll(".dm-item").forEach(x=>x.classList.remove("drop-target"));
+  it.classList.add("drop-target");
+});
+dmList.addEventListener("dragleave", e=>{
+  const it=e.target.closest(".dm-item"); if(it) it.classList.remove("drop-target");
+});
+dmList.addEventListener("drop", e=>{
+  const it=e.target.closest(".dm-item"); if(!it) return;
+  e.preventDefault();
+  const to=+it.dataset.i;
+  if(dmDragFrom===null||dmDragFrom===to) return;
+  const [m]=DIAGS.splice(dmDragFrom,1); DIAGS.splice(to,0,m);
+  dmDragFrom=null; saveDiags(); renderDiagSel(); renderDiagManage();
+});
+dmList.addEventListener("dragend", ()=>{
+  dmDragFrom=null;
+  dmList.querySelectorAll(".dm-item").forEach(x=>x.classList.remove("dragging","drop-target"));
+});
+/* 下拉选中即添加到已选诊断 */
+document.getElementById("diagSel").addEventListener("change", e=>{
+  const v=e.target.value; if(!v) return;
+  setDiagTerms(diagTerms().concat([v]));
+  renderDiagSelected(); renderPreview(); syncForm();
+  e.target.value="";
+});
+/* 新增项回车 */
+document.getElementById("diagNewItem").addEventListener("keydown", e=>{
+  if(e.key==="Enter"){ e.preventDefault(); addCommonDiag(); }
+});
+
+/* ===== 药品清单搜索：支持名称/品牌别名/助记码/厂家模糊匹配，选中自动带出全部字段 ===== */
+function buildDrugSelect(){
+  document.getElementById("dbCount").textContent=DRUG_DB.length;
+  document.getElementById("dbSearch").placeholder=`输入药品名 / 品牌 / 拼音首字母 / 厂家（共 ${DRUG_DB.length} 种）`;
+}
+/* 为每条药品预建搜索文本（惰性初始化，避免早于 DRUG_DB 定义执行） */
+let DB_SEARCH=null;
+function ensureDbSearch(){
+  if(DB_SEARCH) return DB_SEARCH;
+  DB_SEARCH=DRUG_DB.map(d=>({
+    d,
+    t:[d.n, (d.a||[]).join(" "), d.k||"", d.m||"", d.s||""].join(" ").toLowerCase()
+  }));
+  return DB_SEARCH;
+}
+let dbActiveIdx=-1, dbHits=[];
+function dbSearch(q){
+  q=(q||"").trim().toLowerCase().replace(/\s+/g,"");
+  if(!q){ dbHits=[]; return []; }
+  const starts=[], contains=[];
+  ensureDbSearch().forEach(it=>{
+    const nameLow=it.d.n.toLowerCase();
+    const keyLow=(it.d.k||"").toLowerCase();
+    if(nameLow.startsWith(q)||keyLow.startsWith(q)) starts.push(it);
+    else if(it.t.replace(/\s/g,"").includes(q)) contains.push(it);
+  });
+  return starts.concat(contains).slice(0,40);
+}
+function renderDbResults(q){
+  const box=document.getElementById("dbResults");
+  if(!q){ box.classList.remove("on"); box.innerHTML=""; return; }
+  dbHits=dbSearch(q);
+  if(!dbHits.length){ box.innerHTML='<div class="db-empty">未找到匹配药品，可直接手动录入</div>'; box.classList.add("on"); return; }
+  box.innerHTML=dbHits.map((it,i)=>{
+    const d=it.d;
+    const alias=(d.a||[]).filter(x=>x!==d.n).slice(0,3);
+    return `<div class="db-item${i===dbActiveIdx?" active":""}" data-i="${i}">
+      <div class="nm">${esc(d.n)}${alias.length?` <span class="br">[${esc(alias.join(" / "))}]</span>`:""}</div>
+      <div class="meta">${esc(d.s||"")}${d.u?" ｜ "+esc(d.u):""}${d.m?" ｜ "+esc(d.m):""}${d.rx?" ｜ "+esc(d.rx):""}</div>
+    </div>`;
+  }).join("");
+  box.classList.add("on");
+}
+function addDrugFromDB(item){
+  const d=blankDrug();
+  d.name=item.n; d.spec=item.s||""; d.dose=item.d||""; d.dunit=normUnit(item.du);
+  d.freq=item.f||""; d.usage=item.r||""; d.unit=item.u||"盒";
+  d.price=item.p!=null?String(item.p):""; d.qty=d.price?"1":""; d.matched=true; d.cat="Rp";
+  state.drugs=state.drugs.filter(x=>x.name||x.dose||x.price||x.spec).concat([d]);
+  renderDrugs(); renderAll(); save();
+  const inp=document.getElementById("dbSearch"); inp.value=""; dbActiveIdx=-1;
+  document.getElementById("dbResults").classList.remove("on");
+}
+const dbInp=document.getElementById("dbSearch");
+dbInp.addEventListener("input", ()=>{ dbActiveIdx=-1; renderDbResults(dbInp.value); });
+dbInp.addEventListener("focus", ()=>{ if(dbInp.value) renderDbResults(dbInp.value); });
+dbInp.addEventListener("keydown", e=>{
+  const box=document.getElementById("dbResults");
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+    if(!box.classList.contains("on")) renderDbResults(dbInp.value);
+    if(!dbHits.length) return;
+    e.preventDefault();
+    dbActiveIdx=(dbActiveIdx+(e.key==="ArrowDown"?1:-1)+dbHits.length)%dbHits.length;
+    renderDbResults(dbInp.value);
+  }else if(e.key==="Enter"){
+    if(dbHits.length){ e.preventDefault(); addDrugFromDB(dbHits[dbActiveIdx>=0?dbActiveIdx:0].d); }
+  }else if(e.key==="Escape"){ box.classList.remove("on"); }
+});
+document.getElementById("dbResults").addEventListener("mousedown", e=>{
+  const it=e.target.closest(".db-item"); if(!it) return;
+  e.preventDefault();
+  addDrugFromDB(dbHits[+it.dataset.i].d);
+});
+document.addEventListener("click", e=>{
+  if(!e.target.closest("#dbResults") && e.target!==dbInp) document.getElementById("dbResults").classList.remove("on");
+});
+function guessGroup(n){
+  if(/注射|输液|氯化钠|葡萄糖|曲松/.test(n)) return "注射 / 输液";
+  if(/乳膏|软膏|滴眼|滴鼻|气雾|喷雾/.test(n)) return "外用 / 五官科";
+  if(/片|丸|胶囊|颗粒|散|口服液|合剂|溶液|滴剂|咀嚼片|肠溶/.test(n)) return "口服制剂 / 中成药";
+  return "其他";
+}
+function diagTerms(){ return (state.diag||"").split(/[，,、;；\s]+/).filter(t=>t); }
+function syncDeptSel(){ document.getElementById("deptSel").value = DEPTS.includes(state.dept)?state.dept:""; }
+document.getElementById("deptSel").addEventListener("change", e=>{
+  state.dept=e.target.value;   /* 选择即填入，也同步到输入框 */
+  document.getElementById("fDept").value=state.dept;
+  save(); renderPreview();
+});
+
+/* ===== 诊断：已选标签渲染（支持拖动排序、删除）+ 常用点击增删 ===== */
+function setDiagTerms(terms){
+  /* 去重并保持顺序 */
+  const seen=new Set(), out=[];
+  terms.forEach(t=>{ t=(t||"").trim(); if(t && !seen.has(t)){ seen.add(t); out.push(t); } });
+  state.diag=out.join("，");
+  save();
+}
+function renderDiagSelected(){
+  const box=document.getElementById("diagSelected");
+  const terms=diagTerms();
+  box.innerHTML=terms.map((t,i)=>`<span class="diag-tag" draggable="true" data-i="${i}" title="拖动可调整顺序">
+    <span class="ord">${i+1}</span><span class="txt">${esc(t)}</span>
+    <button class="rm" data-i="${i}" title="删除该诊断">✕</button></span>`).join("");
+}
+/* 从输入框添加 */
+function addDiagFromInput(){
+  const inp=document.getElementById("diagInput");
+  const v=(inp.value||"").trim();
+  if(!v) return;
+  setDiagTerms(diagTerms().concat(v.split(/[，,、;；\s]+/).filter(Boolean)));
+  inp.value=""; renderDiagSelected(); renderPreview(); syncForm();
+}
+/* 已选标签区：删除 + 拖动排序 */
+const diagBox=document.getElementById("diagSelected");
+diagBox.addEventListener("click", e=>{
+  const btn=e.target.closest(".rm"); if(!btn) return;
+  const terms=diagTerms(); terms.splice(+btn.dataset.i,1);
+  setDiagTerms(terms); renderDiagSelected(); renderPreview(); updateReqState();
+});
+let diagDragFrom=null;
+diagBox.addEventListener("dragstart", e=>{
+  const tag=e.target.closest(".diag-tag"); if(!tag) return;
+  diagDragFrom=+tag.dataset.i;
+  tag.classList.add("dragging");
+  e.dataTransfer.effectAllowed="move";
+  try{ e.dataTransfer.setData("text/plain", String(diagDragFrom)); }catch(err){}
+});
+diagBox.addEventListener("dragover", e=>{
+  const tag=e.target.closest(".diag-tag"); if(!tag) return;
+  e.preventDefault(); e.dataTransfer.dropEffect="move";
+  diagBox.querySelectorAll(".diag-tag").forEach(t=>t.classList.remove("drop-target"));
+  tag.classList.add("drop-target");
+});
+diagBox.addEventListener("dragleave", e=>{
+  const tag=e.target.closest(".diag-tag"); if(tag) tag.classList.remove("drop-target");
+});
+diagBox.addEventListener("drop", e=>{
+  const tag=e.target.closest(".diag-tag"); if(!tag) return;
+  e.preventDefault();
+  const to=+tag.dataset.i;
+  if(diagDragFrom===null || diagDragFrom===to) return;
+  const terms=diagTerms();
+  const [moved]=terms.splice(diagDragFrom,1);
+  terms.splice(to,0,moved);
+  diagDragFrom=null;
+  setDiagTerms(terms); renderDiagSelected(); renderPreview(); updateReqState();
+});
+diagBox.addEventListener("dragend", ()=>{
+  diagDragFrom=null;
+  diagBox.querySelectorAll(".diag-tag").forEach(t=>t.classList.remove("dragging","drop-target"));
+});
+/* 输入框回车添加 */
+document.getElementById("diagInput").addEventListener("keydown", e=>{
+  if(e.key==="Enter"){ e.preventDefault(); addDiagFromInput(); }
+});
+
+/* ================= 纸张（固定 A5 处方纸）+ 预览缩放 ================= */
+const FIXED_PAPER={w:210, h:148, margin:8};   /* A4 的一半（A5）横放：宽210 × 高148 */
+function stepZoom(delta){
+  state.paper.zoom=Math.min(200, Math.max(30, (state.paper.zoom||100)+delta));
+  syncZoom(); save(); fitPreview();
+}
+function syncZoom(){
+  const el=document.getElementById("pvZoom"); if(el) el.textContent=(state.paper.zoom||100)+"%";
+  const sz=document.getElementById("pvSize"); if(sz) sz.textContent=FIXED_PAPER.w+" × "+FIXED_PAPER.h+" mm";
+}
+function applyPaper(){
+  const w=FIXED_PAPER.w, h=FIXED_PAPER.h;
+  state.paper.w=w; state.paper.h=h; state.paper.orient="landscape"; state.paper.margin=FIXED_PAPER.margin;
+  const page=document.getElementById("page");
+  page.style.width=w+"mm"; page.style.minHeight=h+"mm";
+  page.style.padding=state.paper.margin+"mm";
+  /* 动态 @page */
+  let ps=document.getElementById("pageStyle");
+  if(!ps){ ps=document.createElement("style"); ps.id="pageStyle"; document.head.appendChild(ps); }
+  ps.textContent=`@page{size:${w}mm ${h}mm;margin:0;} @media print{#page{min-height:${h}mm !important;}}`;
+  syncZoom(); fitPreview(); renderPreview();
+}
+function fitPreview(){
+  const w=FIXED_PAPER.w;
+  const pxW=w*96/25.4, area=document.getElementById("previewArea");
+  const avail=(area?area.clientWidth:800)-36;
+  let s=Math.min(avail/pxW, (state.paper.zoom||100)/100);
+  const scaler=document.getElementById("scaler");
+  if(!scaler) return;
+  scaler.style.transform=`scale(${s})`;
+  scaler.style.width=pxW+"px";
+  scaler.style.height=(document.getElementById("page").offsetHeight*s)+"px";
+  scaler.style.margin="0 auto";
+}
+window.addEventListener("resize", ()=>{ applyPaneWidth(); fitPreview(); });
+
+/* ================= 左右栏可拖动调整宽度 ================= */
+const SIDEBAR_MIN=320;              /* 左栏最小宽度 */
+const SIDEBAR_KEY="rxSidebarWidth_v1";
+let sidebarW=520;                   /* 当前左栏宽度（px） */
+let dragging=false, dragStartX=0, dragStartW=0;
+
+function sidebarMax(){
+  /* 以视口宽度为准，为右侧预览区至少保留 360px，并扣除左右 padding 与分割条 */
+  const layout=document.querySelector(".layout");
+  const pad=layout? (parseFloat(getComputedStyle(layout).paddingLeft)||14)*2 : 28;
+  const total=window.innerWidth || document.documentElement.clientWidth || 1200;
+  return Math.max(SIDEBAR_MIN, total - pad - 14 - 360);
+}
+function applyPaneWidth(){
+  const sb=document.querySelector(".sidebar");
+  if(!sb) return;
+  sidebarW=Math.min(Math.max(sidebarW, SIDEBAR_MIN), sidebarMax());
+  if(window.innerWidth<860){
+    /* 窄屏：恢复自适应，不做固定宽度 */
+    sb.style.width="";
+    return;
+  }
+  sb.style.width=sidebarW+"px";
+}
+function setPaneWidth(w, persist){
+  sidebarW=w;
+  applyPaneWidth();
+  fitPreview();
+  if(persist){ try{ localStorage.setItem(SIDEBAR_KEY, String(Math.round(sidebarW))); }catch(e){} }
+}
+function initResizer(){
+  const rz=document.getElementById("resizer");
+  if(!rz) return;
+  const onDown=e=>{
+    if(window.innerWidth<860) return;
+    dragging=true;
+    dragStartX=(e.touches?e.touches[0].clientX:e.clientX);
+    dragStartW=document.querySelector(".sidebar").getBoundingClientRect().width;
+    rz.classList.add("dragging");
+    document.body.classList.add("resizing");
+    e.preventDefault();
+  };
+  const onMove=e=>{
+    if(!dragging) return;
+    const x=(e.touches?e.touches[0].clientX:e.clientX);
+    setPaneWidth(dragStartW+(x-dragStartX), false);
+  };
+  const onUp=()=>{
+    if(!dragging) return;
+    dragging=false;
+    rz.classList.remove("dragging");
+    document.body.classList.remove("resizing");
+    try{ localStorage.setItem(SIDEBAR_KEY, String(Math.round(sidebarW))); }catch(e){}
+  };
+  rz.addEventListener("mousedown", onDown);
+  rz.addEventListener("touchstart", onDown, {passive:false});
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("touchmove", onMove, {passive:false});
+  window.addEventListener("mouseup", onUp);
+  window.addEventListener("touchend", onUp);
+  /* 双击恢复默认宽度 */
+  rz.addEventListener("dblclick", ()=>setPaneWidth(520, true));
+}
+function loadPaneWidth(){
+  try{
+    const v=parseInt(localStorage.getItem(SIDEBAR_KEY)||"", 10);
+    if(!isNaN(v) && v>=SIDEBAR_MIN) sidebarW=v;
+  }catch(e){}
+}
+function resetPaneWidth(){ sidebarW=520; }
+
+/* ================= 智能识别解析 ================= */
+/* 频次：中文全称优先识别；同时兼容旧文本中的拉丁缩写，识别后统一输出中文全称 */
+const FREQ_WORDS=["每日四次","每日三次","每日二次","每日两次","每日一次","每8小时一次","每6小时一次","每12小时一次","隔日一次","每晚一次","睡前一次","必要时服用","必要时","顿服"];
+/* 拉丁缩写 -> 中文全称 映射（识别到缩写时替换为中文） */
+const FREQ_ABBR=[["q8h","每8小时一次"],["q6h","每6小时一次"],["q12h","每12小时一次"],["qid","每日四次"],["tid","每日三次"],["bid","每日两次"],["qd","每日一次"],["prn","必要时服用"]];
+const USE_WORDS=["静脉滴注","静脉注射","肌肉注射","皮下注射","皮内注射","雾化吸入","口服","吞服","含服","冲服","外用","塞肛","灌肠","滴眼","滴鼻","吸入"];
+/* 用法简写 -> 中文全称（识别到简写时替换为全称） */
+const USE_ABBR=[["静滴","静脉滴注"],["静推","静脉注射"],["肌注","肌肉注射"],["皮下注","皮下注射"],["雾化","雾化吸入"],["po","口服"],["ivgtt","静脉滴注"],["iv","静脉注射"],["im","肌肉注射"],["ih","皮下注射"]];
+const DOSE_UNITS=["ml","mg","g","μg","ug","iu","片","粒","袋","支","瓶","喷","丸","贴"];
+const PACK_UNITS=["瓶","盒","支","袋","片","粒","贴","丸","罐","包","板","排","条","瓶装","枚","管","桶","听","扎","件"];
+
+/* ============================================================
+   处方药品主数据库（药品清单）
+   字段：n 通用名｜a 别名/商品名/俗称｜s 规格｜u 数量单位｜
+        d 常用单次剂量｜f 常用频次｜r 用法｜p 参考单价(元)
+        m 生产厂家｜k 助记码｜rx 处方分类｜c 经营类别
+   识别时按"名称/别名最长匹配"精准定位药品，并用库中规格、单位、
+   常用剂量等补齐粘贴文本缺失的信息。
+   ============================================================ */
+/* 企业商品清单（4000+ 条，来自《企业商品清单》Excel，运行时由 药品清单库.js 注入） */
+const ENTERPRISE_DB = (typeof window!=="undefined" && Array.isArray(window.CATALOG_DATA)) ? window.CATALOG_DATA : [];
+
+/* 内置常用药品基线库（企业清单未覆盖时的兜底） */
+const BUILTIN_DB=[
+  /* ---- 解热镇痛 / 感冒 ---- */
+  {n:"布洛芬混悬液",a:["美林","布洛芬混悬液","美林混悬液","芬必得混悬液"],s:"2g 100ML/瓶",u:"瓶",d:"10",du:"ML",f:"必要时",r:"口服",p:17.85},
+  {n:"布洛芬缓释胶囊",a:["芬必得","布洛芬缓释胶囊"],s:"0.3g*20粒/盒",u:"盒",d:"0.3",du:"G",f:"每日两次",r:"口服",p:24.5},
+  {n:"对乙酰氨基酚片",a:["泰诺林","百服宁","对乙酰氨基酚片","扑热息痛"],s:"0.5g*20片/盒",u:"盒",d:"0.5",du:"G",f:"必要时",r:"口服",p:9.8},
+  {n:"对乙酰氨基酚口服溶液",a:["泰诺林滴剂","对乙酰氨基酚口服溶液"],s:"100ml/瓶",u:"瓶",d:"5",du:"ML",f:"必要时",r:"口服",p:15.6},
+  {n:"布洛芬颗粒",a:["布洛芬颗粒"],s:"0.2g*10袋/盒",u:"盒",d:"0.1",du:"G",f:"必要时",r:"冲服",p:14.2},
+  {n:"阿司匹林肠溶片",a:["拜阿司匹灵","阿司匹林肠溶片"],s:"100mg*30片/盒",u:"盒",d:"100",du:"MG",f:"每日一次",r:"口服",p:16.8},
+  {n:"小儿氨酚黄那敏颗粒",a:["护彤","小儿氨酚黄那敏颗粒"],s:"6g*10袋/盒",u:"盒",d:"1",du:"袋",f:"每日三次",r:"冲服",p:13.5},
+  {n:"氨溴索口服溶液",a:["沐舒坦","氨溴索口服溶液","盐酸氨溴索口服溶液"],s:"100ml:0.6g/瓶",u:"瓶",d:"10",du:"ML",f:"每日三次",r:"口服",p:28.5},
+  {n:"氯雷他定片",a:["开瑞坦","氯雷他定片"],s:"10mg*6片/盒",u:"盒",d:"10",du:"MG",f:"每日一次",r:"口服",p:15.8},
+  {n:"西替利嗪滴剂",a:["仙特明","西替利嗪滴剂"],s:"10ml:100mg/瓶",u:"瓶",d:"5",du:"滴",f:"每晚一次",r:"口服",p:32.0},
+  {n:"孟鲁司特钠咀嚼片",a:["顺尔宁","孟鲁司特钠咀嚼片"],s:"4mg*5片/盒",u:"盒",d:"4",du:"MG",f:"每晚一次",r:"口服",p:38.6},
+
+  /* ---- 抗感染 ---- */
+  {n:"头孢地尼分散片",a:["希福尼","头孢地尼分散片","头孢地尼"],s:"50mg*12片/盒",u:"盒",d:"100",du:"MG",f:"每日三次",r:"口服",p:56.6},
+  {n:"阿莫西林胶囊",a:["阿莫仙","阿莫西林胶囊","阿莫西林"],s:"0.25g*24粒/盒",u:"盒",d:"0.5",du:"G",f:"每日三次",r:"口服",p:12.5},
+  {n:"达格列净片",a:["安达唐","达格列净片","达格列净"],s:"10mg*30片/盒",u:"盒",d:"10",du:"MG",f:"每日一次",r:"口服",p:126.0},
+  {n:"阿莫西林克拉维酸钾片",a:["安灭菌","阿莫西林克拉维酸钾片"],s:"0.457g*12片/盒",u:"盒",d:"0.457",du:"G",f:"每日两次",r:"口服",p:35.4},
+  {n:"头孢克肟颗粒",a:["世福素","头孢克肟颗粒"],s:"50mg*6袋/盒",u:"盒",d:"50",du:"MG",f:"每日两次",r:"冲服",p:29.8},
+  {n:"头孢克洛干混悬剂",a:["希刻劳","头孢克洛干混悬剂"],s:"0.125g*6袋/盒",u:"盒",d:"0.125",du:"G",f:"每日三次",r:"冲服",p:33.2},
+  {n:"阿奇霉素干混悬剂",a:["希舒美","阿奇霉素干混悬剂"],s:"0.1g*6袋/盒",u:"盒",d:"0.2",du:"G",f:"每日一次",r:"冲服",p:46.5},
+  {n:"克拉霉素片",a:["克拉仙","克拉霉素片"],s:"0.25g*6片/盒",u:"盒",d:"0.25",du:"G",f:"每日两次",r:"口服",p:27.6},
+  {n:"罗红霉素分散片",a:["严迪","罗红霉素分散片"],s:"75mg*12片/盒",u:"盒",d:"150",du:"MG",f:"每日两次",r:"口服",p:18.9},
+  {n:"甲硝唑片",a:["灭滴灵","甲硝唑片"],s:"0.2g*100片/瓶",u:"瓶",d:"0.4",du:"G",f:"每日三次",r:"口服",p:8.5},
+  {n:"左氧氟沙星片",a:["可乐必妥","左氧氟沙星片"],s:"0.5g*5片/盒",u:"盒",d:"0.5",du:"G",f:"每日一次",r:"口服",p:42.0},
+  {n:"阿昔洛韦片",a:["阿昔洛韦片"],s:"0.2g*24片/盒",u:"盒",d:"0.2",du:"G",f:"每日五次",r:"口服",p:11.6},
+  {n:"奥司他韦颗粒",a:["达菲","奥司他韦颗粒","磷酸奥司他韦颗粒"],s:"15mg*10袋/盒",u:"盒",d:"30",du:"MG",f:"每日两次",r:"冲服",p:68.0},
+
+  /* ---- 呼吸系统 ---- */
+  {n:"布地奈德混悬液",a:["普米克令舒","布地奈德混悬液"],s:"2ml:1mg/支",u:"支",d:"1",du:"MG",f:"每日两次",r:"雾化吸入",p:21.9},
+  {n:"异丙托溴铵溶液",a:["爱全乐","异丙托溴铵溶液"],s:"2ml:0.25mg/支",u:"支",d:"0.25",du:"MG",f:"每日两次",r:"雾化吸入",p:18.6},
+  {n:"特布他林雾化液",a:["博利康尼","特布他林雾化液"],s:"2ml:5mg/支",u:"支",d:"5",du:"MG",f:"每日两次",r:"雾化吸入",p:19.4},
+  {n:"沙丁胺醇气雾剂",a:["万托林","沙丁胺醇气雾剂"],s:"100μg*200揿/支",u:"支",d:"100",du:"μg",f:"必要时",r:"吸入",p:26.8},
+  {n:"蒙脱石散",a:["思密达","蒙脱石散"],s:"3g*10袋/盒",u:"盒",d:"3",du:"G",f:"每日三次",r:"冲服",p:22.5},
+  {n:"复方甘草片",a:["复方甘草片"],s:"100片/瓶",u:"瓶",d:"3",du:"片",f:"每日三次",r:"含服",p:6.5},
+  {n:"肺力咳合剂",a:["肺力咳合剂"],s:"100ml/瓶",u:"瓶",d:"10",du:"ML",f:"每日三次",r:"口服",p:32.8},
+
+  /* ---- 消化系统 ---- */
+  {n:"奥美拉唑肠溶胶囊",a:["洛赛克","奥美拉唑肠溶胶囊"],s:"20mg*14粒/盒",u:"盒",d:"20",du:"MG",f:"每日一次",r:"口服",p:23.6},
+  {n:"雷贝拉唑钠肠溶片",a:["波利特","雷贝拉唑钠肠溶片"],s:"10mg*7片/盒",u:"盒",d:"10",du:"MG",f:"每日一次",r:"口服",p:36.5},
+  {n:"铝碳酸镁咀嚼片",a:["达喜","铝碳酸镁咀嚼片"],s:"0.5g*20片/盒",u:"盒",d:"1",du:"G",f:"每日三次",r:"口服",p:26.9},
+  {n:"多潘立酮片",a:["吗丁啉","多潘立酮片"],s:"10mg*30片/盒",u:"盒",d:"10",du:"MG",f:"每日三次",r:"口服",p:15.2},
+  {n:"枸橼酸莫沙必利片",a:["加斯清","枸橼酸莫沙必利片"],s:"5mg*24片/盒",u:"盒",d:"5",du:"MG",f:"每日三次",r:"口服",p:19.8},
+  {n:"双歧杆菌三联活菌胶囊",a:["培菲康","双歧杆菌三联活菌胶囊"],s:"210mg*36粒/盒",u:"盒",d:"420",du:"MG",f:"每日两次",r:"口服",p:41.3},
+  {n:"枯草杆菌二联活菌颗粒",a:["妈咪爱","枯草杆菌二联活菌颗粒"],s:"1g*10袋/盒",u:"盒",d:"1",du:"袋",f:"每日两次",r:"冲服",p:24.8},
+  {n:"消旋山莨菪碱片",a:["654-2","消旋山莨菪碱片"],s:"5mg*100片/瓶",u:"瓶",d:"5",du:"MG",f:"必要时",r:"口服",p:5.6},
+  {n:"乳果糖口服溶液",a:["杜密克","乳果糖口服溶液"],s:"100ml:66.7g/瓶",u:"瓶",d:"10",du:"ML",f:"每日一次",r:"口服",p:39.8},
+
+  /* ---- 中成药 ---- */
+  {n:"蒲地蓝消炎口服液",a:["蒲地蓝消炎口服液","蒲地蓝"],s:"10ml*6支/盒",u:"盒",d:"10",du:"ML",f:"每日三次",r:"口服",p:30.87},
+  {n:"牛黄解毒片",a:["牛黄解毒片"],s:"21片*2板/盒",u:"盒",d:"4",du:"片",f:"每日三次",r:"口服",p:5.5},
+  {n:"连花清瘟胶囊",a:["连花清瘟胶囊"],s:"0.35g*24粒/盒",u:"盒",d:"4",du:"粒",f:"每日三次",r:"口服",p:29.5},
+  {n:"蓝芩口服液",a:["蓝芩口服液"],s:"10ml*6支/盒",u:"盒",d:"10",du:"ML",f:"每日三次",r:"口服",p:34.6},
+  {n:"金银花颗粒",a:["金银花颗粒"],s:"10g*10袋/盒",u:"盒",d:"10",du:"G",f:"每日三次",r:"冲服",p:18.5},
+  {n:"小柴胡颗粒",a:["小柴胡颗粒"],s:"10g*10袋/盒",u:"盒",d:"10",du:"G",f:"每日三次",r:"冲服",p:16.8},
+  {n:"藿香正气水",a:["藿香正气水"],s:"10ml*10支/盒",u:"盒",d:"10",du:"ML",f:"每日两次",r:"口服",p:12.6},
+  {n:"云南白药气雾剂",a:["云南白药气雾剂"],s:"85g/瓶",u:"瓶",d:"",du:"",f:"必要时",r:"外用",p:36.8},
+  {n:"开喉剑喷雾剂",a:["开喉剑喷雾剂"],s:"20ml/瓶",u:"瓶",d:"",du:"喷",f:"每日三次",r:"外用",p:24.5},
+  {n:"康复新液",a:["康复新液"],s:"100ml/瓶",u:"瓶",d:"10",du:"ML",f:"每日三次",r:"口服",p:28.6},
+
+  /* ---- 外用药 / 皮肤 ---- */
+  {n:"丁酸氢化可的松乳膏",a:["尤卓尔","丁酸氢化可的松乳膏"],s:"10g/支",u:"支",d:"",du:"",f:"每日两次",r:"外用",p:21.8},
+  {n:"糠酸莫米松乳膏",a:["艾洛松","糠酸莫米松乳膏"],s:"5g/支",u:"支",d:"",du:"",f:"每日一次",r:"外用",p:32.5},
+  {n:"莫匹罗星软膏",a:["百多邦","莫匹罗星软膏"],s:"5g/支",u:"支",d:"",du:"",f:"每日三次",r:"外用",p:26.5},
+  {n:"红霉素眼膏",a:["红霉素眼膏"],s:"2g/支",u:"支",d:"",du:"",f:"每日两次",r:"外用",p:6.8},
+  {n:"左氧氟沙星滴眼液",a:["可乐必妥滴眼液","左氧氟沙星滴眼液"],s:"5ml/支",u:"支",d:"1",du:"滴",f:"每日三次",r:"滴眼",p:18.9},
+  {n:"玻璃酸钠滴眼液",a:["爱丽","玻璃酸钠滴眼液"],s:"5ml/支",u:"支",d:"1",du:"滴",f:"每日三次",r:"滴眼",p:23.6},
+
+  /* ---- 输液 / 注射 ---- */
+  {n:"0.9%氯化钠注射液",a:["生理盐水","0.9%氯化钠注射液","氯化钠注射液"],s:"100ml:0.9g/袋",u:"袋",d:"100",du:"ML",f:"每日一次",r:"静脉滴注",p:5.6},
+  {n:"5%葡萄糖注射液",a:["5%葡萄糖注射液","葡萄糖注射液"],s:"250ml:12.5g/袋",u:"袋",d:"250",du:"ML",f:"每日一次",r:"静脉滴注",p:6.2},
+  {n:"注射用头孢曲松钠",a:["罗氏芬","注射用头孢曲松钠"],s:"1g/支",u:"支",d:"2",du:"G",f:"每日一次",r:"静脉滴注",p:26.8},
+  {n:"地塞米松磷酸钠注射液",a:["地塞米松注射液","地塞米松磷酸钠注射液"],s:"1ml:5mg/支",u:"支",d:"5",du:"MG",f:"每日一次",r:"静脉注射",p:4.2},
+  {n:"维生素C注射液",a:["维生素C注射液","维C注射液"],s:"2ml:0.5g/支",u:"支",d:"2",du:"G",f:"每日一次",r:"静脉滴注",p:3.8}
+];
+
+/* 商品名 / 品牌名黑名单：识别时剔除，不参与药名与规格（作为品牌标记，非药品通用名） */
+const BRAND_NAMES=["乐药师","格优净","仁和","修正","哈药","同仁堂","云南白药","三九","999","葵花","江中","太极","石药","齐鲁","扬子江","步长","以岭","康恩贝","天士力","白云山","华润三九","京东健康","老百姓","大参林","益丰","海王星辰"];
+
+/* 产地 / 区域词库：省、自治区、直辖市、特别行政区及常见产地标注词，识别时一律忽略 */
+const ORIGIN_WORDS=["北京","上海","天津","重庆","河北","山西","辽宁","吉林","黑龙江","江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州","云南","陕西","甘肃","青海","台湾","内蒙古","广西","西藏","宁夏","新疆","香港","澳门","产地","生产地","原产地","生产厂家","厂家","分装","委托方","受托方","地址","住址"];
+const ORIGIN_RE=new RegExp("("+ORIGIN_WORDS.join("|")+")","g");
+
+/* 英文/数字单位统一大写，便于比对 */
+function normUnit(u){
+  if(!u) return "";
+  const t=String(u).trim();
+  const up=t.toUpperCase();
+  if(up==="UG"||up==="ΜG") return "μg";
+  if(["ML","MG","G","IU","μg"].includes(up)) return up==="UG"?"μg":up;
+  return t;
+}
+
+/* ===== 合并数据源：企业商品清单 优先，内置基线库补缺 ===== */
+let USER_DB=[];   /* 用户导入的药品库（可选，优先级最高） */
+let DRUG_DB=[];
+let DRUG_INDEX=[];
+function buildDrugDB(){
+  const src = USER_DB.length ? USER_DB.concat(ENTERPRISE_DB) : ENTERPRISE_DB;
+  const merged=[];
+  const seen=new Set();
+  const keyOf=d=>((d.n||"")+"|"+(d.s||"")).replace(/\s/g,"");
+  /* 1) 外部数据（用户导入 > 企业商品清单，优先） */
+  src.forEach(d=>{
+    if(!d || !d.n) return;
+    const k=keyOf(d);
+    if(seen.has(k)) return;
+    seen.add(k);
+    const rec={n:d.n, a:(d.a||[]).slice()};
+    if(d.s) rec.s=d.s;
+    if(d.u) rec.u=d.u;
+    if(d.d) rec.d=d.d;
+    if(d.du) rec.du=normUnit(d.du);
+    if(d.f) rec.f=d.f;
+    if(d.r) rec.r=d.r;
+    if(d.p!=null) rec.p=d.p;
+    if(d.m) rec.m=d.m;
+    if(d.k) rec.k=d.k;
+    if(d.rx) rec.rx=d.rx;
+    if(d.c) rec.c=d.c;
+    merged.push(rec);
+  });
+  /* 2) 内置基线库（含常用剂量/频次/价格，外部数据缺少时补上） */
+  BUILTIN_DB.forEach(b=>{
+    /* 若已有同名药品，仅补充缺失字段，不重复录入 */
+    const exist=merged.find(m=>m.n===b.n);
+    if(exist){
+      if(!exist.d && b.d){ exist.d=b.d; exist.du=b.du; }
+      if(!exist.f && b.f) exist.f=b.f;
+      if(!exist.r && b.r) exist.r=b.r;
+      if(exist.p==null && b.p!=null) exist.p=b.p;
+      (b.a||[]).forEach(x=>{ if(!exist.a.includes(x)) exist.a.push(x); });
+      return;
+    }
+    const k=keyOf(b);
+    if(seen.has(k)) return;
+    seen.add(k);
+    merged.push(Object.assign({}, b));
+  });
+  DRUG_DB=merged;
+  /* 3) 重建别名索引（按名称长度降序，保证最长匹配优先） */
+  const list=[];
+  DRUG_DB.forEach(d=>{
+    const keys=new Set([d.n,...(d.a||[])]);
+    keys.forEach(k=>{ if(k && k.length>=2) list.push({k, d}); });
+  });
+  DRUG_INDEX=list.sort((x,y)=>y.k.length-x.k.length);
+  /* 4) 失效搜索缓存 */
+  DB_SEARCH=null;
+}
+buildDrugDB();
+
+/* ===== 品牌名黑名单扩充：把企业清单中识别出的品牌词自动并入 ===== */
+(()=>{
+  const extra=new Set(BRAND_NAMES);
+  ENTERPRISE_DB.forEach(d=>(d.a||[]).forEach(b=>{ if(b && b.length>=2 && b.length<=10) extra.add(b); }));
+  BRAND_NAMES.length=0;
+  extra.forEach(b=>BRAND_NAMES.push(b));
+  BRAND_NAMES.sort((x,y)=>y.length-x.length);
+})();
+
+/* 建立别名索引：由 buildDrugDB() 统一重建（见上） */
+
+/* 从文本中精准匹配药品主数据（最长匹配优先） */
+function matchDrug(text){
+  if(!text) return null;
+  const clean=text.replace(/[\s　]/g,"");
+  for(const it of DRUG_INDEX){
+    if(clean.includes(it.k)) return {db:it.d, keyword:it.k};
+  }
+  return null;
+}
+/* 从药品主数据补全缺失的信息字段，返回补全项说明 */
+function fillFromDB(d, db){
+  const filled=[];
+  if(db.s && !d.spec){ d.spec=db.s; filled.push("规格"); }
+  if(db.u && (!d.unit || d.unit==="盒")){ if(d.unit!==db.u){ d.unit=db.u; filled.push("单位"); } }
+  if(db.d && !d.dose){ d.dose=db.d; d.dunit=normUnit(db.du); filled.push("剂量"); }
+  if(db.du && !d.dunit && d.dose) { d.dunit=normUnit(db.du); }
+  if(db.f && !d.freq){ d.freq=db.f; filled.push("频次"); }
+  if(db.r && !d.usage){ d.usage=db.r; filled.push("用法"); }
+  if(db.p!=null && !d.price){ d.price=String(db.p); filled.push("单价"); }
+  if(db.u && !d.qty && d.price) { d.qty="1"; }
+  return filled;
+}
+/* 归一化药品名：优先使用清单中的标准通用名 */
+function canonicalName(text, db){
+  if(db) return db.n;
+  return text;
+}
+
+
+/* ===== POS 收银小票噪音行识别（非药品信息，直接跳过） ===== */
+const POS_NOISE=[
+  /^现金[：:]/, /^微信[：:]/, /^支付宝[：:]/, /^银行卡[：:]/, /^医保[：:]/, /^找零/, /^合计/, /^应收/, /^实收/, /^实付/, /^优惠/, /^折扣/,
+  /^普通会员$/, /^会员$/, /^VIP/i, /^PC收银/, /^收银/, /^收银员/, /^操作员/, /^营业员/, /^药师\s*$/, /^审方/,
+  /^无折价$/, /^折价$/, /^销售$/, /^退货$/, /^换货$/,
+  /^处方药$/, /^非处方药$/, /^甲类$/, /^乙类$/, /^甲$/, /^乙$/,
+  /^(片剂|胶囊|颗粒|口服液|注射液|软膏|乳膏|滴眼液|喷雾剂|栓剂|丸剂|散剂|糖浆|混悬液)$/,
+  /^国药准字/, /^\d{13}$/, /^\d{8,14}$/,
+  /药业|制药|有限公司|有限责任公司|医药有限公司|大药房|药店|连锁/,
+  /^(西药|中药|中成药|成药|生物制品)\s*[-－]/,
+  /^\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}:\d{2})?$/,
+  /^\d+(\.\d+)?%$/, /^[A-Z]{1,3}\d{6,}$/, /^[A-Z]{2}\d{8,}$/,
+  /* --- 表格式小票的列名与操作项 --- */
+  /^序号$/, /^商品信息$/, /^商品名称$/, /^品名$/, /^批号$/, /^批次$/, /^生产日期$/, /^有效期至$/, /^有效期$/, /^数量$/, /^单位$/,
+  /^追溯码/, /^零售价$/, /^实价$/, /^小计$/, /^单价$/, /^金额$/, /^销售员$/, /^销售金额$/, /^查看$/, /^操作$/, /^合计金额$/,
+  /^应收金额$/, /^实收金额$/, /^找零金额$/, /^付款方式$/, /^收银时间$/, /^商品编码$/, /^条码$/, /^会员名$/, /^会员卡号$/,
+];
+/* 小票中的"界面操作词/UI 元素"——独立成行时直接忽略 */
+const POS_UI_WORDS=["查看","详情","明细","展开","收起","操作","编辑","删除","修改","返回","提交","保存","取消","确认","打印","结算","退款","换货","退货","备注","更多","全部","收起","展开","上一页","下一页","首页","末页","搜索","刷新","加载","暂无","无数据","空"];
+/* 纯 UI 操作词（整行即为该词，或该词+括号说明） */
+function isUiWord(line){
+  const t=line.replace(/[（(][^）)]*[）)]/g,"").trim();
+  return POS_UI_WORDS.includes(t);
+}
+/* 小票中出现的"非药名"词库：测试语、厂家、设备、结算、会员等级等 */
+const POS_STOPWORDS=["检测","正确识别","是否正确","测试","识别","是否","正确","示例","样例","请识别","验证","试验","会员","普通会员","收银","收银员","操作员","营业员","药师","医师","护士","折价","无折价","销售","退货","换货","处方药","非处方药","企业","公司","药房","药店","医院","门诊","收据","小票","清单","底联","第","联"];
+function hasStopword(s){ return POS_STOPWORDS.some(w=>s.includes(w)); }
+/* 药名不得以此类"非药品词"结尾（列名、操作项、单据用语等）——防止"商品信息/查看/序号"被当药名
+   注意：仅做"结尾匹配"，避免"乐药师""药剂师"等含"药师"的合法药名被误伤 */
+const DRUG_SUFFIX_REJECT=/(?:信息|内容|详情|明细|记录|编号|号码|方式|时间|日期|金额|单价|实价|售价|原价|合计|总计|小计|数量|单位|规格|批号|厂家|产地|备注|状态|类型|分类|操作|查看|删除|编辑|修改|确认|取消|提交|保存|打印|返回|会员|客户|顾客|医生|医师|收银|销售)$|^(?:序号|条码|追溯|医保|处方|支付|折扣|优惠|积分|余额|姓名|性别|年龄|电话|手机|地址|卡号|账号|密码|验证|识别|检测|测试|检查|是否|可否|正确|错误|成功|失败|异常|提示|警告|说明|注意|请|第[一二三四五六七八九十\d]|联)$/;
+function badDrugName(s){
+  if(!s) return true;
+  const t=s.replace(/\s+/g,"");
+  if(!t) return true;
+  if(DRUG_SUFFIX_REJECT.test(t)) return true;
+  if(/^[\u4e00-\u9fa5]$/.test(t)) return true;      /* 单字中文 → 非药名 */
+  if(/^\d+$/.test(t)) return true;
+  return false;
+}
+/* 停用词校验：仅当"整段文字本身"就是停用词或以其结尾时才算噪音（避免"乐药师"中的"药师"误伤药名） */
+function stopwordAsNoise(s){
+  if(!s) return false;
+  const t=s.replace(/\s+/g,"");
+  if(POS_STOPWORDS.includes(t)) return true;
+  for(const w of POS_STOPWORDS){ if(w.length>=2 && t.endsWith(w)) return true; }
+  return false;
+}
+/* 判断是否为"纯药名候选行"：含中文、不含数字/价格/单位/规格特征 */
+function isPureNameLine(line){
+  if(!/[\u4e00-\u9fa5]/.test(line)) return false;
+  if(/\d/.test(line)) return false;
+  if(/[：:]/.test(line)) return false;
+  if(/药业|制药|有限|公司|药房|药店|医院|门诊|会员|收银|折价|收据|小票|销售|退货|检测|识别|测试|验证|试/.test(line)) return false;
+  if(/^(男|女|普通|现金|合计)/.test(line)) return false;
+  return line.replace(/[\u4e00-\u9fa5A-Za-z（）()·•\s]/g,"").length===0;
+}
+/* 会员信息行：如 "11258331 陈小娟 女 0 15931435011" → 提取姓名 / 性别 / 年龄
+   形态：可选会员号/病历号 + 姓名(2~4字) + 性别 + 若干字段（年龄、等级、电话等） */
+function parseMemberLine(line){
+  /* 排除带字段标签的行 */
+  if(/[：:]/.test(line)) return null;
+  if(/姓\s*名|性\s*别|年\s*龄/.test(line)) return null;
+  /* 姓名前须是行首或数字+空白（避免"2"被当姓氏、"序号"被当姓名） */
+  const m=line.match(/^\s*(?:(\d{4,})\s+)?([\u4e00-\u9fa5·•]{2,4})\s+(男|女)(?:\s|$)(.*)$/);
+  if(!m) return null;
+  const name=m[2], gender=m[3];
+  if(badDrugName(name)) return null;
+  if(stopwordAsNoise(name)) return null;
+  /* 行尾剩余部分：提取年龄（1~120 的整数，且不是手机号/编号片段）与电话 */
+  const rest=(m[4]||"").trim();
+  const phoneM=rest.match(/1[3-9]\d{9}/);
+  const masked=new Set();
+  if(phoneM){ for(let i=phoneM.index;i<phoneM.index+phoneM[0].length;i++) masked.add(i); }
+  let age="";
+  for(const mm of rest.matchAll(/\d{1,3}/g)){
+    if(masked.has(mm.index)) continue;
+    const v=parseInt(mm[0],10);
+    if(v>0 && v<=120){ age=String(v)+"岁"; break; }
+  }
+  return { name, gender, age, member:m[1]||"" };
+}
+/* 独立的"姓名 + 手机号"行（如 "陈小娟 15931435011"）→ 提取姓名 */
+function parseNamePhoneLine(line){
+  if(/[：:]/.test(line)) return null;
+  const m=line.match(/^\s*([\u4e00-\u9fa5·•]{2,4})\s+(1[3-9]\d{9})\s*$/);
+  if(!m) return null;
+  if(badDrugName(m[1]) || stopwordAsNoise(m[1])) return null;
+  return { name:m[1], phone:m[2] };
+}
+/* 患者信息（处方抬头）提取：整行形态（会员行 / 姓名+电话行 / 独立"姓名 性别 年龄"行） */
+function extractHeadInfo(lines, patch, report, bump){
+  for(const line of lines){
+    const mr=parseMemberLine(line) || parseNamePhoneLine(line);
+    if(!mr) continue;
+    if(!state.name && !patch.name){ patch.name=mr.name; report.push("✔ 姓名："+mr.name); bump(); }
+    if(mr.gender && !state.gender && !patch.gender){ patch.gender=mr.gender; report.push("✔ 性别："+mr.gender); bump(); }
+    if(mr.age && !state.age && !patch.age){ patch.age=mr.age; report.push("✔ 年龄："+mr.age); bump(); }
+    if(mr.member && !state.card && !patch.card){ patch.card=mr.member; report.push("✔ 会员号/就诊卡："+mr.member); bump(); }
+    if(mr.gender || mr.member) break;      /* 命中带性别的会员行 → 信息最全，取首条即可 */
+  }
+  /* 兜底：从首部信息块推断姓名（会员名/患者名独立成行时） */
+  extractNameFromBlock(lines, patch, report, bump);
+  /* 结算行："现金：50.00 找零金额：26.00" → 提取实收与找零（仅作报告提示） */
+  for(const line of lines){
+    const mm=line.match(/现金[：:]\s*([\d.]+)/);
+    const zm=line.match(/(?:找零|找零金额)[：:]?\s*([\d.]+)/);
+    if(mm||zm){
+      const parts=[];
+      if(mm) parts.push("现金 "+mm[1]);
+      if(zm) parts.push("找零 "+zm[1]);
+      report.push("ℹ 结算信息："+parts.join("，"));
+      break;
+    }
+  }
+}
+/* 从"会员/患者信息块"提取姓名：小票首部常形如
+   设备名/时间/会员名/件数/金额/患者名/电话/单据号…
+   取信息块内所有"纯中文短词且未命中清单"的候选，后者优先（患者名通常紧随会员名） */
+function extractNameFromBlock(lines, patch, report, bump){
+  const limit=Math.min(lines.length, 20);
+  const cands=[];
+  for(let i=0;i<limit;i++){
+    const t=lines[i].trim();
+    if(!t || /\d/.test(t)) continue;
+    if(!/^[\u4e00-\u9fa5·•]{2,4}$/.test(t)) continue;
+    if(POS_UI_WORDS.includes(t) || badDrugName(t) || stopwordAsNoise(t)) continue;
+    if(POS_NOISE.some(re=>re.test(t))) continue;   /* 列名/表头（销售员/批号/数量…） */
+    if(matchDrug(t)) continue;
+    if(/序号|商品信息|批号/.test(t)) break;
+    cands.push(t);
+  }
+  if(cands.length && !state.name && !patch.name){
+    const nm=cands[cands.length-1];       /* 取最后一个：患者名通常在会员名之后 */
+    patch.name=nm; report.push("✔ 姓名："+nm); bump();
+  }
+}
+function collectNameCandidates(lines){
+  const per=new Map();
+  lines.forEach(line=>{
+    const t=line.trim();
+    if(!t || /\d/.test(t) || /[：:]/.test(t)) return;
+    if(!/^[\u4e00-\u9fa5·•]{2,4}$/.test(t)) return;
+    if(POS_UI_WORDS.includes(t)) return;
+    if(badDrugName(t) || stopwordAsNoise(t)) return;
+    if(matchDrug(t)) return;
+    per.set(t,(per.get(t)||0)+1);
+  });
+  return per;
+}
+/* 在第 1 遍药品识别后回填：把曾误判为药品的患者姓名行剔除，并从重复短行中推断患者姓名 */
+function verifyNames(lines, newDrugs, patch, report, bump){
+  const cands=collectNameCandidates(lines);
+  /* 反复出现的纯中文短行 → 会员/患者姓名（如"孙杏娟"出现 2 次） */
+  let topName="";
+  if(!patch.name && !state.name){
+    let best=0;
+    cands.forEach((cnt,nm)=>{ if(cnt>best){ best=cnt; topName=nm; } });
+    if(best>=2){ patch.name=topName; report.push("✔ 姓名："+topName); bump(); }
+  }
+  const known=new Set([patch.name, state.name, topName].filter(Boolean));
+  /* 从已识别药品项反推患者姓名（如"陈小娟 女"） */
+  newDrugs.forEach(d=>{
+    const m=(d.name||"").trim().match(/^([\u4e00-\u9fa5·•]{2,4})(?:\s*(男|女))?$/);
+    if(m && !matchDrug(m[1]) && !stopwordAsNoise(m[1])) known.add(m[1]);
+  });
+  if(!known.size) return;
+  /* 同步清理报告中"把姓名当药品"的条目 */
+  for(let i=report.length-1;i>=0;i--){
+    if(!/^✔ 药品：/.test(report[i])) continue;
+    const bare=report[i].replace(/^✔ 药品：\[[^\]]*\]\s*/,"").replace(/^✔ 药品：/,"").split("（")[0].split("｜")[0].replace(/\s+/g,"").trim();
+    const m=bare.match(/^([\u4e00-\u9fa5·•]{2,4})(?:(男|女))?$/);
+    if(m && known.has(m[1]) && !matchDrug(m[1])) report.splice(i,1);
+  }
+  /* 剔除误判为药品的姓名行 */
+  let removed=false;
+  for(let i=newDrugs.length-1;i>=0;i--){
+    const d=newDrugs[i];
+    const bare=(d.name||"").trim();
+    const m=bare.match(/^([\u4e00-\u9fa5·•]{2,4})(?:\s*(男|女))?$/);
+    if(!m || !known.has(m[1])) continue;
+    if(matchDrug(m[1])) continue;                 /* 确实能命中清单 → 保留 */
+    if(d.spec || d.dose || d.freq || d.usage) continue;  /* 带实质药品信息 → 保留 */
+    newDrugs.splice(i,1);
+    removed=true;
+  }
+  if(removed) report.push("ℹ 已忽略小票中的患者/会员姓名行（非药品）");
+}
+/* 从行中分离"规格 + 中文噪音尾缀"，如 "0.35g*10片*4板  检测是否 正确识别"
+   仅当尾部中文不构成独立药名（无规格件数特征）时才算噪音 */
+function splitSpecTail(line){
+  const m=line.match(/^\s*([^：:]+?)\s+([\u4e00-\u9fa5][^\n\r]*)$/);
+  if(!m) return null;
+  const head=m[1].trim(), tail=m[2].trim();
+  if(!head || !/\d/.test(head)) return null;
+  if(!/[片粒袋支丸瓶盒包罐贴板排条枚管桶听扎件]|ml|mg|μg|g\b/i.test(head)) return null;
+  if(!/[*×xX:：\/]|^[\d.]+\s*[片粒袋支丸瓶盒包罐贴板排条枚管桶听扎件%]|^\d+(?:\.\d+)?\s*(?:ml|mg|μg|g)\b/i.test(head)) return null;
+  /* 尾部若本身像药名（含 数字+件数 或 明显药品后缀）则不拆分 */
+  if(/\d+\s*(?:片|粒|袋|支|丸|瓶|盒|包|板|排|枚|管|ml|mg|g)/i.test(tail)) return null;
+  return { head, tail };
+}
+/* 判断一段文字是否像药品名称（用于过滤非药品噪音行） */
+function looksLikeDrugName(s){
+  if(!s) return false;
+  if(/\d/.test(s)) return false;
+  if(!/[\u4e00-\u9fa5]/.test(s)) return false;
+  return /片|胶囊|颗粒|丸|散|膏|液|剂|栓|贴|喷雾|滴眼|口服液|糖浆|混悬|注射|凝胶|乳|酊|胶浆|含片|泡腾|软|硬|素|酯|酸|碱|盐|唑|啶|芬|林|康|星|松|灵|普|坦|韦|肽|酶|锌|钙|铁|钠|钾|镁|铝|溴|碘|氨|酚|醚|醇|油$/i.test(s) || /[\u4e00-\u9fa5]{3,}$/.test(s);
+}
+/* 数字转紧凑字符串：12.00 → "12"，12.50 → "12.5" */
+function trimNum(n){
+  if(n==null || isNaN(n)) return "";
+  return String(Math.round(n*1000)/1000).replace(/(\.\d*?)0+$/,"$1").replace(/\.$/,"");
+}
+/* 判定是否为"独立成行的规格"（不含药名，仅规格/数量形态） */function isStandaloneSpec(line){
+  /* 先剥离剂型/性质等括注（如 "0.32g*200片(薄膜衣片)"、"100片(糖衣)"），
+     这些是规格的一部分而非药名，否则会因残留汉字被误判为"非规格行" */
+  const t=line.split("|")[0]
+             .replace(/[（(][^（）()]{0,10}[）)]/g,"")
+             .trim();
+  if(!t || !/\d/.test(t)) return false;
+  if(/^\d+\s*\/\s*\d+$/.test(t)) return false;        /* "1/1" 追溯码已录/总数 → 非规格 */
+  if(/^\d{4}-\d{2}-\d{2}/.test(t)) return false;      /* 日期 */
+  /* 除药名以外的字符集：数字、单位字母、分隔符、包装单位 */
+  const core=t.replace(/[\d\s.,，、\-+]/g,"").replace(/[*×xX:：\/]/g,"").replace(/(ml|mg|μg|ug|iu|g|片|粒|袋|支|丸|瓶|盒|包|罐|贴|板|排|条|枚|管|桶|听|扎|件|揿|滴|喷)/gi,"");
+  if(core) return false;                       /* 仍有余留字符（汉字药名等）→ 不是纯规格行 */
+  return /[*×xX:：\/]|片|粒|袋|支|丸|瓶|盒|包|罐|贴|板|排|条|枚|管|桶|听|扎|件|ml|mg|μg|g/i.test(t);
+}
+
+/* ===== 剪贴板读取：浏览器要求用户手势 + 授权，失败时给出明确指引 ===== */
+function setPasteHint(msg, isErr){
+  const r=document.getElementById("parseReport");
+  if(!msg){ r.classList.remove("ok"); r.innerHTML=""; return; }
+  r.classList.add("ok");
+  r.innerHTML=`<span class="${isErr?"warn":""}">${esc(msg)}</span>`;
+}
+async function readClipboardText(){
+  if(navigator.clipboard && navigator.clipboard.readText){
+    try{ return await navigator.clipboard.readText(); }catch(e){ /* 权限被拒，继续尝试兜底方案 */ }
+  }
+  /* 兜底：聚焦 + 全选后用 execCommand('paste')，部分环境/内核仍可放行 */
+  try{
+    const ta=document.getElementById("pasteBox");
+    ta.focus(); ta.select();
+    const ok=document.execCommand("paste");
+    if(ok) return ta.value;
+  }catch(e){}
+  return null;
+}
+/* 「读取剪贴板」：只负责把剪贴板内容放进输入框 */
+async function pasteFromClipboard(){
+  const text=await readClipboardText();
+  if(text==null){
+    setPasteHint("浏览器未授权读取剪贴板。请直接点击上方输入框，按 Ctrl+V（Mac 为 ⌘+V）粘贴后再点「识别并填入」。", true);
+    return;
+  }
+  if(!text.trim()){ setPasteHint("剪贴板是空的，请先复制处方文字。", true); return; }
+  document.getElementById("pasteBox").value=text;
+  setPasteHint("已从剪贴板读取 " + text.trim().length + " 个字符，点击「识别并填入」开始识别。");
+}
+/* 「识别并填入」：粘贴框为空时自动尝试读剪贴板，再执行识别 */
+async function parseWithClipboard(){
+  const ta=document.getElementById("pasteBox");
+  if(!ta.value.trim()){
+    const text=await readClipboardText();
+    if(text!=null && text.trim()) ta.value=text;
+  }
+  doParse();
+}
+
+function doParse(){
+  const text=document.getElementById("pasteBox").value.trim();
+  if(!text){ setPasteHint("粘贴框是空的：请先粘贴处方文字，或点击「读取剪贴板」自动获取。", true); return; }
+  const report=[]; let hitCount=0;
+  const patch={};
+
+  /* --- 抬头字段 --- */
+  const hospitalM = text.match(/([\u4e00-\u9fa5]{2,12}医院)/);
+  if(hospitalM && !state.hospital){ patch.hospital=hospitalM[1]; report.push("✔ 医院："+hospitalM[1]); hitCount++; }
+  const kv=(re,label,key)=>{ const m=text.match(re); if(m&&m[1]&&m[1].trim()){ patch[key]=m[1].trim(); report.push(`✔ ${label}：${m[1].trim()}`); hitCount++; } };
+  { /* 姓名：支持"姓名：X / 姓名 X / 姓名X / 患者姓名X"，并在粘连时截断于下一个字段词 */
+    const nm=text.match(/(?:患者)?姓\s*名[：:]?\s*([\u4e00-\u9fa5][\u4e00-\u9fa5·•]{0,11})/);
+    if(nm){ const n=nm[1].split(/性别|年龄|科别|就诊|病历|诊断|医院|门诊|处方|药/)[0];
+      if(n){ patch.name=n; report.push("✔ 姓名："+n); hitCount++; } }
+  }
+  kv(/性\s*别[：:]\s*(男|女)/,"性别","gender");
+  kv(/年\s*龄[：:]\s*([0-9]{1,3}\s*(?:岁|月|天|日)?)/,"年龄","age");
+  kv(/科\s*别[：:]\s*([^\s，,。;；]+)/,"科别","dept");
+  kv(/就诊卡[：:（(]?\s*([0-9A-Za-z\-]+)/,"就诊卡","card");
+  kv(/病历号[：:（(]?\s*([0-9A-Za-z\-]*)/,"病历号","mrn");
+  kv(/(?:病情及诊断|诊断)[：:]\s*([^\n\r]+)/,"诊断","diag");
+  kv(/处方医师[：:]\s*([^\s，,。;；（(]+)/,"处方医师","doctor");
+  kv(/发药药房[：:]\s*([^\s，,。;；]+)/,"发药药房","pharmacy");
+  kv(/(?:患者)?(?:家庭)?地址[：:]\s*([^\n\r]+)/,"患者地址","address");
+  const dm=text.match(/(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/);
+  if(dm){ patch.date=`${dm[1]}-${String(dm[2]).padStart(2,"0")}-${String(dm[3]).padStart(2,"0")}`; report.push(`✔ 日期：${patch.date}`); hitCount++; }
+  /* --- 药品行 --- */
+  const lines=text.split(/[\n\r]+/).map(l=>l.trim()).filter(Boolean);
+  /* --- POS/零售小票形态的患者信息（无"姓名："标签时从会员行等提取） --- */
+  extractHeadInfo(lines, patch, report, ()=>hitCount++);
+  let newDrugs=[];
+  /* 药名悬挂状态：等待后续行（规格/价格/数量）归属的药品 */
+  let pending=null;
+  const flushPending=()=>{
+    if(!pending) return;
+    const p=pending; pending=null;
+    /* POS 小票结构化定价："查看" 之后为 单价 / 数量 / 金额，
+       块尾可能还跟一个"下一个商品的序号"整数，需排除后再校验 金额=单价×数量。 */
+    if(p._triplet && p._triplet.length>=2 && !p.price){
+      let trip=p._triplet.slice();
+      /* 尾部的单调递增小整数视为块序号（如 1→2→3），不是金额 */
+      while(trip.length>2 && Number.isInteger(trip[trip.length-1]) && trip[trip.length-1]<trip[trip.length-2] && trip[trip.length-1]<=99) trip.pop();
+      const up=trip[0];
+      const amt=trip[trip.length-1];
+      if(p._qty>0 && Math.abs(up*p._qty-amt)<0.011){
+        p.price=trimNum(up);
+        p.qty=String(p._qty);
+      }else{
+        p.price=trimNum(up);
+      }
+    }
+    /* 兜底：从收集到的候选价格中择优（优先带小数的"单价"形态，如 14.00） */
+    if(!p.price && p._prices && p._prices.length){
+      const dec=p._prices.filter(v=>!Number.isInteger(v));
+      const pool=dec.length?dec:p._prices;
+      p.price=trimNum(Math.max.apply(null, pool));
+    }
+    delete p._prices; delete p._triplet; delete p._lastInt; delete p._qty;
+    /* 只保留确实是药名的（含中文非数字） */
+    if(p.name && /[\u4e00-\u9fa5]/.test(p.name)){
+      /* 对照清单补全 */
+      const hit=matchDrug(p.name);
+      if(hit){
+        const hasOwnSpec = p.spec && p.spec!==hit.db.s;
+        const filled=fillFromDB(p, hit.db).filter(x=>!(hasOwnSpec && x==="规格"));
+        p.name=canonicalName(p.name, hit.db);
+        p.matched=true;
+        if(!p.spec && hit.db.s) p.spec=hit.db.s;
+        report.push(`✔ 匹配清单【${hit.keyword}】→ ${hit.db.n}${filled.length?"｜补全："+filled.join("、"):"｜信息完整"}`);
+        hitCount++;
+      }
+      newDrugs.push(p);
+      report.push(`✔ 药品：${p.code?"["+p.code+"] ":""}${p.name}${p.spec?"（规格 "+p.spec+"）":""}${p.dose?"｜"+p.dose+p.dunit:""}${p.freq?" "+p.freq:""}${p.usage?" "+p.usage:""}${p.price?"｜单价 "+p.price:""}${p.qty?"｜"+p.qty+p.unit:""}`);
+      hitCount++;
+    }
+  };
+
+  lines.forEach(line=>{
+    if(/类别|药品名称|每次剂量|频次|用法|单价|数量|金额/.test(line) && newDrugs.length===0 && !/\d+\s*(ml|mg)/i.test(line)) { flushPending(); return; } // 表头
+    if(/^Rp[.:：]?$/i.test(line)) return;
+    if(/药费|打印时间|签字或盖章|药师提示|实行双|医保患者|底联/.test(line)) return;
+    if(/^\s*(就诊卡|病历号|挂号|电话|手机|卡号|编号|发票|单据|流水|No\.?)/i.test(line)) return; /* 卡号/编号等信息行 */
+    if(/姓\s*名[：:]|性\s*别[：:]|年\s*龄[：:]|科\s*别[：:]|病情及诊断|处方医师|发药药房/.test(line)) return; /* 患者信息行（抬头字段已单独识别） */
+
+    /* --- 会员/患者信息行（如 "11258331 陈小娟 女 0 15931435011"、"陈小娟 15931435011"）：提取信息后跳过 --- */
+    if(parseMemberLine(line) || parseNamePhoneLine(line)) return;
+
+    /* --- 【POS 表格小票】商品行优先：编号+药名（如 "10123879龙仕康 活络消痛片"）
+           必须在噪音过滤之前判定，避免药名含"大药房/药业"等词被误伤 --- */
+    {
+      const gm=line.match(/^\s*(\d{5,})\s*(.+)$/);
+      const glBody=gm?gm[2]:"";
+      const looksDrug = gm && /[\u4e00-\u9fa5]/.test(glBody)
+        && !/药业|制药|有限公司|有限责任公司|医药有限公司|大药房$|连锁$/.test(glBody);
+      if(looksDrug){
+        const body=glBody;
+        /* 末行可能粘连非药品文字（如 "14.00  检测是否正确识别"），先剥离 */
+        const tailCut=body.match(/^(.*?\d)\s{2,}([^\n]*)$/);
+        let specSrc=body, tailTxt="";
+        if(tailCut && /[\u4e00-\u9fa5]/.test(tailCut[2]) && !/\d/.test(tailCut[2])){ specSrc=tailCut[1].trim(); tailTxt=tailCut[2].trim(); }
+        /* 拆分 规格 | 厂家 */
+        let specPart=specSrc, maker="";
+        if(/\|/.test(specSrc)){ const arr=specSrc.split("|"); specPart=arr[0].trim(); maker=arr.slice(1).join(" ").trim(); }
+        /* 药名 = 规格之前的部分（商品名/品牌 + 通用名） */
+        let namePart=specPart;
+        const sp=specPart.match(/^([^\d]*?)\s*([\d].*)$/);
+        if(sp){ namePart=sp[1].trim(); specPart=sp[2].trim(); }
+        /* 拆出品牌前缀：若整体未命中清单，但去掉首段后命中，则首段作别名 */
+        let alias="", name=namePart.replace(/\s+/g,"");
+        if(/\s/.test(namePart) && !matchDrug(name)){
+          const segs=namePart.split(/\s+/).filter(Boolean);
+          for(let i=0;i<segs.length;i++){
+            const cand=segs.slice(i).join("");
+            if(matchDrug(cand)){ alias=segs.slice(0,i).join(""); name=cand; break; }
+          }
+        }else if(/\s/.test(namePart)){
+          name=namePart.trim();
+        }
+        if(badDrugName(name) || stopwordAsNoise(name)) return;
+        flushPending();                        /* 上一条结算 */
+        pending=blankDrug();
+        pending.name=name;
+        pending.code=gm[1];
+        if(alias) pending.alias=alias;
+        if(specPart && /\d/.test(specPart)) pending.spec=specPart;
+        report.push(`ℹ 商品行：编号 ${gm[1]}${alias?"｜品牌 "+alias:""}｜${name}${pending.spec?"（规格 "+pending.spec+"）":""}${maker?"｜厂家 "+maker:""}`);
+        if(tailTxt && stopwordAsNoise(tailTxt)) report.push(`ℹ 已忽略非药品文字：${tailTxt}`);
+        return;
+      }
+    }
+
+    /* --- 【规格行】优先于噪音过滤：小票的规格行常带"| 厂家"，会被厂家噪音规则误伤 --- */
+    if(pending){
+      /* 形态一：规格 | 厂家（如 "0.35g*10片*4板 | 通化斯威药业股份有限公司"） */
+      if(/\|/.test(line) && /药业|制药|有限公司|医药|股份有限公司/.test(line)){
+        const specOnly=line.split("|")[0].trim();
+        if(specOnly && /\d/.test(specOnly) && isStandaloneSpec(specOnly)){
+          if(!pending.spec || pending.spec===pending.dbSpec){ pending.spec=specOnly; }
+          else if(!pending.packSize && !pending.spec.includes(specOnly)){ pending.packSize=specOnly; }
+          report.push(`✔ 续行读取规格【${pending.name}】：${specOnly}`);
+          hitCount++;
+          return;
+        }
+      }
+      /* 形态二：独立规格行（如 "50粒"、"21片*2板"） */
+      if(isStandaloneSpec(line)){
+        const specOnly=line.split("|")[0].trim();
+        if(!pending.spec || pending.spec===pending.dbSpec){ pending.spec=specOnly; }
+        else if(!pending.packSize && !pending.spec.includes(specOnly)){ pending.packSize=specOnly; }
+        report.push(`✔ 续行并入【${pending.name}】：${specOnly}`);
+        hitCount++;
+        return;
+      }
+    }
+
+    /* --- POS 小票噪音行与价格数字行：归属给悬挂中的药品 --- */
+    /* "查看" 之后紧跟 单价/数量/金额 三列，须在 POS_NOISE 拦截前先打标记 */
+    if(line==="查看" || line==="详情" || line==="明细"){ if(pending) pending._viewSeen=true; return; }
+    if(POS_NOISE.some(re=>re.test(line))) return;
+    if(isUiWord(line)) return;                 /* 界面操作词（查看/详情/操作…） */
+    if(/^[\d\s.,，、\-—:：\/年月日号%]+$/.test(line)){
+      /* 纯数字/金额/百分比行：若已有悬挂药品，则收集候选价格（结束时择优） */
+      if(pending){
+        const dnum=line.match(/^(20\d{2})-(\d{2})-(\d{2})$/);          /* 生产日期/有效期 → 跳过 */
+        const raw=line.replace(/[^\d]/g,"");
+        const isBarcode = /^\d{8,}$/.test(raw);
+        const isDateTime = /^\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}:\d{2})?$/.test(line);
+        const isPercent = /%$/.test(line);
+        const isPlainInt = /^\d{1,7}$/.test(line);                     /* 单一整数：多为批号/追溯码/数量 */
+        const isRatio = /^\d{1,7}\s*\/\s*\d{1,7}$/.test(line);         /* "4/4" 已录/总数 → 其前一个整数即数量 */
+        const isDecimal = /^\d+\.\d+$/.test(line);                     /* 单价/金额（两位小数） */
+
+        /* 小票结构：<数量> / <N/N> / 查看 / <单价> / <整数> / <金额> */
+        if(isRatio){
+          if(pending._lastInt!=null) pending._qty=pending._lastInt;    /* 数量紧邻 "N/N" 的前一行 */
+          pending._lastInt=null;
+          return;
+        }
+        if(isPlainInt){
+          if(pending._viewSeen){ pending._triplet=pending._triplet||[]; pending._triplet.push(parseFloat(line)); }
+          else pending._lastInt=parseFloat(line);
+          return;
+        }
+        if(isDecimal){
+          const v=parseFloat(line);
+          if(v>0 && v<=9999){
+            if(pending._viewSeen){ pending._triplet=pending._triplet||[]; pending._triplet.push(v); }
+            else { pending._prices=pending._prices||[]; pending._prices.push(v); }
+          }
+          return;
+        }
+        if(!dnum && !isBarcode && !isDateTime && !isPercent){
+          const num=line.match(/\d+(?:\.\d+)?/);
+          if(num){
+            const v=parseFloat(num[0]);
+            if(v>0 && v<=9999){
+              pending._prices=pending._prices||[];
+              pending._prices.push(v);
+            }
+          }
+        }
+      }
+      return;
+    }
+    /* "现金:24.00" 等结算行 → 跳过 */
+    if(/^[\u4e00-\u9fa5]{2,4}[：:]\s*\d/.test(line) && !/^规格[：:]/.test(line)) return;
+
+    /* --- 【纯数字 + 中文噪音尾缀】行（如 "14.00  检测是否正确识别"）：
+           数字作为悬挂药品的价格，中文尾缀丢弃 --- */
+    {
+      const tm=line.match(/^(\d+(?:\.\d+)?)\s{2,}([^\n]*)$/);
+      if(tm && /[\u4e00-\u9fa5]/.test(tm[2])){
+        const v=parseFloat(tm[1]);
+        if(pending && v>0 && v<=9999){
+          pending._prices=pending._prices||[];
+          pending._prices.push(v);
+        }
+        report.push(`ℹ 已忽略非药品文字：${tm[2].trim()}`);
+        return;
+      }
+    }
+
+    /* --- 规格行 + 中文尾缀（如 "0.35g*10片*4板  检测是否 正确识别"）：规格归入悬挂药品，尾缀丢弃 --- */
+    {
+      const st=splitSpecTail(line);
+      if(st && (pending || newDrugs.length)){
+        const target=pending || newDrugs[newDrugs.length-1];
+        if(!target.spec || target.spec===target.dbSpec){ target.spec=st.head; }
+        else if(!target.packSize && !target.spec.includes(st.head)){ target.packSize=st.head; }
+        report.push(`ℹ 已忽略非药品文字：${st.tail}`);
+        return;
+      }
+    }
+
+    /* --- 纯药名候选行（无数字）：悬挂等待后续规格/价格 --- */
+    if(isPureNameLine(line) && !/^(男|女)/.test(line)){
+      /* 先剔除行首的角色前缀，如"药师 美洛昔康片" */
+      let nm=line.replace(/^(药师|医师|护士|收银员|营业员|销售员)\s*/,"").trim();
+      /* 药名可能在行内靠后（如"龙仕康 活络消痛片"），逐段尝试对照清单，取可行段 */
+      if(/\s/.test(nm) && !matchDrug(nm)){
+        const segs=nm.split(/\s+/).filter(Boolean);
+        for(let i=0;i<segs.length;i++){
+          const cand=segs.slice(i).join("");
+          if(matchDrug(cand)){ nm=cand; break; }
+        }
+      }
+      /* 含"检测/识别/测试"等非药品词 → 不是药名，丢弃（用户附加的测试语） */
+      if(stopwordAsNoise(nm)) return;
+      flushPending();                 /* 结算上一条 */
+      pending=blankDrug();
+      pending.name=nm;
+      return;
+    }
+
+    /* 行内以 | 分隔的字段（如"50粒 | 四川"、"21片*2板 | 江苏华天宝药业有限公司"），保留主段继续解析 */
+    if(/\|/.test(line)) line=line.split("|")[0].trim();
+
+    /* 产地 / 区域信息剔除（省、市、自治区、"产地"等标注词），不参与任何字段识别 */
+    const origins=[];
+    line=line.replace(ORIGIN_RE,(m)=>{ origins.push(m); return " "; }).replace(/\s+/g," ").trim();
+    if(!line) { if(origins.length) report.push(`ℹ 忽略产地：${[...new Set(origins)].join("、")}`); return; }
+
+    const d=blankDrug();
+    let s=line;
+
+    /* 药品编码：行首 6 位以上纯数字（如 80000394、10206498）剥离，不作为药名/价格 */
+    let drugCode="";
+    const codeM=s.match(/^(\d{6,})\s*/);
+    if(codeM){ drugCode=codeM[1]; s=s.slice(codeM[0].length); }
+
+    /* 商品名/品牌名剔除（如"乐药师""格优净"），仅作品牌标记不参与识别 */
+    const brands=[];
+    BRAND_NAMES.forEach(b=>{
+      if(s.includes(b)){ brands.push(b); s=s.split(b).join(" "); }
+    });
+    if(brands.length) report.push(`ℹ 忽略商品名：${brands.join("、")}`);
+
+    /* 厂家信息行（含企业后缀）直接跳过，不作为药品 */
+    if(/药业|制药|有限公司|有限责任公司|集团|生物科技|医药|股份|厂$/.test(s)) return;
+
+    /* 类别 */
+    const catM=s.match(/^(Rp|西药|中药|成药|输液|草约)[.:：\s]/i);
+    if(catM){ d.cat=catM[1]; s=s.slice(catM[0].length); }
+    else if(/^Rp/i.test(s)){ d.cat="Rp"; s=s.replace(/^Rp[.:：]?\s*/i,""); }
+
+    /* 拉丁缩写先归一化为中文全称（如 qd→每日一次、q8h→每8小时一次） */
+    for(const [abbr, full] of FREQ_ABBR){
+      const re=new RegExp("(^|[\\s,，、;；])"+abbr+"(?=$|[\\s,，、;；])","i");
+      if(re.test(s)) s=s.replace(re, "$1"+full+" ");
+    }
+    /* 频次（按词边界匹配，避免误伤药名） */
+    for(const f of FREQ_WORDS){
+      const re=new RegExp("(^|[\\s,，、;；])"+f+"(?=$|[\\s,，、;；])","i");
+      if(re.test(s)){ d.freq=f; s=s.replace(re,"$1 "); break; }
+    }
+    /* 用法简写先归一化为中文全称（如 静滴→静脉滴注、po→口服） */
+    for(const [abbr, full] of USE_ABBR){
+      const re=new RegExp("(^|[\\s,，、;；])"+abbr+"(?=$|[\\s,，、;；])","i");
+      if(re.test(s)) s=s.replace(re, "$1"+full+" ");
+    }
+    /* 用法（按词边界匹配，避免误伤药名如"口服液"） */
+    for(const u of USE_WORDS){
+      const re=new RegExp("(^|[\\s,，、;；])"+u+"(?=$|[\\s,，、;；])");
+      if(re.test(s)){ d.usage=u; s=s.replace(re,"$1 "); break; }
+    }
+    if(/免皮试|皮试/.test(s)){ d.skin=/免皮试/.test(s)?false:true; if(/免皮试/.test(s)){ d.skin=false; } s=s.replace(/说明[：:]?免皮试/," "); }
+
+    /* 中文与数字之间插入空格，便于自动拆分"药名+粘连规格"（仅当中文字符紧邻数字，避免误拆 2ml:1mg 这类规格） */
+    s=s.replace(/([\u4e00-\u9fa5）)])(?:[:：,，、])?(\d)/g,"$1 $2");
+
+    /* "规格:" 标签显式标注 */
+    let specStr="";
+    const lab=s.match(/规格[：:]?\s*([^\s]+)/);
+    if(lab){ specStr=lab[1]; s=s.replace(lab[0]," "); }
+
+    /* ===== 逐词分类：药名 / 剂量 / 规格 / 数量 / 价格 ===== */
+    const toks0=s.split(/[\s,，、;；]+/).filter(Boolean);
+    /* 合并被空格切开的规格片段：如 "21片 *2板" → "21片*2板"、"10ml :6支" → "10ml:6支" */
+    const toks=[];
+    for(let i=0;i<toks0.length;i++){
+      const cur=toks0[i], nxt=toks0[i+1];
+      if(nxt && /^[*×xX:：\/]/.test(nxt)){ toks.push(cur+nxt); i++; continue; }
+      if(/[*×xX:：\/]$/.test(cur) && nxt){ toks.push(cur+nxt); i++; continue; }
+      toks.push(cur);
+    }
+    const nameT=[], specT=[], units=[], nums=[], counts=[];
+    toks.forEach((t,idx)=>{
+      const isLast=idx===toks.length-1;
+      if(/\d/.test(t) && !/[^\d.,%:：\-\/]/.test(t)){ nums.push(t); return; }        // 纯数字类 token（金额/卡号/编号等）排除，绝不作为药名
+      if(/^\d+(?:\.\d+)?$/.test(t)){ nums.push(t); return; }                     // 纯数字 → 价格/金额
+      if(/^(\d+(?:\.\d+)?)(ml|mg|g|μg|ug|iu)$/i.test(t)){ units.push(t); return; } // 数值+药品单位 → 剂量或规格含量
+      const cm=t.match(/^(\d+(?:\.\d+)?)(瓶|盒|支|袋|片|粒|贴|丸|罐|包|板|排|条|枚|管|桶|听|扎|件)$/);
+      if(cm){
+        const val=parseFloat(cm[1]);
+        /* 已出现过价格/规格组合，或行尾且数值很小 → 视为"数量"；否则先记为待定计数（可能是剂量或规格） */
+        if(nums.length>0 || (isLast && val<=3 && "瓶盒支袋罐包".includes(cm[2]))){ d.qty=cm[1]; d.unit=cm[2]; return; }
+        counts.push(t); return;
+      }
+      /* 规格 token：数字/单位/分隔符组合，如 50mg*12片/盒、100ML/瓶、10ml:6支、2ml:1mg、21片*2板、0.25g*24粒 */
+      if(/\d/.test(t) && /^[\d.*×xX:：\/a-zA-Zμg%片粒袋支丸瓶盒包罐贴板排条枚管桶听扎件]+$/.test(t) && /[*×xX:：\/]|片|粒|袋|支|丸|瓶|盒|包|罐|贴|板|排|条|枚|管|桶|听|扎|件/.test(t) && /^[\d.]/.test(t)){ specT.push(t); return; }
+      nameT.push(t);                                                              // 其余 → 药品名称
+    });
+    /* 整行即"患者姓名 [性别]"时（如 "孙杏娟"、"陈小娟 女"，与抬头提取的患者同名）不视为药品 */
+    {
+      const joined=nameT.join("").trim();
+      const nmm=joined.match(/^([\u4e00-\u9fa5·•]{2,4})(?:\s*(男|女))?$/);
+      if(nmm){
+        const guess=nmm[1];
+        const pName=patch.name||state.name;
+        if(pName && guess===pName && !specT.length && !units.length && !nums.length && !counts.length){
+          report.push(`ℹ 已忽略患者姓名行：${joined}`);
+          return;
+        }
+      }
+    }
+
+    /* ===== 剂量 / 规格 归属判定 ===== */
+    let doseTok=null;
+    if(specT.length>0){
+      /* 规格由多段组成时（如 "2g" + "100ML/瓶"）全部并入规格 */
+      const specParts=[...specT];
+      if(units.length>0){
+        /* 仅当规格段是纯含量且该单位段无包装量特征、且行内单位段多于1个时，前置段并入规格（如 "2g 100ML/瓶"）；否则单位段作为剂量 */
+        if(specT.length>=1 && units.length>=2 && /^\d+(?:\.\d+)?(?:ml|mg|g)$/i.test(units[0])) specParts.unshift(units.shift());
+        /* 规格段以含量单位开头（如 "2g" 单独成段）时也并入规格 */
+        else if(/^(?:\d+(?:\.\d+)?)?(?:ml|mg|g)$/i.test(specT[0]) && units.length>=2) specParts.unshift(units.shift());
+        else if(/^\d+(?:\.\d+)?(?:ml|mg|g)$/i.test(units[0]) && !/[片粒袋支丸].*\*/.test(specT.join("")) && specT.length>=2) specParts.unshift(units.shift());
+      }
+      if(!specStr) specStr=specParts.join(" ");
+      if(units.length>0) doseTok=units[units.length-1];
+      else if(counts.length>0){
+        const last=counts[counts.length-1];
+        const lm=last.match(/^(\d+(?:\.\d+)?)(.+)$/);
+        if(counts.length>=2 || !/[盒瓶]/.test(lm[2])) doseTok=last;
+      }
+    }else if(counts.length>0){
+      if(units.length>=2){ if(!specStr) specStr=units.slice(0,-1).join(" ")+"*"+counts.join("*"); doseTok=units[units.length-1]; }
+      else if(units.length===1){ if(!specStr) specStr=units[0]+"*"+counts.join("*"); }  /* 如 0.25g 24片 → 规格 */
+      else if(counts.length>=2){ if(!specStr) specStr=counts.join("*"); doseTok=counts[counts.length-1]; } /* 21片 4片 → 规格21片、剂量4片 */
+      else if(!specStr && /[盒瓶袋罐]/.test(counts[0])) specStr=counts.join("*");   /* 仅当带包装形态时才作为规格 */
+      else doseTok=counts[counts.length-1];                                        /* 否则判定为每次剂量，如"连花清瘟胶囊 4粒" */
+    }else{
+      if(units.length>=2){ if(!specStr) specStr=units.slice(0,-1).join(" "); doseTok=units[units.length-1]; }
+      else if(units.length===1){ doseTok=units[0]; }
+    }
+    if(doseTok){ const dm=doseTok.match(/^(\d+(?:\.\d+)?)(.+)$/); if(dm){ d.dose=dm[1]; d.dunit=(dm[2].toUpperCase()==="UG"?"μg":dm[2].toUpperCase()); } }
+
+    /* 价格：行内首个纯数字为单价；若本行无价，沿用悬挂期间收集到的候选价格（取合理单价） */
+    let priceCollected=false;
+    if(nums.length>=1){ d.price=nums[0]; priceCollected=true; }
+    else if(pending && pending._prices && pending._prices.length){
+      const dec=pending._prices.filter(v=>!Number.isInteger(v));
+      const pool=dec.length?dec:pending._prices;
+      d.price=String(Math.max.apply(null,pool)).replace(/(\.\d*?)0+$/,"$1").replace(/\.$/,"");
+      priceCollected=true;
+    }
+    if(nums.length===1 && !d.qty){ d.qty="1"; }
+    if(d.price && !d.qty && /盒|瓶|支|袋|罐|包/.test(d.unit||"")) d.qty="1";
+    if(pending) pending._prices=[];   /* 已被本行消费，避免重复赋值 */
+
+    /* 药品名称 */
+    let name=nameT.join(" ").replace(/[，,、;；:：\s]+$/,"").trim();
+    const braceM=name.match(/[（(]([^（）()]{2,30})[）)]\s*$/);
+    if(braceM && /\d/.test(braceM[1]) && !specStr){ specStr=braceM[1]; name=name.slice(0,braceM.index).trim(); } /* 括号内含数字 → 规格 */
+    d.name=name;
+    d.spec=(specStr||"").replace(/^[*×]+/,"");
+
+    /* ===== 对照药品清单精准匹配：归一化名称 + 补全缺失信息 ===== */
+    const hitSeries = /^\d+(?:\.\d+)?$/.test(line.replace(/[\s，,、;；]+/g,""));
+    const hit=matchDrug(line);
+    if(hit && !stopwordAsNoise(hit.db.n) && !hitSeries){
+      d.dbSpec=hit.db.s;
+      /* 粘贴文本自带规格时以文本为准（品牌/厂家规格可能不同），其余字段仍按清单补全 */
+      const hasOwnSpec = d.spec && d.spec!==hit.db.s;
+      const filled=fillFromDB(d, hit.db).filter(x=>!(hasOwnSpec && x==="规格"));
+      d.name=canonicalName(d.name, hit.db);
+      d.matched=true;
+      if(!d.spec && hit.db.s) d.spec=hit.db.s;
+      report.push(`✔ 匹配清单【${hit.keyword}】→ ${hit.db.n}${filled.length?"｜补全："+filled.join("、"):"｜信息完整"}`);
+      hitCount++;
+    }
+
+    const nameOk = d.name && /[^\d\s.,，、\-:：\/%]/.test(d.name);   /* 药名必须含非数字字符，排除纯数字 */
+    if(nameOk && (units.length+counts.length+specT.length+nums.length>0 || d.freq || d.usage || d.matched)){
+      newDrugs.push(d);
+      report.push(`✔ 药品：${d.name}${d.spec?"（规格："+d.spec+"）":""}｜${d.dose?d.dose+d.dunit:""}${d.freq?" "+d.freq:""}${d.usage?" "+d.usage:""}${d.price?"｜单价"+d.price:""}${d.qty?"｜"+d.qty+d.unit:""}`);
+      hitCount++;
+    } else if(isStandaloneSpec(line)){
+      /* 独立成行的规格/装量（如"50粒"、"21片*2板"）→ 优先并入悬挂药品，其次并入上一条药品 */
+      const specOnly=line.split("|")[0].trim();
+      const target=pending || newDrugs[newDrugs.length-1];
+      if(target){
+        if(!target.spec){ target.spec=specOnly; }
+        else if(target.spec===target.dbSpec){ target.spec=specOnly; }        /* 清单补的规格 → 用文本实际规格替换 */
+        else if(target.packSize){ /* 已有独立装量 */ }
+        else if(!target.spec.includes(specOnly)){ target.packSize=specOnly; } /* 已有规格 → 此行记为装量 */
+        report.push(`✔ 续行并入【${target.name}】：${specOnly}`);
+        hitCount++;
+      }
+    } else if(line.length>3 && !/^[（(底联）)]$/.test(line) && !/^[\d\s.,，、\-—:：\/年月日号%]+$/.test(line)){
+      /* 纯中文短名（2~4 字、不在药品清单内）→ 多为小票中的会员/患者姓名，静默忽略 */
+      const bare=line.replace(/\s+/g,"");
+      if(/^[\u4e00-\u9fa5·•]{2,4}$/.test(bare) && !matchDrug(bare) && !badDrugName(bare) && !stopwordAsNoise(bare)){
+        report.push(`ℹ 已忽略姓名行：${bare}`);
+      } else {
+        report.push(`⚠ 未识别（已忽略）：${line.slice(0,40)}`);
+      }
+    }
+  });
+  flushPending();   /* 结算最后一条悬挂药品 */
+  /* 二次校验：剔除误判为药品的患者/会员姓名行，并尽量补全患者姓名 */
+  verifyNames(lines, newDrugs, patch, report, ()=>hitCount++);
+
+  /* 规格 副行（形如“规格:2g 100ML/瓶”单独一行） */
+  Object.keys(patch).forEach(k=>{ state[k]=patch[k]; });
+  if(newDrugs.length){
+    state.drugs = state.drugs.filter(d=>d.name||d.dose||d.price).concat(newDrugs);
+  }
+  renderDrugs(); renderAll(); save();
+
+  const rep=document.getElementById("parseReport");
+  if(hitCount===0){
+    rep.innerHTML='<span class="warn">⚠ 未能识别出有效内容，请检查粘贴的文字格式（需包含药品名称+剂量/频次/用法/价格等信息）。</span>';
+  } else {
+    rep.innerHTML=`<b>识别完成：共命中 ${hitCount} 项</b>\n`+report.join("\n")+(newDrugs.length?`\n✔ 新增 ${newDrugs.length} 条药品记录`:"");
+  }
+  rep.classList.add("ok");
+  /* 自动同步性别chip与表单 */
+  syncForm();
+}
+function hideReport(){ document.getElementById("pasteBox").value=""; const r=document.getElementById("parseReport"); r.classList.remove("ok"); r.innerHTML=""; }
+
+/* 粘贴框内 Ctrl+V 直接识别 */
+document.getElementById("pasteBox").addEventListener("paste", ()=>{ setTimeout(doParse, 60); });
+
+function syncForm(){
+  Object.entries(fieldMap).forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.value=state[key]??""; });
+  syncGender(); syncDeptSel(); renderDiagSelected(); updateReqState(); refreshReqInputs();
+}
+/* ===== 必填项状态：未填写时红色高亮（.empty），填写后恢复 ===== */
+const REQ_FIELDS=[
+  {key:"hospital", id:"fHospital"},
+  {key:"name",     id:"fName"},
+  {key:"gender",   id:"genderChips"},
+  {key:"age",      id:"fAge"},
+  {key:"dept",     id:"fDept"},
+  {key:"diag",     id:"diagSelected"},
+  {key:"doctor",   id:"fDoctor"},
+  {key:"date",     id:"fDate"},
+];
+function updateReqState(){
+  REQ_FIELDS.forEach(f=>{
+    const el=document.getElementById(f.id);
+    if(!el) return;
+    const box=el.closest(".field");
+    if(!box) return;
+    const v=(state[f.key]??"").toString().trim();
+    box.classList.toggle("empty", !v);
+  });
+  /* 性别 chips：未选时红色边框 */
+  const gc=document.getElementById("genderChips");
+  if(gc){ gc.classList.toggle("req-empty", !(state.gender||"").trim()); }
+}
+/* 输入/选择即时刷新必填状态 */
+document.addEventListener("input", e=>{ if(e.target.closest(".field")) updateReqState(); }, true);
+document.addEventListener("change", e=>{ if(e.target.closest(".field")) updateReqState(); }, true);
+
+/* ================= 预览渲染 ================= */
+function renderPreview(){
+  const p=document.getElementById("page");
+  const total=state.drugs.reduce((s,d)=>s+num(d.price)*num(d.qty),0);
+  const today=state.date||new Date().toISOString().slice(0,10);
+  const [Y,M,D]=today.split("-");
+  let rows="";
+  state.drugs.filter(d=>d.name||d.dose||d.price).forEach(d=>{
+    rows+=`<tr>
+      <td>${esc(d.cat)||"Rp"}</td>
+      <td>${esc(d.name)||"&nbsp;"}${d.spec?`<div class="spec">规格:${esc(d.spec)}</div>`:""}</td>
+      <td style="white-space:nowrap">${d.dose?esc(d.dose)+" "+esc(d.dunit):""}</td>
+      <td style="white-space:nowrap">${esc(d.freq)}</td>
+      <td style="white-space:nowrap">${esc(d.usage)}${d.usage&&d.skin?'<div class="use-note">说明:皮试</div>':""}</td>
+      <td class="num">${d.price?num(d.price).toFixed(2).replace(/\.00$/,""):""}</td>
+      <td style="white-space:nowrap">${d.qty?esc(d.qty)+" "+esc(d.unit):""}</td>
+      <td class="num">${num(d.price)*num(d.qty)?(num(d.price)*num(d.qty)).toFixed(2).replace(/\.00$/,""):""}</td>
+    </tr>`;
+  });
+  p.innerHTML=`
+    <div class="p-head">
+      <div class="p-title">${esc(state.hospital)||"（医院名称）"} 处方</div>
+      <div class="p-lian">(底联)</div>
+    </div>
+    <div class="p-cardline">就诊卡：( ${esc(state.card)} )　科别：${esc(state.dept)}　病历号：${esc(state.mrn)}</div>
+    <div class="p-info">
+      姓名：<span class="underline">${esc(state.name)}</span>
+      　性别：<span class="underline" style="min-width:40px">${esc(state.gender)}</span>
+      　年龄：<span class="underline" style="min-width:48px">${esc(state.age)}</span>
+    </div>
+    <div class="p-info">患者地址：<span class="underline" style="min-width:300px;text-align:left">${esc(state.address)}</span></div>
+    <div class="p-info">病情及诊断：<span class="underline" style="min-width:180px;text-align:left">${esc(state.diag)}</span></div>
+    <hr>
+    <table>
+      <thead><tr><th style="width:9%">类别</th><th style="width:33%">药品名称</th><th style="width:12%">每次剂量</th><th style="width:11%">频次</th><th style="width:11%">用法</th><th style="width:8%;text-align:right">单价</th><th style="width:8%">数量</th><th style="width:8%;text-align:right">金额</th></tr></thead>
+    </table>
+    <div class="rp-label">Rp:</div>
+    <table>${rows?`<tbody>${rows}</tbody>`:""}</table>
+    <div class="p-sign">
+      处方医师：<span class="doc">${esc(state.doctor)}</span>（签字或盖章有效）；
+      <span class="p-date">${Y} 年 ${parseInt(M)} 月 ${parseInt(D)} 日</span>
+    </div>
+    <div class="p-foot1">
+      <span>发药药房：${esc(state.pharmacy)}</span>
+      <span>(底联)</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:8.5pt;margin-top:3px">
+      <span>计价/核校　　　　调配　　　　核对　　　　发药：</span>
+    </div>
+    <div class="p-fee"><b>药费：</b><b>￥${total.toFixed(2)}</b></div>
+    <div class="p-note">${esc(state.note)}</div>`;
+  fitPreview();
+}
+/* 统一重绘：表单回填 + 药品行重绘 + 预览刷新（loadSample/clearAll/导入后均需重绘药品行） */
+function renderAll(){ syncForm(); renderDrugs(); renderPreview(); }
+
+/* ================= 界面皮肤 ================= */
+const SKINS=["classic","bamboo","apricot","ink","sakura","ocean","dark-blue","dark-green","dark-purple","dark"];
+function setSkin(name, silent){
+  if(!SKINS.includes(name)) name="classic";
+  if(name==="classic") document.body.removeAttribute("data-skin");
+  else document.body.setAttribute("data-skin", name);
+  document.querySelectorAll("#skinBar .skin-dot").forEach(d=>d.classList.toggle("on", d.dataset.skin===name));
+  state.skin=name;
+  if(!silent){ save(); }
+}
+
+/* ================= 存取 ================= */
+const KEY="rxPrintState_v1";
+let saveTimer=null;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }, 300);
+}
+function restore(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(raw){ const s=JSON.parse(raw); state={...state,...s, paper:{...state.paper,...(s.paper||{})}}; }
+  }catch(e){}
+  if(!state.date) state.date=new Date().toISOString().slice(0,10);
+  setSkin(state.skin||"classic", true);
+}
+function loadSample(){
+  state.hospital="北京大学第一医院";
+  state.name="梁雅遥"; state.gender="男"; state.age="10岁";
+  state.dept="儿科门诊"; state.diag="发热，咳嗽"; state.card=""; state.mrn="";
+  state.doctor=""; state.pharmacy="儿科门诊药房"; state.date=new Date().toISOString().slice(0,10);
+  state.drugs=[
+    {cat:"Rp",name:"美林混悬液/布洛芬混悬液",spec:"2g 100ML/瓶",dose:"10",dunit:"ML",freq:"必要时",usage:"口服",skin:false,price:"17.85",qty:"1",unit:"瓶"},
+    {cat:"Rp",name:"头孢地尼分散片/希福尼(分散)",spec:"50mg*12片/盒",dose:"100",dunit:"MG",freq:"每日三次",usage:"口服",skin:false,price:"56.6",qty:"2",unit:"盒"},
+    {cat:"Rp",name:"蒲地蓝消炎口服液",spec:"10ml*6支/盒",dose:"10",dunit:"ML",freq:"每日三次",usage:"口服",skin:false,price:"30.87",qty:"2",unit:"盒"}
+  ];
+  renderAll(); save();
+}
+function clearAll(){
+  if(!confirm("确定清空所有内容？")) return;
+  const paper=state.paper, skin=state.skin;
+  state={ paper, skin, hospital:"", card:"", dept:"", mrn:"", address:"", name:"", gender:"", age:"", diag:"", doctor:"", date:new Date().toISOString().slice(0,10), pharmacy:"", note:DEFAULT_NOTE, drugs:[blankDrug()] };
+  renderAll(); save();
+}
+
+/* ================= 导入数据库文件 ================= */
+/* 字段定义：内部键 -> 中文名。导入时按勾选映射 */
+const IMPORT_FIELDS=[
+  {k:"n",  label:"通用名 / 药品名称", aliases:["通用名","通用名称","药品名称","药品名","品名","药名","名称","drug","name"], required:true},
+  {k:"n2", label:"商品名称（通用名为空时使用）", aliases:["商品名称","商品名","商品","productname","trade name"]},
+  {k:"a",  label:"品牌 / 别名",       aliases:["品牌","别名","商品名别名","品牌名","alias","brand"]},
+  {k:"s",  label:"规格",             aliases:["规格","规格型号","包装规格","spec","specification"]},
+  {k:"u",  label:"单位",             aliases:["单位","包装单位","基本单位","unit"]},
+  {k:"m",  label:"生产厂家",          aliases:["生产厂家","厂家","生产企业","厂商","manufacturer"]},
+  {k:"k",  label:"助记码 / 拼音",     aliases:["助记码","拼音","拼音码","首字母","pinyin","code"]},
+  {k:"rx", label:"处方分类",          aliases:["处方分类","处方类别","处方药","类别","rx"]},
+  {k:"c",  label:"经营类别",          aliases:["商品经营类别","经营类别","经营分类","category"]},
+  {k:"r",  label:"用法",             aliases:["用法","用法用量","给药途径","usage"]},
+  {k:"d",  label:"常用剂量",          aliases:["剂量","常用剂量","单次剂量","dose","dosage"]},
+  {k:"du", label:"剂量单位",          aliases:["剂量单位","剂量单位名称","doseunit"]},
+  {k:"f",  label:"频次",             aliases:["频次","用药频次","frequency","freq"]},
+  {k:"p",  label:"参考单价",          aliases:["单价","参考单价","零售价","价格","price"]}
+];
+
+let impRows=[];     /* 解析出的原始行对象数组 */
+let impHeader=[];   /* 表头 */
+let impAutoMap={};  /* 自动匹配结果：字段键 -> 源列名 */
+let impFieldOn={};  /* 勾选状态：字段键 -> bool */
+
+function openImport(){
+  document.getElementById("importMask").classList.add("on");
+  document.getElementById("impFile").value="";
+  document.getElementById("impFName").textContent="支持 Excel(.xlsx/.xls) / CSV / TXT / JSON / JS";
+  document.getElementById("impTip").textContent="选择药品数据文件后，可勾选需要导入的字段，再点击「开始导入」。";
+  document.getElementById("impFieldsStep").style.display="none";
+  document.getElementById("impModeStep").style.display="none";
+  document.getElementById("impConfirm").disabled=true;
+  document.getElementById("impStatus").textContent="";
+  impRows=[]; impHeader=[]; impAutoMap={}; impFieldOn={};
+}
+function closeImport(){ document.getElementById("importMask").classList.remove("on"); }
+
+/* 把源表头文字归一化用于匹配 */
+function normHeader(h){
+  return String(h==null?"":h).trim().toLowerCase().replace(/[\s（）()【】\[\]:：*＊/／\\-—_.]/g,"");
+}
+/* 自动匹配表头 -> 内部字段键 */
+function autoMapHeader(header){
+  const map={}, used=new Set();
+  IMPORT_FIELDS.forEach(f=>{
+    for(const label of [f.label.replace(/[\s/／].*$/,"")].concat(f.aliases)){
+      const want=normHeader(label);
+      if(!want) continue;
+      const hit=header.find(h=>!used.has(h) && normHeader(h)===want);
+      if(hit){ map[f.k]=hit; used.add(hit); break; }
+    }
+  });
+  /* 二次宽松匹配：包含关系 */
+  IMPORT_FIELDS.forEach(f=>{
+    if(map[f.k]) return;
+    const cands=[f.label.replace(/[\s/／].*$/,"")].concat(f.aliases).map(normHeader).filter(Boolean);
+    const hit=header.find(h=>!used.has(h) && cands.some(c=>c.length>=2 && (normHeader(h).includes(c)||c.includes(normHeader(h)))));
+    if(hit){ map[f.k]=hit; used.add(hit); }
+  });
+  return map;
+}
+
+function onImportFile(ev){
+  const file=ev.target.files && ev.target.files[0];
+  if(!file) return;
+  document.getElementById("impFName").textContent=file.name;
+  const reader=new FileReader();
+  const isExcel=/\.(xlsx|xls)$/i.test(file.name);
+  reader.onload=async e=>{
+    try{
+      let rows;
+      if(isExcel){ rows=await parseExcel(e.target.result); }
+      else { rows=parseText(String(e.target.result)); }
+      if(!rows || !rows.length){ document.getElementById("impTip").textContent="文件内容为空或无法解析，请检查文件格式。"; return; }
+      impHeader=Object.keys(rows[0]);
+      impRows=rows;
+      impAutoMap=autoMapHeader(impHeader);
+      renderImportFields();
+      document.getElementById("impTip").textContent=`已读取 ${rows.length} 行，识别到 ${impHeader.length} 个字段。请勾选需要导入的内容。`;
+      document.getElementById("impFieldsStep").style.display="block";
+      document.getElementById("impModeStep").style.display="block";
+      document.getElementById("impConfirm").disabled=false;
+    }catch(err){
+      document.getElementById("impTip").textContent="解析失败："+(err.message||err)+"，建议另存为 CSV 后重试。";
+      document.getElementById("impConfirm").disabled=true;
+    }
+  };
+  if(isExcel) reader.readAsArrayBuffer(file);
+  else reader.readAsText(file, "utf-8");
+}
+
+/* 渲染字段勾选列表 */
+function renderImportFields(){
+  const box=document.getElementById("impFields");
+  impFieldOn={};
+  box.innerHTML=IMPORT_FIELDS.map(f=>{
+    const srcCol=impAutoMap[f.k];
+    const on=!!srcCol;
+    impFieldOn[f.k]=on || !!f.required;
+    const attr=(f.required)?"checked disabled":"";
+    const tip=f.required?"必选字段":(srcCol?("对应列："+srcCol):"未匹配到列，勾选后不会导入");
+    return `<label class="imp-field${f.required?" required":""}" title="${tip}">
+      <input type="checkbox" data-k="${f.k}" ${srcCol?"checked":""} ${attr} onchange="toggleImportField('${f.k}', this.checked)">
+      <span>${f.label}${f.required?'<b style="color:var(--req)"> *</b>':""}</span>
+      <span class="fkey${f.required?" req":""}">${f.required?"必选":(srcCol?("("+srcCol+")"):"未匹配")}</span>
+    </label>`;
+  }).join("");
+}
+function toggleImportField(k, on){ impFieldOn[k]=on; }
+function toggleAllImportFields(){
+  const anyOn=IMPORT_FIELDS.some(f=>!f.required && impAutoMap[f.k] && impFieldOn[f.k]);
+  IMPORT_FIELDS.forEach(f=>{
+    if(f.required) return;
+    if(!impAutoMap[f.k]) return;
+    impFieldOn[f.k]=!anyOn;
+  });
+  document.querySelectorAll("#impFields input[type=checkbox]").forEach(cb=>{
+    const k=cb.dataset.k;
+    const f=IMPORT_FIELDS.find(x=>x.k===k);
+    if(f && f.required) return;
+    if(impAutoMap[k]) cb.checked=impFieldOn[k];
+  });
+}
+
+/* ---- Excel 解析（xlsx = zip + XML，浏览器原生能力手写解析，无需外部库） ---- */
+async function parseExcel(buf){
+  const u8=new Uint8Array(buf);
+  if(u8[0]!==0x50 && u8[0]!==0x4B) throw new Error("不是有效的 xlsx 文件（.xls 旧格式请另存为 .xlsx 或 CSV）");
+  /* 1) 解出 zip 中的条目 */
+  const entries=await readZip(u8);
+  const dec=new TextDecoder("utf-8");
+  /* 2) 共享字符串表 */
+  let shared=[];
+  if(entries["xl/sharedStrings.xml"]){
+    const xml=dec.decode(entries["xl/sharedStrings.xml"]);
+    shared=parseSharedStrings(xml);
+  }
+  /* 3) 定位第一个工作表 */
+  let sheetKey=Object.keys(entries).filter(k=>/^xl\/worksheets\/sheet\d+\.xml$/.test(k)).sort()[0];
+  if(!sheetKey) throw new Error("文件中没有找到工作表");
+  const sheetXml=dec.decode(entries[sheetKey]);
+  return parseSheet(sheetXml, shared);
+}
+/* 读取 zip 全部条目（stored + deflate） */
+async function readZip(u8){
+  const dv=new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+  /* 从尾部找 End of Central Directory */
+  let eocd=-1;
+  for(let i=u8.length-22;i>=0 && i>u8.length-66000;i--){
+    if(dv.getUint32(i,true)===0x06054b50){ eocd=i; break; }
+  }
+  if(eocd<0) throw new Error("zip 结构损坏");
+  const cdCount=dv.getUint16(eocd+10,true);
+  let off=dv.getUint32(eocd+16,true);
+  const out={};
+  for(let n=0;n<cdCount;n++){
+    if(dv.getUint32(off,true)!==0x02014b50) break;
+    const method=dv.getUint16(off+10,true);
+    const compSize=dv.getUint32(off+20,true);
+    const nameLen=dv.getUint16(off+28,true);
+    const extraLen=dv.getUint16(off+30,true);
+    const cmtLen=dv.getUint16(off+32,true);
+    const localOff=dv.getUint32(off+42,true);
+    const name=new TextDecoder("utf-8").decode(u8.subarray(off+46, off+46+nameLen));
+    /* 本地文件头 */
+    const lnameLen=dv.getUint16(localOff+26,true);
+    const lextraLen=dv.getUint16(localOff+28,true);
+    const dataStart=localOff+30+lnameLen+lextraLen;
+    const raw=u8.subarray(dataStart, dataStart+compSize);
+    if(method===0) out[name]=raw;
+    else if(method===8) out[name]=await inflateRaw(raw);
+    off+=46+nameLen+extraLen+cmtLen;
+  }
+  return out;
+}
+/* 原生 DecompressionStream 解 deflate-raw */
+async function inflateRaw(u8){
+  if(typeof DecompressionStream==="undefined") throw new Error("浏览器不支持自动解压，请将 Excel 另存为 CSV 后导入");
+  const ds=new DecompressionStream("deflate-raw");
+  const stream=new Blob([u8]).stream().pipeThrough(ds);
+  const ab=await new Response(stream).arrayBuffer();
+  return new Uint8Array(ab);
+}
+/* 解析 sharedStrings.xml */
+function parseSharedStrings(xml){
+  const doc=new DOMParser().parseFromString(xml, "application/xml");
+  const out=[];
+  doc.querySelectorAll("si").forEach(si=>{
+    let s="";
+    si.querySelectorAll("t").forEach(t=>{ s+=t.textContent; });
+    out.push(s);
+  });
+  return out;
+}
+/* 解析 sheet xml -> 行对象数组（首行为表头） */
+function parseSheet(xml, shared){
+  const doc=new DOMParser().parseFromString(xml, "application/xml");
+  const rows=[];
+  doc.querySelectorAll("sheetData > row").forEach(rowEl=>{
+    const cells=[];
+    rowEl.querySelectorAll("c").forEach(c=>{
+      const ref=c.getAttribute("r")||"";
+      const colIdx=colLetterToIdx((ref.match(/^[A-Z]+/)||[""])[0]);
+      const t=c.getAttribute("t");
+      let v="";
+      const vEl=c.querySelector("v");
+      if(t==="s" && vEl){ v=shared[parseInt(vEl.textContent,10)]||""; }
+      else if(t==="inlineStr"){ const isEl=c.querySelector("is"); v=isEl?isEl.textContent:""; }
+      else if(vEl){ v=vEl.textContent; }
+      cells[colIdx>=0?colIdx:cells.length]=String(v==null?"":v).trim();
+    });
+    rows.push(cells);
+  });
+  if(!rows.length) return [];
+  /* 表头取第一行非空单元格 */
+  let headerRow=rows[0].map(h=>String(h||"").trim());
+  /* 若首行明显不像表头（全是数字），则补通用列名 */
+  if(!headerRow.some(h=>h)) headerRow=headerRow.map((_,i)=>"列"+(i+1));
+  const out=[];
+  for(let i=1;i<rows.length;i++){
+    const o={};
+    let has=false;
+    headerRow.forEach((h,j)=>{ const val=String(rows[i][j]==null?"":rows[i][j]).trim(); o[h||("列"+(j+1))]=val; if(val) has=true; });
+    if(has) out.push(o);
+  }
+  return out;
+}
+function colLetterToIdx(s){
+  if(!s) return -1;
+  let n=0;
+  for(let i=0;i<s.length;i++){ n=n*26+(s.charCodeAt(i)-64); }
+  return n-1;
+}
+/* ---- 文本解析：CSV / TSV / TXT / JSON / JS ---- */
+function parseText(text){
+  text=text.replace(/^\uFEFF/,"").trim();
+  if(!text) return [];
+  /* JSON / JS */
+  if(text[0]==="[" || text[0]==="{"){
+    let data;
+    try{ data=JSON.parse(text); }
+    catch(e){ try{ data=JSON.parse(text.replace(/^[^\[{]*/,"").replace(/;[^\]}]*$/,"")); }catch(e2){ data=null; } }
+    if(Array.isArray(data)) return data;
+    if(data && Array.isArray(data.data)) return data.data;
+  }
+  /* CSV / TSV */
+  const lines=text.split(/\r?\n/).filter(l=>l.trim());
+  if(!lines.length) return [];
+  const delim=(lines[0].match(/\t/g)||[]).length >= (lines[0].match(/,/g)||[]).length ? "\t" : ",";
+  const header=splitCsvLine(lines[0], delim);
+  const rows=[];
+  for(let i=1;i<lines.length;i++){
+    const cells=splitCsvLine(lines[i], delim);
+    const o={};
+    header.forEach((h,j)=>{ o[h||("列"+(j+1))]=(cells[j]||"").trim(); });
+    if(Object.values(o).some(v=>v)) rows.push(o);
+  }
+  return rows;
+}
+function splitCsvLine(line, delim){
+  const out=[]; let cur="", q=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i];
+    if(q){
+      if(c==='"'){ if(line[i+1]==='"'){ cur+='"'; i++; } else q=false; }
+      else cur+=c;
+    } else {
+      if(c==='"') q=true;
+      else if(c===delim){ out.push(cur); cur=""; }
+      else cur+=c;
+    }
+  }
+  out.push(cur);
+  return out;
+}
+
+/* 把导入行映射为药品记录 */
+function mapRow(row){
+  const rec={};
+  const raw=k=>{ const col=impAutoMap[k]; return (col && impFieldOn[k]!==false)? String(row[col]||"").trim() : ""; };
+  /* 通用名优先；为空时回退到商品名称 */
+  let name=raw("n");
+  let specBrand="";
+  if(!name){ const n2=raw("n2"); if(n2){ name=n2; specBrand="n2"; } }
+  if(!name) return null;
+  rec.n=name;
+  /* 从商品名称中拆出品牌别名（空格分隔的前置部分） */
+  if(specBrand==="n2"){
+    const parts=name.split(/\s+/);
+    if(parts.length>1){ rec.n=parts[parts.length-1]; rec.a=[parts.slice(0,-1).join("")]; }
+  }
+  const extraAlias=raw("a");
+  if(extraAlias){
+    const arr=extraAlias.split(/[，,、\|;；\/]+/).map(s=>s.trim()).filter(Boolean);
+    rec.a=(rec.a||[]).concat(arr);
+  }
+  IMImport_add(rec, "s", raw("s"));
+  IMImport_add(rec, "u", raw("u"));
+  IMImport_add(rec, "m", raw("m"));
+  IMImport_add(rec, "k", raw("k"));
+  IMImport_add(rec, "rx", raw("rx"));
+  IMImport_add(rec, "c", raw("c"));
+  IMImport_add(rec, "r", raw("r"));
+  IMImport_add(rec, "d", raw("d"));
+  IMImport_add(rec, "du", raw("du"));
+  IMImport_add(rec, "f", raw("f"));
+  const p=raw("p");
+  if(p){ const n=parseFloat(p.replace(/[^\d.]/g,"")); if(!isNaN(n)) rec.p=n; }
+  return rec;
+}
+function IMImport_add(rec, key, val, transform){
+  if(!val || !impFieldOn[key]) return;
+  rec[key]=transform? transform(val) : val;
+}
+
+/* 执行导入 */
+function doImport(){
+  const mode=(document.querySelector('input[name="impMode"]:checked')||{}).value || "merge";
+  const status=document.getElementById("impStatus");
+  let ok=0, skip=0;
+  const recs=[];
+  impRows.forEach(row=>{
+    const rec=mapRow(row);
+    if(rec) { recs.push(rec); ok++; } else skip++;
+  });
+  if(!recs.length){ status.textContent="没有可导入的有效数据（缺少药品名称？）"; return; }
+
+  if(mode==="replace") USER_DB=recs;
+  else {
+    const idx=new Map(USER_DB.map((d,i)=>[d.n, i]));
+    recs.forEach(r=>{
+      if(idx.has(r.n)) USER_DB[idx.get(r.n)]=Object.assign({}, USER_DB[idx.get(r.n)], r);
+      else USER_DB.push(r);
+    });
+  }
+  saveUserDB();
+  buildDrugDB();
+  buildDrugSelect();
+  refreshBrandNames();
+  status.textContent=`导入成功：新增/更新 ${ok} 条${skip?("，跳过 "+skip+" 条"):""}，药品库现共 ${DRUG_DB.length} 种。`;
+  setTimeout(()=>{ closeImport(); }, 900);
+}
+function saveUserDB(){
+  try{
+    const light=USER_DB.map(d=>{ const o={...d}; delete o.__src; return o; });
+    localStorage.setItem("rxUserDrugDB_v1", JSON.stringify(light));
+  }catch(e){ /* 超限则仅内存生效 */ }
+}
+function loadUserDB(){
+  try{
+    const raw=localStorage.getItem("rxUserDrugDB_v1");
+    if(raw){ const arr=JSON.parse(raw); if(Array.isArray(arr)) USER_DB=arr; }
+  }catch(e){}
+}
+/* 品牌名黑名单随用户库扩充 */
+function refreshBrandNames(){
+  const extra=new Set(BRAND_NAMES);
+  [USER_DB, ENTERPRISE_DB].forEach(src=>src.forEach(d=>(d.a||[]).forEach(b=>{ if(b&&b.length>=2&&b.length<=10) extra.add(b); })));
+  BRAND_NAMES.length=0;
+  extra.forEach(b=>BRAND_NAMES.push(b));
+  BRAND_NAMES.sort((x,y)=>y.length-x.length);
+}
+
+/* ================= 启动 ================= */
+restore();
+loadDiags();
+loadUserDB();
+if(USER_DB.length){ buildDrugDB(); refreshBrandNames(); }
+buildChips(); buildDrugSelect();
+syncZoom(); syncForm();
+/* 先保证至少有一条空药品行，再渲染，避免首次打开时列表区空白 */
+if(!Array.isArray(state.drugs) || state.drugs.length===0) state.drugs=[blankDrug()];
+renderDrugs();
+renderDiagSelected();
+applyPaper();
+loadPaneWidth(); applyPaneWidth(); initResizer();
+</script>
+</body>
+</html>

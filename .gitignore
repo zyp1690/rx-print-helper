@@ -1,0 +1,19 @@
+# Windows
+Thumbs.db
+Desktop.ini
+*.lnk
+
+# macOS
+.DS_Store
+
+# 打包产物
+*.exe
+*.spec
+build/
+dist/
+__pycache__/
+*.pyc
+
+# 编辑器
+.vscode/
+.idea/
