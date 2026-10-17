@@ -194,25 +194,46 @@
   .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px 10px;}
   .field{display:flex; flex-direction:column; gap:3px;}
   .field label{font-size:12px; color:var(--text); opacity:.85; font-weight:600;}
-  /* ===== 必填项：红色提示 ===== */
+  /* ===== 日期：输入框 + 「今天」快捷按钮 ===== */
+  .date-wrap{display:flex; gap:6px; align-items:stretch;}
+  .date-wrap input[type=date]{flex:1; min-width:0;}
+  .btn-today{
+    flex-shrink:0; border:1px dashed var(--req); background:var(--req-soft); color:var(--req);
+    border-radius:7px; padding:8px 12px; font-size:12px; font-weight:600; cursor:pointer;
+    transition:.15s; white-space:nowrap;
+  }
+  .btn-today:hover{border-color:var(--req); background:var(--req); color:#fff;}
+  .btn-today.on{background:var(--req); border:1px solid var(--req); color:#fff;}
+  /* ===== 必填项：红色细虚线提示====== */
   :root{ --req:#e23c3c; --req-soft:rgba(226,60,60,.06); }
   body[data-skin^="dark"]{ --req:#ff6b6b; --req-soft:rgba(255,107,107,.12); }
   .field.req label::after{content:" *"; color:var(--req); font-weight:700;}
   .field.req input:not([type=checkbox]):not([type=radio]),
   .field.req select,
-  .field.req textarea{border-color:var(--req) !important; background:var(--req-soft);}
+  .field.req textarea{
+    border:1px dashed var(--req) !important;
+    background:var(--req-soft);
+    box-shadow:none;
+    padding:8px 10px;/* 1px 虚线补偿 2px 实线，保持与同行输入框等高 */
+  }
   .field.req input:focus, .field.req select:focus, .field.req textarea:focus{
-    border-color:var(--req) !important; box-shadow:0 0 0 2px var(--req-soft);}
-  /* 未填写时的醒目提示（输入后由 JS 移除 .empty） */
+    border-color:var(--req) !important;
+    box-shadow:0 0 0 2px var(--req-soft);
+  }
+  /* 未填写时的醒目提示：虚线加深 + 淡红底（输入后由 JS 移除 .empty） */
   .field.req.empty input:not([type=checkbox]):not([type=radio]),
   .field.req.empty select,
-  .field.req.empty textarea{border-color:var(--req) !important; background:var(--req-soft); box-shadow:0 0 0 1px var(--req);}
+  .field.req.empty textarea{
+    border:1px dashed var(--req) !important;
+    background:var(--req-soft);
+    box-shadow:0 0 0 1px var(--req);
+  }
   /* 性别 chips 未选时的红色提示 */
   .chips.req-empty .chip{border-color:var(--req); background:var(--req-soft); color:var(--req);}
   .field.req.empty .diag-selected{border:1px dashed var(--req) !important; background:var(--req-soft);}
   .req-tip{color:var(--req); font-size:11px; margin:-1px 0 4px;}
   /* 药品行内的必填输入框（剂量/用法） */
-  .req-inp{border-color:var(--req) !important; background:var(--req-soft);}
+  .req-inp{border:1px dashed var(--req) !important; background:var(--req-soft); box-shadow:none; padding:8px 10px;}
   .req-inp.empty{box-shadow:0 0 0 1px var(--req);}
   .req-inp:focus{border-color:var(--req) !important; box-shadow:0 0 0 2px var(--req-soft);}
   .drug-row .req-inp::placeholder{color:var(--req); opacity:.85;}
@@ -560,7 +581,12 @@
       <h2>签发信息</h2>
       <div class="grid3">
         <div class="field req"><label>处方医师</label><input type="text" id="fDoctor" placeholder="（签字或盖章有效）"></div>
-        <div class="field req"><label>日期</label><input type="date" id="fDate"></div>
+        <div class="field req"><label>日期</label>
+          <div class="date-wrap">
+            <input type="date" id="fDate">
+            <button type="button" class="btn-today" id="btnToday" onclick="setToday()" title="填入今天日期">今天</button>
+          </div>
+        </div>
         <div class="field"><label>发药药房</label><input type="text" id="fPharmacy" placeholder="儿科门诊药房"></div>
       </div>
       <div class="field" style="margin-top:8px"><label>底部说明文字</label><textarea id="fNote" style="height:70px;font-size:11px"></textarea></div>
@@ -612,6 +638,19 @@
 <script>
 /* ================= 状态 ================= */
 const DEFAULT_NOTE = "药师提示： 1、请遵医嘱服药；2、请在窗口处请药品；3、处方当日有效(如有特殊情况可延长至三日)；4、发出药品不予退换。注：实行双对方、双划价；医保患者、离、退休人员患高血压、糖尿病、冠心病、慢性肝炎、肝硬化、结核病、精神病、癌症、脑血管病、前列腺肥大疾病，且病情稳定需长期服用同一类药物的，药量可放宽到不超过一个月量。";
+
+/* ===== 本地日期工具（避免 toISOString 的 UTC 偏移，东八区凌晨会少一天） ===== */
+function todayStr(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+/* 「今天」按钮：填入当天日期并刷新预览 */
+function setToday(){
+  state.date=todayStr();
+  const el=document.getElementById("fDate");
+  if(el) el.value=state.date;
+  save(); renderPreview(); updateReqState(); syncTodayBtn();
+}
 
 let state = {
   paper:{w:210, h:148, orient:"landscape", margin:8, zoom:100},
@@ -695,6 +734,7 @@ Object.entries(fieldMap).forEach(([id,key])=>{
   document.getElementById(id).addEventListener("input", e=>{
     state[key]=e.target.value;
     if(key==="dept") syncDeptSel();
+    if(key==="date") syncTodayBtn();
     save(); renderPreview();
   });
 });
@@ -2048,7 +2088,12 @@ document.getElementById("pasteBox").addEventListener("paste", ()=>{ setTimeout(d
 
 function syncForm(){
   Object.entries(fieldMap).forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.value=state[key]??""; });
-  syncGender(); syncDeptSel(); renderDiagSelected(); updateReqState(); refreshReqInputs();
+  syncGender(); syncDeptSel(); renderDiagSelected(); updateReqState(); refreshReqInputs(); syncTodayBtn();
+}
+/* 「今天」按钮高亮：当前日期 == 今天 */
+function syncTodayBtn(){
+  const b=document.getElementById("btnToday");
+  if(b) b.classList.toggle("on", state.date===todayStr());
 }
 /* ===== 必填项状态：未填写时红色高亮（.empty），填写后恢复 ===== */
 const REQ_FIELDS=[
@@ -2082,7 +2127,7 @@ document.addEventListener("change", e=>{ if(e.target.closest(".field")) updateRe
 function renderPreview(){
   const p=document.getElementById("page");
   const total=state.drugs.reduce((s,d)=>s+num(d.price)*num(d.qty),0);
-  const today=state.date||new Date().toISOString().slice(0,10);
+  const today=state.date||todayStr();
   const [Y,M,D]=today.split("-");
   let rows="";
   state.drugs.filter(d=>d.name||d.dose||d.price).forEach(d=>{
@@ -2157,14 +2202,29 @@ function restore(){
     const raw=localStorage.getItem(KEY);
     if(raw){ const s=JSON.parse(raw); state={...state,...s, paper:{...state.paper,...(s.paper||{})}}; }
   }catch(e){}
-  if(!state.date) state.date=new Date().toISOString().slice(0,10);
+  /* 日期自动识别当前日期：
+     1) 空值 → 填今天
+     2) 已保存的日期早于今天（跨天再打开）→ 自动滚动到今天
+     3) 用户手动设为未来日期 → 保留不动 */
+  const t=todayStr();
+  if(!state.date || /^\d{4}-\d{2}-\d{2}$/.test(state.date)===false || state.date < t) state.date=t;
   setSkin(state.skin||"classic", true);
 }
+/* 跨天守护：页面长时间开着跨过零点时，日期自动跟进今天 */
+let _lastDay=todayStr();
+setInterval(()=>{
+  const d=todayStr();
+  if(d!==_lastDay){
+    _lastDay=d;
+    /* 仅当用户没有手动指定未来日期时才覆盖 */
+    if(!state.date || state.date < d){ state.date=d; syncForm(); renderPreview(); save(); }
+  }
+}, 30000);
 function loadSample(){
   state.hospital="北京大学第一医院";
   state.name="梁雅遥"; state.gender="男"; state.age="10岁";
   state.dept="儿科门诊"; state.diag="发热，咳嗽"; state.card=""; state.mrn="";
-  state.doctor=""; state.pharmacy="儿科门诊药房"; state.date=new Date().toISOString().slice(0,10);
+  state.doctor=""; state.pharmacy="儿科门诊药房"; state.date=todayStr();
   state.drugs=[
     {cat:"Rp",name:"美林混悬液/布洛芬混悬液",spec:"2g 100ML/瓶",dose:"10",dunit:"ML",freq:"必要时",usage:"口服",skin:false,price:"17.85",qty:"1",unit:"瓶"},
     {cat:"Rp",name:"头孢地尼分散片/希福尼(分散)",spec:"50mg*12片/盒",dose:"100",dunit:"MG",freq:"每日三次",usage:"口服",skin:false,price:"56.6",qty:"2",unit:"盒"},
@@ -2175,7 +2235,7 @@ function loadSample(){
 function clearAll(){
   if(!confirm("确定清空所有内容？")) return;
   const paper=state.paper, skin=state.skin;
-  state={ paper, skin, hospital:"", card:"", dept:"", mrn:"", address:"", name:"", gender:"", age:"", diag:"", doctor:"", date:new Date().toISOString().slice(0,10), pharmacy:"", note:DEFAULT_NOTE, drugs:[blankDrug()] };
+  state={ paper, skin, hospital:"", card:"", dept:"", mrn:"", address:"", name:"", gender:"", age:"", diag:"", doctor:"", date:todayStr(), pharmacy:"", note:DEFAULT_NOTE, drugs:[blankDrug()] };
   renderAll(); save();
 }
 
