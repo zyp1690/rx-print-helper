@@ -6,14 +6,19 @@ Desktop.ini
 # macOS
 .DS_Store
 
-# 打包产物
-*.exe
-*.spec
-build/
-dist/
+# 打包依赖与产物（可由 npm install / npm run dist 重建）
+build/node_modules/
+build/dist/
+build/*.txt
+build/shots/
+build/*.js.bak
 __pycache__/
 *.pyc
 
 # 编辑器
 .vscode/
 .idea/
+
+# 临时文件
+*.tmp
+*.log

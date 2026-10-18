@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="zh-CN" data-page-node-id="aqROfbIIKIFGyEQ8LVOHjI">
+<head data-page-node-id="X8bIfwE33yqQfDJ6euRTNG">
+<meta charset="UTF-8" data-page-node-id="9qRDQ25TcTzmmsNHNfEoyz">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="453yDTR8mNo7DYKLm58VVd">
 <title>处方打印助手</title>
 <style>
   /* ===== 主题变量（默认：经典蓝） ===== */
@@ -12,10 +12,8 @@
     --accent:#ffb02e; --accent-text:#5a3200;
     --head-from:#0d4d8c; --head-to:#1667b8;
     --preview-bg:#c9d3dd;
-    --chip-bg:#f6f9fc; --chip-text:#33465e;
     --soft:#f2f8ff; --soft-line:#cbe2fa; --soft-text:#23507f;
-    --in-bg:#ffffff; --in-line:#c6d2e0; --row-line:#e4eaf2;
-    --radius:8px;
+    --in-bg:#ffffff; --in-line:#c6d2e0;
   }
   /* 皮肤：青竹 */
   body[data-skin="bamboo"]{
@@ -23,90 +21,72 @@
     --line:#c4d9cb; --text:#152218; --muted:#44604f; --green:#157a5a;
     --accent:#e8a33d; --accent-text:#4a2c00;
     --head-from:#0b553d; --head-to:#157a5a; --preview-bg:#c3d5c9;
-    --chip-bg:#f2f8f4; --chip-text:#2f4d3c;
     --soft:#eff8f3; --soft-line:#c2e0d0; --soft-text:#165c42;
-    --in-bg:#ffffff; --in-line:#c4d9cb; --row-line:#e0ece4;
-  }
+    --in-bg:#ffffff; --in-line:#c4d9cb; }
   /* 皮肤：暖杏 */
   body[data-skin="apricot"]{
     --blue:#c26a2a; --blue-dark:#8a4213; --bg:#f8f2ea; --card:#ffffff;
     --line:#e2d0bc; --text:#2e2115; --muted:#6f5a45; --green:#4c8b3f;
     --accent:#c26a2a; --accent-text:#fff5ec;
     --head-from:#96491a; --head-to:#c26a2a; --preview-bg:#dccfbe;
-    --chip-bg:#fdf8f2; --chip-text:#5a4530;
     --soft:#fdf5ec; --soft-line:#ebd3b6; --soft-text:#8a4a13;
-    --in-bg:#ffffff; --in-line:#e2d0bc; --row-line:#f0e5d7;
-  }
+    --in-bg:#ffffff; --in-line:#e2d0bc; }
   /* 皮肤：墨玉 */
   body[data-skin="ink"]{
     --blue:#4a5568; --blue-dark:#232c3a; --bg:#edf0f4; --card:#ffffff;
     --line:#c8d0da; --text:#151c26; --muted:#4f5b6b; --green:#3f7d5f;
     --accent:#8a6d3b; --accent-text:#fff8ea;
     --head-from:#222b38; --head-to:#4a5568; --preview-bg:#c4cbd4;
-    --chip-bg:#f5f7fa; --chip-text:#39424f;
     --soft:#f4f6f9; --soft-line:#d3dae3; --soft-text:#2d3748;
-    --in-bg:#ffffff; --in-line:#c8d0da; --row-line:#e3e8ef;
-  }
+    --in-bg:#ffffff; --in-line:#c8d0da; }
   /* 皮肤：樱粉 */
   body[data-skin="sakura"]{
     --blue:#c2506e; --blue-dark:#8e2b45; --bg:#faf0f3; --card:#ffffff;
     --line:#eccdd8; --text:#311c25; --muted:#74525f; --green:#4c8b6a;
     --accent:#c2506e; --accent-text:#fff2f5;
     --head-from:#96334d; --head-to:#c2506e; --preview-bg:#ddc6ce;
-    --chip-bg:#fdf4f7; --chip-text:#5e3a47;
     --soft:#fdf3f6; --soft-line:#efc9d7; --soft-text:#95243f;
-    --in-bg:#ffffff; --in-line:#eccdd8; --row-line:#f6e2e9;
-  }
+    --in-bg:#ffffff; --in-line:#eccdd8; }
   /* 皮肤：深海 */
   body[data-skin="ocean"]{
     --blue:#0f6f8c; --blue-dark:#064052; --bg:#ecf3f6; --card:#ffffff;
     --line:#c0d5de; --text:#12262e; --muted:#40606c; --green:#12796b;
     --accent:#e0a63c; --accent-text:#463000;
     --head-from:#08485c; --head-to:#0f6f8c; --preview-bg:#c0d0d8;
-    --chip-bg:#f1f8fa; --chip-text:#2e4d59;
     --soft:#eef8fb; --soft-line:#bcdbe7; --soft-text:#0a556b;
-    --in-bg:#ffffff; --in-line:#c0d5de; --row-line:#dceaf0;
-  }
+    --in-bg:#ffffff; --in-line:#c0d5de; }
   /* ===== 深色皮肤 ===== */
   body[data-skin="dark-blue"]{
     --blue:#4da3ff; --blue-dark:#8ec6ff; --bg:#0e1621; --card:#18222f;
     --line:#2c3a4c; --text:#e8eef7; --muted:#93a5bb; --green:#43c78e;
     --accent:#ffb02e; --accent-text:#4a2c00;
     --head-from:#0f2138; --head-to:#1d3b5e; --preview-bg:#0a1017;
-    --chip-bg:#1e2b3b; --chip-text:#c3d1e2;
     --soft:#1b2735; --soft-line:#2f4055; --soft-text:#9cc9ff;
-    --in-bg:#111a25; --in-line:#2f3f52; --row-line:#243140;
-    --dark:1;
+    --in-bg:#111a25; --in-line:#2f3f52;
   }
   body[data-skin="dark-green"]{
     --blue:#3fc98d; --blue-dark:#7ee0b3; --bg:#0d1713; --card:#17231d;
     --line:#2a3b32; --text:#e6f2ec; --muted:#8fa99b; --green:#3fc98d;
     --accent:#e8b356; --accent-text:#3d2a00;
     --head-from:#0c1f18; --head-to:#173a2c; --preview-bg:#080f0c;
-    --chip-bg:#1c2b24; --chip-text:#bdd6c8;
     --soft:#1a2a22; --soft-line:#2c4036; --soft-text:#8fe3b8;
-    --in-bg:#101a15; --in-line:#2c3d34; --row-line:#22312a;
-    --dark:1;
+    --in-bg:#101a15; --in-line:#2c3d34;
   }
   body[data-skin="dark-purple"]{
     --blue:#a98bff; --blue-dark:#c9b6ff; --bg:#141020; --card:#1e1830;
     --line:#332a4c; --text:#ece8f7; --muted:#9d93b8; --green:#4fd6a8;
     --accent:#ffb02e; --accent-text:#3d2a00;
     --head-from:#1b1233; --head-to:#33245c; --preview-bg:#0c0916;
-    --chip-bg:#241c3a; --chip-text:#cbc0e4;
     --soft:#221b36; --soft-line:#382c58; --soft-text:#c4b0ff;
-    --in-bg:#161125; --in-line:#352c50; --row-line:#281f3e;
-    --dark:1;
+    --in-bg:#161125; --in-line:#352c50;
   }
   body[data-skin="dark"]{
     --blue:#e8c469; --blue-dark:#f5d88f; --bg:#0d0d0f; --card:#17171a;
     --line:#2e2e33; --text:#f2f2f4; --muted:#9b9ba5; --green:#4fd6a8;
     --accent:#e8c469; --accent-text:#2b2100;
     --head-from:#0a0a0c; --head-to:#26262c; --preview-bg:#070708;
-    --chip-bg:#1f1f23; --chip-text:#d4d4dc;
     --soft:#1d1d21; --soft-line:#33333a; --soft-text:#e8c469;
-    --in-bg:#111114; --in-line:#33333a; --row-line:#242429;
-    --dark:1;
+    --in-bg:#111114; --in-line:#33333a;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:var(--bg); color:var(--text); font-size:13px;}
@@ -130,7 +110,45 @@
   .app-header{background:linear-gradient(90deg,var(--head-from),var(--head-to)); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
   .app-header h1{font-size:17px; font-weight:600; letter-spacing:1px;}
   .app-header .sub{font-size:11px; opacity:.8;}
+  .app-header .sub b{font-weight:600; opacity:1;}
   .app-header .spacer{flex:1;}
+  /* 页脚版权 */
+  .app-footer{
+    text-align:center; font-size:11.5px; color:var(--muted);
+    padding:4px 0 2px; letter-spacing:.3px;
+  }
+  .app-footer a{color:var(--blue); text-decoration:none; cursor:pointer;}
+  .app-footer a:hover{text-decoration:underline;}
+  .app-footer .cp{opacity:.85;}
+  /* ===== 多联切换栏（A4 拼版时显示） ===== */
+  .rx-bar{
+    display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+    background:var(--soft); border:1px solid var(--soft-line); border-radius:7px;
+    padding:7px 9px; position:sticky; top:0; z-index:20;
+  }
+  .rx-bar .rxbar-lbl{font-size:11.5px; color:var(--muted); font-weight:600; margin-right:2px;}
+  .rx-bar .rxbar-item{
+    border:1px solid var(--soft-line); background:var(--in-bg); color:var(--soft-text);
+    border-radius:14px; padding:3px 11px; font-size:12px; cursor:pointer;
+    font-family:inherit; transition:.12s; white-space:nowrap;
+  }
+  .rx-bar .rxbar-item:hover{border-color:var(--blue);}
+  .rx-bar .rxbar-item.on{background:var(--blue); border-color:var(--blue); color:#fff; font-weight:600;}
+  /* 已录有内容的联：左侧加实心圆点提示 */
+  .rx-bar .rxbar-item.filled::before{
+    content:""; display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--green); margin-right:5px; vertical-align:middle;
+  }
+  .rx-bar .rxbar-item.on.filled::before{background:#fff;}
+  body[data-skin^="dark"] .rx-bar .rxbar-item.filled::before{background:#43c78e;}
+  body[data-skin^="dark"] .rx-bar .rxbar-item.on.filled::before{background:#fff;}
+  /* 「下一联」：跳到下一张继续录入 */
+  .rx-bar .rxbar-next{
+    margin-left:auto; border:1px solid var(--blue); background:var(--blue); color:#fff;
+    border-radius:14px; padding:3px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit; white-space:nowrap; transition:.12s;
+  }
+  .rx-bar .rxbar-next:hover{filter:brightness(1.08);}
   .btn{border:none; border-radius:5px; padding:7px 14px; font-size:13px; background:rgba(255,255,255,.16); color:#fff; transition:.15s;}
   .btn:hover{background:rgba(255,255,255,.3);}
   .btn.primary{background:#ffb02e; color:#5a3200; font-weight:600;}
@@ -231,7 +249,6 @@
   /* 性别 chips 未选时的红色提示 */
   .chips.req-empty .chip{border-color:var(--req); background:var(--req-soft); color:var(--req);}
   .field.req.empty .diag-selected{border:1px dashed var(--req) !important; background:var(--req-soft);}
-  .req-tip{color:var(--req); font-size:11px; margin:-1px 0 4px;}
   /* 药品行内的必填输入框（剂量/用法） */
   .req-inp{border:1px dashed var(--req) !important; background:var(--req-soft); box-shadow:none; padding:8px 10px;}
   .req-inp.empty{box-shadow:0 0 0 1px var(--req);}
@@ -254,8 +271,8 @@
   .mini{width:88px;} .mini2{width:72px;}
   /* 药品行内输入框：保持紧凑，抵消全局放大的内边距 */
   .drug-row input,.drug-row select{font-size:13px; padding:6px 8px;}
-  .quick-freq,.quick-use{display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;}
-  .quick-freq .chip,.quick-use .chip{padding:2px 9px; font-size:11px;}
+  .quick-freq{display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;}
+  .quick-freq .chip{padding:2px 9px; font-size:11px;}
   .add-drug{width:100%; border:1px dashed var(--blue); background:var(--soft); color:var(--blue); border-radius:6px; padding:8px; font-size:13px;}
   .add-drug:hover{background:var(--soft-line);}
   /* ===== 药品搜索 ===== */
@@ -290,10 +307,6 @@
   /* ===== 常用诊断：下拉选择 + 管理面板 ===== */
   .diag-selbar{display:flex; gap:6px;}
   .diag-selbar select{flex:1;}
-  .diag-manage{display:none; margin-top:7px; padding:9px; border:1px solid var(--line); border-radius:7px; background:var(--soft);}
-  .diag-manage.on{display:block;}
-  .dm-hint{font-size:11.5px; color:var(--muted); margin-bottom:6px;}
-  .dm-list{list-style:none; margin:0 0 8px; padding:0; max-height:210px; overflow-y:auto;}
   .dm-item{display:flex; align-items:center; gap:7px; padding:4px 7px; margin-bottom:4px; background:#fff;
     border:1px solid var(--line); border-radius:6px; font-size:12px; cursor:grab; transition:.12s;}
   .dm-item:hover{border-color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.07);}
@@ -308,7 +321,39 @@
   .dm-item .del{border:none; background:transparent; color:#c25; font-size:13px; line-height:1; cursor:pointer;
     padding:2px 5px; border-radius:4px;}
   .dm-item .del:hover{background:#fbe4e9;}
-  .dm-empty{padding:8px; text-align:center; color:var(--muted); font-size:11.5px;}
+  /* ===== 设置弹窗：下拉选项排序 ===== */
+  .set-hint{
+    background:var(--soft); border:1px solid var(--soft-line); border-radius:6px;
+    padding:8px 11px; font-size:12px; line-height:1.7; color:var(--muted); margin-bottom:10px;
+  }
+  .set-hint b{color:var(--text);}
+  .set-hint-sm{font-size:11px; margin:10px 0 0; padding:6px 9px;}
+  .set-tabs{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;}
+  .set-tabs .set-tab{
+    border:1px solid var(--line); background:var(--in-bg); color:var(--soft-text);
+    border-radius:15px; padding:4px 13px; font-size:12.5px; cursor:pointer;
+    font-family:inherit; transition:.12s; white-space:nowrap;
+  }
+  .set-tabs .set-tab:hover{border-color:var(--blue); color:var(--blue);}
+  .set-tabs .set-tab.on{background:var(--blue); border-color:var(--blue); color:#fff; font-weight:600;}
+  .set-panel-head{display:flex; align-items:baseline; gap:9px; margin-bottom:7px; flex-wrap:wrap;}
+  .set-panel-title{font-size:13.5px; font-weight:700; color:var(--text);}
+  .set-panel-tip{font-size:11.5px; color:var(--muted);}
+  .set-count{margin-left:auto; font-size:11.5px; color:var(--muted);}
+  /* 设置页条目列表：限制高度，超出可滚动；必须清掉 ul 默认样式 */
+  #setList{max-height:300px; overflow-y:auto; border:1px solid var(--line); border-radius:7px;
+    background:var(--soft); padding:6px; margin:0 0 8px; list-style:none;
+    display:flex; flex-direction:column; gap:4px;}
+  /* 设置页条目占满整行（侧栏里的 .dm-item 是窄列，这里要宽一些） */
+  #setList .dm-item{margin-bottom:0; width:100%; min-width:0; box-sizing:border-box; padding:6px 9px;}
+  #setList .dm-item .nm{flex:1 1 auto; min-width:0; text-align:left; line-height:1.5;}
+  #setList .dm-item .num{flex:0 0 auto; margin-right:2px;}
+  #setList .dm-item .grip{flex:0 0 auto; width:12px; text-align:center;}
+  #setList .dm-item .del{flex:0 0 auto; margin-left:6px;}
+  .set-ops{display:flex; gap:6px; margin-top:9px; flex-wrap:wrap;}
+  #setList .dm-item.picked{border-color:var(--blue); background:#eef5fd; box-shadow:0 0 0 1.5px var(--blue);}
+  body[data-skin^="dark"] #setList .dm-item.picked{background:var(--soft-line);}
+  body[data-skin^="dark"] #setList{background:var(--soft);}
   /* ===== 皮肤选择器 ===== */
   .skin-bar{display:flex; align-items:center; gap:7px;}
   .skin-bar .lbl{font-size:12px; opacity:.85;}
@@ -332,7 +377,7 @@
   .modal-mask{display:none; position:fixed; inset:0; background:rgba(8,15,26,.55); z-index:200;
     align-items:center; justify-content:center; backdrop-filter:blur(2px);}
   .modal-mask.on{display:flex;}
-  .modal{width:620px; max-width:calc(100vw - 40px); max-height:88vh; background:var(--card); color:var(--text);
+  .modal{width:620px; max-width:calc(100vw - 40px); max-height:92vh; background:var(--card); color:var(--text);
     border:1px solid var(--line); border-radius:10px; box-shadow:0 12px 40px rgba(0,0,0,.38);
     display:flex; flex-direction:column; overflow:hidden;}
   .modal-head{display:flex; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line);}
@@ -358,12 +403,38 @@
   .imp-file input[type=file]{flex:1; border:none; background:transparent; color:var(--text); font-size:12px; padding:0;}
   .imp-fname{font-size:11.5px; color:var(--muted); word-break:break-all;}
   .imp-tip{margin-top:8px; font-size:11.5px; color:var(--muted); line-height:1.6;}
-  .imp-fields{display:grid; grid-template-columns:repeat(2,1fr); gap:6px 12px;}
+  /* 字段区独立滚动：保证第三步「导入方式」始终可见，不被字段列表挤出弹窗 */
+  .imp-fields{display:grid; grid-template-columns:repeat(2,1fr); gap:6px 12px;
+    max-height:46vh; overflow-y:auto; padding-right:4px; align-content:start;}
   .imp-field{display:flex; align-items:center; gap:7px; padding:6px 9px; border:1px solid var(--line);
     border-radius:6px; background:var(--in-bg); font-size:12px; cursor:pointer;}
   .imp-field:hover{border-color:var(--blue);}
   .imp-field input{width:14px; height:14px; accent-color:var(--blue); flex:0 0 auto;}
   .imp-field .fkey{color:var(--muted); font-size:11px; margin-left:auto;}
+  /* 手动列映射下拉 */
+  .imp-field .col-sel{
+    font-family:inherit; font-size:11.5px; padding:2px 4px; min-width:104px; max-width:150px;
+    border:1px solid var(--line); border-radius:4px; background:var(--in-bg); color:var(--text);
+    cursor:pointer; flex:0 0 auto;
+  }
+  .imp-field .col-sel:hover{border-color:var(--blue);}
+  .imp-field.mapped .col-sel{border-color:var(--green); color:var(--green); font-weight:600;}
+  .imp-field.manual .col-sel{border-color:var(--accent); color:var(--accent-text);}
+  .imp-field .fkey.manual-tag{color:var(--accent-text); font-weight:600;}
+  /* 字段预览样例 */
+  .imp-field .sample{color:var(--muted); font-size:10.5px; max-width:130px; overflow:hidden;
+    text-overflow:ellipsis; white-space:nowrap;}
+  /* 手动匹配开关行 */
+  .imp-manual-bar{display:flex; align-items:center; gap:8px; margin-bottom:7px; flex-wrap:wrap;}
+  .imp-manual-bar label{display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--muted); cursor:pointer;}
+  .imp-manual-bar label input{width:14px; height:14px; accent-color:var(--blue);}
+  .imp-hint-box{font-size:11px; color:var(--muted); background:var(--soft); border:1px solid var(--soft-line);
+    border-radius:5px; padding:6px 9px; margin-bottom:7px; line-height:1.6;}
+  .imp-hint-box b{color:var(--text);}
+  /* 字段区滚动条 */
+  .imp-fields::-webkit-scrollbar{width:8px;}
+  .imp-fields::-webkit-scrollbar-thumb{background:var(--line); border-radius:4px;}
+  .imp-fields::-webkit-scrollbar-thumb:hover{background:var(--muted);}
   .imp-modes{display:flex; flex-direction:column; gap:6px;}
   .imp-mode{display:flex; align-items:flex-start; gap:9px; padding:8px 10px; border:1px solid var(--line);
     border-radius:6px; background:var(--in-bg); cursor:pointer; font-size:12px;}
@@ -372,11 +443,83 @@
   .imp-mode i{display:block; font-style:normal; color:var(--muted); font-size:11px; margin-top:2px;}
   /* ===== 预览纸张 ===== */
   #scaler{transform-origin:top center;}
+  /* A4 拼版容器：一张 A4 上排布 N 张处方 */
+  #sheetWrap{margin:0 auto;}
+  #sheet{
+    background:#fff; box-shadow:0 3px 14px rgba(20,40,70,.25);
+    display:flex; flex-wrap:wrap; box-sizing:border-box; position:relative;
+  }
+  #sheet .sheet-tip{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    color:#9aa7b6; font-size:10pt; z-index:3; pointer-events:none;
+  }
+  /* 单张处方在拼版中的格子 */
+  .sheet-cell{box-sizing:border-box; position:relative; overflow:hidden; border:1px dashed #dde3ea;}
   #page{
     background:#fff; box-shadow:0 3px 14px rgba(20,40,70,.25);
     font-family:"SimSun","宋体",serif; color:#111;
     display:flex; flex-direction:column; position:relative;
   }
+  /* 单张模式沿用原#page 阴影；拼版时由格子承担边框 */
+  body.multi-up #page, body.multi-up .rx-page{box-shadow:none !important; height:100% !important; min-height:0 !important; width:100% !important;}
+  body.multi-up .sheet-cell{box-shadow:0 0 0 1px rgba(20,40,70,.12);}
+  /* 克隆出来的联节点沿用#page 的排版样式 */
+  .rx-page{
+    background:#fff; font-family:"SimSun","宋体",serif; color:#111;
+    display:flex; flex-direction:column; position:relative; box-sizing:border-box;
+  }
+  /* 缩小拼版时：把字号整体按比例调小，版式结构不变 */
+  #sheet .rx-page[data-small] .p-title{font-size:calc(14pt * var(--k,1));}
+  #sheet .rx-page[data-small] .p-info,
+  #sheet .rx-page[data-small] table{font-size:calc(9.5pt * var(--k,1));}
+  #sheet .rx-page[data-small] .p-cardline{font-size:calc(8.5pt * var(--k,1));}
+  #sheet .rx-page[data-small] .rp-label{font-size:calc(10pt * var(--k,1));}
+  #sheet .rx-page[data-small] .spec,
+  #sheet .rx-page[data-small] .p-lian,
+  #sheet .rx-page[data-small] .p-foot1{font-size:calc(8pt * var(--k,1));}
+  #sheet .rx-page[data-small] .p-note{font-size:calc(8.5pt * var(--k,1));}
+  #sheet .rx-page[data-small] .p-sign,
+  #sheet .rx-page[data-small] .p-fee{font-size:calc(9pt * var(--k,1));}
+  #sheet .rx-page[data-small] .p-sign .doc{min-width:calc(90px * var(--k,1));}
+  #sheet .rx-page[data-small] .p-info .underline{min-width:calc(56px * var(--k,1));}
+  /* #page 本身也是一页，给它挂rx-page 类以复用下方的后代选择器 */
+  #sheet .rx-page .p-head{display:flex; align-items:baseline; position:relative; margin-bottom:2px;}
+  #sheet .rx-page .p-title{flex:1; text-align:center; font-size:14pt; font-weight:bold; letter-spacing:2px;}
+  #sheet .rx-page .p-lian{position:absolute; right:0; top:0; font-size:8pt;}
+  #sheet .rx-page .p-cardline{text-align:right; font-size:8.5pt; line-height:1.35;}
+  #sheet .rx-page .p-info{font-size:9.5pt; line-height:1.5; margin-top:1px;}
+  #sheet .rx-page .p-info .underline{display:inline-block; min-width:56px; text-align:center; border-bottom:1px solid #333; padding:0 5px;}
+  #sheet .rx-page hr{border:none; border-top:1.5px solid #111; margin:3px 0;}
+  #sheet .rx-page table{width:100%; border-collapse:collapse; font-size:9.5pt;}
+  #sheet .rx-page table th{font-weight:bold; text-align:left; padding:2px 2px; border-bottom:1.5px solid #111;}
+  #sheet .rx-page table td{padding:2.5px 2px; vertical-align:top;}
+  #sheet .rx-page .rp-label{font-size:10pt; font-weight:bold; margin:3px 0 1px;}
+  #sheet .rx-page .spec{font-size:8pt; color:#333; padding-left:2em; line-height:1.3;}
+  #sheet .rx-page .num{text-align:right; font-variant-numeric:tabular-nums;}
+  #sheet .rx-page .p-sign{display:flex; align-items:baseline; font-size:9pt; margin-top:5px; gap:4px;}
+  #sheet .rx-page .p-sign .doc{display:inline-block; min-width:90px; border-bottom:1px solid #333; text-align:center;}
+  #sheet .rx-page .p-date{margin-left:auto;}
+  #sheet .rx-page .p-foot1{display:flex; justify-content:space-between; font-size:8pt; margin-top:4px; line-height:1.4;}
+  #sheet .rx-page .p-fee{font-size:9pt; margin-top:2px;}
+  #sheet .rx-page .p-note{font-size:8.5pt; line-height:1.55; color:#222; margin-top:5px; text-align:justify;}
+  /* 旋转拼版：处方在格子中旋转 90°，由 JS 写入 --rx-w/--rx-h 原始尺寸
+   注意：选择器必须用 .rx-page.rot 而非 #page.rot，
+   否则只有主节点（id=page）会旋转，第 2 联起的克隆节点不生效。 */
+  .sheet-cell.rot{overflow:hidden;}
+  #sheet .rx-page.rot{
+    position:absolute; top:50%; left:50%;
+    width:var(--rx-w) !important; height:var(--rx-h) !important; min-height:0 !important;
+    transform:translate(-50%,-50%) rotate(-90deg);
+    transform-origin:center center;
+  }
+  /* 当前编辑联高亮，便于区分正在录入的是哪一张 */
+  .sheet-cell.active{box-shadow:0 0 0 2px var(--blue) !important; z-index:2;}
+  .sheet-cell .rx-badge{
+    position:absolute; left:1mm; top:1mm; z-index:5;
+    font-size:6.5pt; line-height:1; padding:2px 4px; border-radius:3px;
+    background:rgba(22,103,184,.10); color:#1667b8; font-weight:700;
+  }
+  .sheet-cell.active .rx-badge{background:var(--blue); color:#fff;}
   #page .p-head{display:flex; align-items:baseline; position:relative; margin-bottom:2px;}
   #page .p-title{flex:1; text-align:center; font-size:14pt; font-weight:bold; letter-spacing:2px;}
   #page .p-lian{position:absolute; right:0; top:0; font-size:8pt;}
@@ -389,14 +532,23 @@
   #page table td{padding:2.5px 2px; vertical-align:top;}
   #page .rp-label{font-size:10pt; font-weight:bold; margin:3px 0 1px;}
   #page .spec{font-size:8pt; color:#333; padding-left:2em; line-height:1.3;}
-  #page .use-note{font-size:8pt; color:#333;}
   #page .num{text-align:right; font-variant-numeric:tabular-nums;}
   #page .p-sign{display:flex; align-items:baseline; font-size:9pt; margin-top:5px; gap:4px;}
   #page .p-sign .doc{display:inline-block; min-width:90px; border-bottom:1px solid #333; text-align:center;}
   #page .p-date{margin-left:auto;}
   #page .p-foot1{display:flex; justify-content:space-between; font-size:8pt; margin-top:4px; line-height:1.4;}
   #page .p-fee{font-size:9pt; margin-top:2px;}
-  #page .p-note{font-size:6.5pt; line-height:1.45; color:#222; margin-top:4px; text-align:justify;}
+  #page .p-note{font-size:8.5pt; line-height:1.55; color:#222; margin-top:5px; text-align:justify;}
+  /* ===== 分段控件（方向 / 拼版张数）===== */
+  .seg{display:inline-flex; border:1px solid var(--line); border-radius:5px; overflow:hidden; background:var(--in-bg);}
+  .seg .seg-btn{
+    border:none; background:transparent; color:var(--muted); cursor:pointer;
+    padding:3px 9px; font-size:11.5px; font-family:inherit; line-height:1.5;
+    border-right:1px solid var(--line); transition:.12s; white-space:nowrap;
+  }
+  .seg .seg-btn:last-child{border-right:none;}
+  .seg .seg-btn:hover{background:var(--soft); color:var(--blue);}
+  .seg .seg-btn.on{background:var(--blue); color:#fff; font-weight:600;}
   /* ===== 深色皮肤局部适配 ===== */
   body[data-skin^="dark"] .card{box-shadow:0 1px 3px rgba(0,0,0,.35);}
   body[data-skin^="dark"] .btn{background:rgba(255,255,255,.1);}
@@ -419,225 +571,310 @@
   /* ===== 打印 ===== */
   @media print{
     body{background:#fff;}
-    .app-header,.sidebar,.preview-bar,.modal-mask,.resizer{display:none !important;}
+    .app-header,.sidebar,.preview-bar,.modal-mask,.resizer,.pv-multi{display:none !important;}
     .layout{padding:0; display:block;}
     .preview-area{padding:0; background:#fff; overflow:visible; display:block; border-radius:0; max-height:none; position:static;}
     .preview-scroll{padding:0; overflow:visible; display:block;}
     #scaler{transform:none !important; width:auto !important; height:auto !important;}
-    #page{box-shadow:none; width:auto !important;}
+    #sheetWrap{margin:0 auto !important; width:auto !important;}
+    /* 单张：保留 JS 设定的纸张尺寸（横向 A4 时为 210×148），不要用 auto 覆盖 */
+    body:not(.multi-up) #sheet{margin:0 auto !important; box-shadow:none !important; height:auto !important;}
+    body:not(.multi-up) #page{
+      box-shadow:none !important;
+      width:auto !important;      /* 单张时宽度由 JS 内联样式决定，auto 会被内联覆盖 */
+      margin:0 auto !important;   /* A4 横向时居中留裁切边 */
+    }
+    /* A4 拼版打印 */
+    body.multi-up #sheet{box-shadow:none !important; width:auto !important; height:auto !important;}
+    body.multi-up .sheet-cell{border-color:#ccc; box-shadow:none !important; break-inside:avoid; page-break-inside:avoid;}
   }
 </style>
 </head>
-<body>
+<body data-page-node-id="DYBtDgE0QdF1K83waGXVRJ">
 
-<div class="app-header">
-  <h1>处方打印助手</h1>
-  <span class="sub">智能识别粘贴内容 · 点击选择录入 · 药品库自动匹配</span>
-  <span class="spacer"></span>
-  <button class="btn" onclick="openImport()">导入数据库文件</button>
-  <div class="skin-bar" id="skinBar">
-    <span class="lbl">界面皮肤</span>
-    <button class="skin-dot" data-skin="classic" title="经典蓝（浅色）" onclick="setSkin('classic')"></button>
-    <button class="skin-dot" data-skin="bamboo" title="青竹绿（浅色）" onclick="setSkin('bamboo')"></button>
-    <button class="skin-dot" data-skin="apricot" title="暖杏橙（浅色）" onclick="setSkin('apricot')"></button>
-    <button class="skin-dot" data-skin="ink" title="墨玉灰（浅色）" onclick="setSkin('ink')"></button>
-    <button class="skin-dot" data-skin="sakura" title="樱粉红（浅色）" onclick="setSkin('sakura')"></button>
-    <button class="skin-dot" data-skin="ocean" title="深海蓝（浅色）" onclick="setSkin('ocean')"></button>
-    <span class="skin-sep"></span>
-    <button class="skin-dot dark-dot" data-skin="dark-blue" title="深色 · 曜石蓝" onclick="setSkin('dark-blue')"></button>
-    <button class="skin-dot dark-dot" data-skin="dark-green" title="深色 · 松墨绿" onclick="setSkin('dark-green')"></button>
-    <button class="skin-dot dark-dot" data-skin="dark-purple" title="深色 · 夜幕紫" onclick="setSkin('dark-purple')"></button>
-    <button class="skin-dot dark-dot" data-skin="dark" title="深色 · 纯黑金" onclick="setSkin('dark')"></button>
+<div class="app-header" data-page-node-id="hStWlTrXJgMIVh9uUfWwj4">
+  <h1 data-page-node-id="GjQiEC6JxWYGEZNuiMSQLp">处方打印助手</h1>
+  <span class="sub" data-page-node-id="HAl8DlXqyfoIGPLA68ZoSl">智能识别粘贴内容 · 点击选择录入 · 药品库自动匹配</span>
+  <span class="sub" style="opacity:.7" data-page-node-id="S73KY0eFCsIwa52f7r9jaX">| © <b data-page-node-id="EhMdDWLgzEygO1S31xlvTb">火舞狂沙</b></span>
+  <span class="spacer" data-page-node-id="85yTcdxf7z0HxktiNsJpkH"></span>
+  <button class="btn" onclick="openImport()" data-page-node-id="jWMBNgQeJpanhV9oTzSoMB">导入数据库文件</button>
+  <div class="skin-bar" id="skinBar" data-page-node-id="VMmwkkqJruDjpQNmVMCoU4">
+    <span class="lbl" data-page-node-id="xKlEWdLxpUUVcJcFCdsD9g">界面皮肤</span>
+    <button class="skin-dot" data-skin="classic" title="经典蓝（浅色）" onclick="setSkin('classic')" data-page-node-id="Mic3jwU9bGQj4F9x6wgIsf"></button>
+    <button class="skin-dot" data-skin="bamboo" title="青竹绿（浅色）" onclick="setSkin('bamboo')" data-page-node-id="XGz0cQbLMAy8hvlu3e40k1"></button>
+    <button class="skin-dot" data-skin="apricot" title="暖杏橙（浅色）" onclick="setSkin('apricot')" data-page-node-id="S5cVPVrDiVV6x0NmcHln5p"></button>
+    <button class="skin-dot" data-skin="ink" title="墨玉灰（浅色）" onclick="setSkin('ink')" data-page-node-id="YLVYX28mZudHfLjdEYneyV"></button>
+    <button class="skin-dot" data-skin="sakura" title="樱粉红（浅色）" onclick="setSkin('sakura')" data-page-node-id="xX5xkAQClsBZEJVHch7YZs"></button>
+    <button class="skin-dot" data-skin="ocean" title="深海蓝（浅色）" onclick="setSkin('ocean')" data-page-node-id="n6UPx0vJnvPRAtyOCSYo8l"></button>
+    <span class="skin-sep" data-page-node-id="57GwFYXreI0lwbnUJitUVu"></span>
+    <button class="skin-dot dark-dot" data-skin="dark-blue" title="深色 · 曜石蓝" onclick="setSkin('dark-blue')" data-page-node-id="gPpwbFpe42W9ejnNfuGGCS"></button>
+    <button class="skin-dot dark-dot" data-skin="dark-green" title="深色 · 松墨绿" onclick="setSkin('dark-green')" data-page-node-id="S7LkFdlwCEuEGbYluwN3RQ"></button>
+    <button class="skin-dot dark-dot" data-skin="dark-purple" title="深色 · 夜幕紫" onclick="setSkin('dark-purple')" data-page-node-id="FjCnWD1XIGg7ZusE5CfiHO"></button>
+    <button class="skin-dot dark-dot" data-skin="dark" title="深色 · 纯黑金" onclick="setSkin('dark')" data-page-node-id="NywrfeN5bXmHeKXQssHWPo"></button>
   </div>
-  <button class="btn ghost" onclick="loadSample()">载入示例</button>
-  <button class="btn" onclick="clearAll()">清空</button>
-  <button class="btn primary" onclick="window.print()">打 印</button>
+  <button class="btn ghost" onclick="loadSample()" title="载入一份完整的示例处方" data-page-node-id="QIDzPxrXreLZf8CdwB9hs7">载入示例</button>
+  <button class="btn ghost" onclick="loadSampleTable()" title="演示：从 Excel 复制的「名称 规格 单位 单价」清单直接识别成药品">清单示例</button>
+  <button class="btn ghost" onclick="openSettings()" title="设置下拉选项的排序与内容">⚙ 设置</button>
+  <button class="btn" onclick="clearAll()" data-page-node-id="FYItYPUscGaMWreJfKgH3G">清空</button>
+  <button class="btn primary" onclick="doPrint()" data-page-node-id="FDUFSO02Yx6eWaOgBBYE2A">打 印</button>
 </div>
 
 <!-- ===== 导入数据库文件弹窗 ===== -->
-<div class="modal-mask" id="importMask">
-  <div class="modal">
+<div class="modal-mask" id="importMask" data-page-node-id="WQdoBD3wRWuhZsJstpwtaj">
+  <div class="modal" data-page-node-id="Rbyq2DdD4dZDYkJNhEgjcq">
+    <div class="modal-head" data-page-node-id="mZYxQGCKrceLVlEIXJZIms">
+      <h3 data-page-node-id="TgD568F7PL938cqiME1f4U">导入数据库文件</h3>
+      <button class="modal-x" onclick="closeImport()" title="关闭" data-page-node-id="hZzEiH3G7ZXkvNDz1eOCJy">✕</button>
+    </div>
+    <div class="modal-body" data-page-node-id="YejYubRGOhmZPnKB4rCyEF">
+      <div class="imp-step" data-page-node-id="J0uPR7lxm2K6u9jX6w2iuf">
+        <div class="imp-label" data-page-node-id="5LAqqcxBB4NAz0pQFmMtdZ">第一步：选择文件</div>
+        <div class="imp-file" data-page-node-id="jhQmTTS9dyUcwfwhEfGGcD">
+          <input type="file" id="impFile" accept=".xlsx,.xls,.csv,.txt,.json,.js" onchange="onImportFile(event)" data-page-node-id="E6usWef431DAF7fwug0RLY">
+          <span class="imp-fname" id="impFName" data-page-node-id="g20Dn7M5310W1YONmMPiE6">支持 Excel(.xlsx/.xls) / CSV / TXT / JSON / JS</span>
+        </div>
+        <div class="imp-tip" id="impTip" data-page-node-id="lDlQAdvlB8Y94ONxbDZn0T">选择药品数据文件后，可勾选需要导入的字段，再点击「开始导入」。</div>
+      </div>
+
+      <div class="imp-step" id="impFieldsStep" style="display:none" data-page-node-id="rbmBJVtXxBsKHofnsvY99P">
+        <div class="imp-label" data-page-node-id="UsBbSOx9970UKnZSt24n1d">第二步：选择要导入的内容
+          <button class="imp-all" onclick="toggleAllImportFields()" data-page-node-id="0oASLsArnIX9ANLtSul3P8">全选 / 全不选</button>
+        </div>
+
+        <!-- 手动匹配：自动识别不准时，可逐字段指定来源列 -->
+        <div class="imp-manual-bar" data-page-node-id="KiYkdyWC75LKlmJEfNNokO">
+          <label data-page-node-id="xD8JFyqb52ZEYSrEJFOqxE"><input type="checkbox" id="impManual" onchange="toggleManualMap(this.checked)" data-page-node-id="o0WEkdJ23lxR4Feou8Bca4">
+            <span data-page-node-id="W4F4IDYjhanUWWHVelVnry">手动匹配数据项（自动识别不准时勾选，可逐项指定来源列）</span>
+          </label>
+          <button class="btn-mini" onclick="clearManualMap()" data-page-node-id="78wg3OmKiTTazelEWOAvS9">清空匹配</button>
+          <button class="btn-mini" onclick="autoFillUnmatched()" data-page-node-id="JcK6cvaJzp6ALjZsZxNAE4">按名称补匹配</button>
+        </div>
+        <div class="imp-hint-box" id="impManualHint" style="display:none" data-page-node-id="pEhVSYjX4c8YVkUF1pRoRN">
+          在每个字段右侧的下拉框中选择该字段<b data-page-node-id="8lOtEB7qDYgn5xInrqArnj">对应的源文件列</b>。留空表示不导入该字段。
+          绿色下拉表示自动匹配，橙色表示你手动指定。下方会显示该列的首行样例值便于核对。
+        </div>
+
+        <div class="imp-fields" id="impFields" data-page-node-id="OamLx7sQ3DDGHaaM2QDU5f"></div>
+      </div>
+
+      <div class="imp-step" id="impModeStep" style="display:none" data-page-node-id="zB8LRgLn6Xgc9v9ejb61qz">
+        <div class="imp-label" data-page-node-id="xUHZhvNNRqPkmasgjKxuDP">第三步：导入方式</div>
+        <div class="imp-modes" data-page-node-id="zfeqBTFg4hYvOtFI8KVOD8">
+          <label class="imp-mode" data-page-node-id="4ahtU0DWoO3STXBQN6oUTm"><input type="radio" name="impMode" value="merge" checked data-page-node-id="mrmwsxdZtBAP7LmtzV5o9z">
+            <span data-page-node-id="FRCFTZrHr82DGHlNbNyF74"><b data-page-node-id="46TFgELV7D6Br4bUexlldJ">合并</b>（推荐）<i data-page-node-id="KVxxNcCsp9aDiMFZplGicp">同名药品更新，新药品追加，不动原有数据</i></span></label>
+          <label class="imp-mode" data-page-node-id="46gWBp5Poe0KNVbew70oNz"><input type="radio" name="impMode" value="replace" data-page-node-id="H3D6H7oFT7OmoHGYLzp3r8">
+            <span data-page-node-id="p6TwRKsZyyFkYvLoDjKnJw"><b data-page-node-id="1mD70u4OF1m0xSRKgrODbF">替换</b><i data-page-node-id="4kCKU9cboL6E2EIYn5mW12">清空现有药品库，仅保留本次导入内容</i></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot" data-page-node-id="YrNcY18vazu1VNlCrhaMrb">
+      <span class="imp-status" id="impStatus" data-page-node-id="5GwDD4EnpQDIJ07t61uPvl"></span>
+      <button class="btn imp-btn-cancel" onclick="closeImport()" data-page-node-id="em794LcopngTCaS7L5DdtN">取消</button>
+      <button class="btn primary" id="impConfirm" disabled onclick="doImport()" data-page-node-id="eh33ywYggyos0YEQY8Q3xE">开始导入</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 设置弹窗：下拉选项排序与维护 ===== -->
+<div class="modal-mask" id="setMask">
+  <div class="modal" style="width:720px">
     <div class="modal-head">
-      <h3>导入数据库文件</h3>
-      <button class="modal-x" onclick="closeImport()" title="关闭">✕</button>
+      <h3>⚙ 下拉选项设置</h3>
+      <button class="modal-x" onclick="closeSettings()" title="关闭">✕</button>
     </div>
     <div class="modal-body">
-      <div class="imp-step">
-        <div class="imp-label">第一步：选择文件</div>
-        <div class="imp-file">
-          <input type="file" id="impFile" accept=".xlsx,.xls,.csv,.txt,.json,.js" onchange="onImportFile(event)">
-          <span class="imp-fname" id="impFName">支持 Excel(.xlsx/.xls) / CSV / TXT / JSON / JS</span>
-        </div>
-        <div class="imp-tip" id="impTip">选择药品数据文件后，可勾选需要导入的字段，再点击「开始导入」。</div>
+      <div class="set-hint">
+        每个选项组都可<b>拖动排序</b>（影响下拉菜单里的先后顺序）、<b>双击改名</b>、删除，或在下方输入框回车新增。
+        修改<b>立即生效并自动保存</b>。
       </div>
-
-      <div class="imp-step" id="impFieldsStep" style="display:none">
-        <div class="imp-label">第二步：选择要导入的内容
-          <button class="imp-all" onclick="toggleAllImportFields()">全选 / 全不选</button>
+      <!-- 左侧选项组切换 -->
+      <div class="set-tabs" id="setTabs"></div>
+      <!-- 右侧当前组的条目列表 -->
+      <div class="set-panel">
+        <div class="set-panel-head">
+          <span class="set-panel-title" id="setCurTitle">科别</span>
+          <span class="set-panel-tip" id="setCurTip"></span>
+          <span class="set-count" id="setCount"></span>
         </div>
-        <div class="imp-fields" id="impFields"></div>
-      </div>
-
-      <div class="imp-step" id="impModeStep" style="display:none">
-        <div class="imp-label">第三步：导入方式</div>
-        <div class="imp-modes">
-          <label class="imp-mode"><input type="radio" name="impMode" value="merge" checked>
-            <span><b>合并</b>（推荐）<i>同名药品更新，新药品追加，不动原有数据</i></span></label>
-          <label class="imp-mode"><input type="radio" name="impMode" value="replace">
-            <span><b>替换</b><i>清空现有药品库，仅保留本次导入内容</i></span></label>
+        <ul class="dm-item" id="setList" style="padding:0;margin:0 0 8px"></ul>
+        <div class="row-top" style="gap:6px">
+          <input type="text" id="setNewItem" placeholder="输入新选项后回车添加" style="flex:1">
+          <button class="btn-mini" onclick="addSetItem()">＋ 添加</button>
+        </div>
+        <div class="set-ops">
+          <button class="btn-mini" onclick="moveSetItem(-1)" title="把选中的条目上移">↑ 上移</button>
+          <button class="btn-mini" onclick="moveSetItem(1)" title="把选中的条目下移">↓ 下移</button>
+          <button class="btn-mini" onclick="sortSetItem('pinyin')">按拼音排序</button>
+          <button class="btn-mini" onclick="sortSetItem('reset')">恢复默认</button>
+        </div>
+        <div class="set-hint set-hint-sm">
+          提示：诊断列表若曾在旧版本中自定义过，会自动沿用；「恢复默认」会还原为内置顺序。
         </div>
       </div>
     </div>
     <div class="modal-foot">
-      <span class="imp-status" id="impStatus"></span>
-      <button class="btn imp-btn-cancel" onclick="closeImport()">取消</button>
-      <button class="btn primary" id="impConfirm" disabled onclick="doImport()">开始导入</button>
+      <span class="imp-status" id="setStatus">所有改动已自动保存</span>
+      <button class="btn imp-btn-cancel" onclick="closeSettings()">关闭</button>
     </div>
   </div>
 </div>
 
-<div class="layout">
-  <div class="sidebar">
+<div class="layout" data-page-node-id="DfmODR5luDNit02Hn1oynC">
+  <div class="sidebar" data-page-node-id="tAriFp91w6bidJpo5sQmPz">
+
+    <!-- 多联切换栏：仅在A4 拼版（一张打印多张）时显示 -->
+    <div class="rx-bar" id="rxBar" style="display:none"></div>
 
     <!-- 智能粘贴 -->
-    <div class="card">
-      <h2>智能粘贴识别 <span class="hint">复制处方文字后按 Ctrl+V 粘贴到此处</span></h2>
+    <div class="card" data-page-node-id="2ylqpxmqB6dVADjLfmrrLa">
+      <h2 data-page-node-id="bae7eKogFdBRcPHguctJz0">智能粘贴识别 <span class="hint" data-page-node-id="Hqo0JvkBwBbphkou8LnN4R">复制处方文字后按 Ctrl+V 粘贴到此处</span></h2>
       <textarea id="pasteBox" placeholder="支持粘贴整张处方文字或单行药品，自动识别药品名称和规格，例如：&#10;美林混悬液/布洛芬混悬液 2g 100ML/瓶 10ML 必要时 口服 17.85 1瓶 17.85&#10;头孢地尼分散片 50mg*12片/盒 100MG 每日三次 口服 56.6 2盒&#10;姓名：张三 性别：男 年龄：10岁 科别：儿科门诊 病情及诊断：发热"></textarea>
-      <div class="paste-row">
-        <button class="btn" style="background:var(--blue)" onclick="parseWithClipboard()">识别并填入</button>
-        <button class="btn" id="btnPasteFromClip" style="background:#0f8a5f" onclick="pasteFromClipboard()">读取剪贴板</button>
-        <button class="btn" style="background:#e7ecf3;color:#41526a" onclick="document.getElementById('pasteBox').value='';hideReport()">清空粘贴框</button>
+      <div class="paste-row" data-page-node-id="79MRSZ0ddtRh5VOHzl4jPM">
+        <button class="btn" style="background:var(--blue)" onclick="parseWithClipboard()" data-page-node-id="ehADjsIDTEmZwpmEi0NJ8G">识别并填入</button>
+        <button class="btn" id="btnPasteFromClip" style="background:#0f8a5f" onclick="pasteFromClipboard()" data-page-node-id="mWiTxmdW40KMsgUJo0ErDk">读取剪贴板</button>
+        <button class="btn" style="background:#e7ecf3;color:#41526a" onclick="document.getElementById('pasteBox').value='';hideReport()" data-page-node-id="5IPQbIubl9HOeSHCnOismx">清空粘贴框</button>
       </div>
-      <div id="parseReport" class="parse-report"></div>
+      <div id="parseReport" class="parse-report" data-page-node-id="sifRGvwBNuBI0UafqpzkSe"></div>
     </div>
 
     <!-- 患者信息 -->
-    <div class="card">
-      <h2>处方抬头 / 患者信息</h2>
-      <div class="grid2">
-        <div class="field req"><label>医院名称</label><input type="text" id="fHospital" placeholder="北京大学第一医院"></div>
-        <div class="field req"><label>姓名</label><input type="text" id="fName"></div>
-        <div class="field req"><label>性别</label>
-          <div class="chips" id="genderChips">
-            <button class="chip" data-v="男">男</button>
-            <button class="chip" data-v="女">女</button>
+    <div class="card" data-page-node-id="FsW6dW7bNjttxKYPwEk1f5">
+      <h2 data-page-node-id="WOlTmKe1TAZh5Ad8NkBUGa">处方抬头 / 患者信息</h2>
+      <div class="grid2" data-page-node-id="9fzoIoCTD05ODsTOSc2BIN">
+        <div class="field req" data-page-node-id="PvrWYx2MAPVmLnckfI7FY6"><label data-page-node-id="dHBgv6ZUfqkbV44Bq1jfgw">医院名称 <span class="hint" data-page-node-id="h_hint">输入过会自动记住</span></label><input type="text" id="fHospital" list="hospitalList" placeholder="高阳县新型农村合作医疗专用" data-page-node-id="HHCDwcxh1eezfh3VYiM9zm"></div>
+        <div class="field req" data-page-node-id="1T20nlV0VaKGPdk9jfdaND"><label data-page-node-id="DTMjMYureTwv1a4U2FTbz9">姓名</label><input type="text" id="fName" data-page-node-id="zmqWijxgTHmBGy2yqgeNqL"></div>
+        <div class="field req" data-page-node-id="PtprXyz73miYAmrlXv0FMr"><label data-page-node-id="HmtfYfTPRjVSKpGgK3jF4c">性别</label>
+          <div class="chips" id="genderChips" data-page-node-id="gWGmGW6SfM66DViBMfZz1K">
+            <button class="chip" data-v="男" data-page-node-id="kjhIWYY6PAm4dMdvC1uVre">男</button>
+            <button class="chip" data-v="女" data-page-node-id="3gLAiaW1ah0UjOXCpjBDAt">女</button>
           </div>
         </div>
-        <div class="field req"><label>年龄</label><input type="text" id="fAge" placeholder="10岁"></div>
-        <div class="field req"><label>科别（点击选择）</label><input type="text" id="fDept" list="deptList" placeholder="儿科门诊"></div>
-        <div class="field"><label>就诊卡</label><input type="text" id="fCard"></div>
-        <div class="field"><label>病历号</label><input type="text" id="fMrn"></div>
-        <div class="field" style="grid-column:1 / -1"><label>患者地址</label><input type="text" id="fAddress" placeholder="XX省XX市XX县XX镇XX村"></div>
+        <div class="field req" data-page-node-id="7ATxhPtDtJ3E2AQBWV3yvP"><label data-page-node-id="0gNsAE0G2wAXA9sy6TUW0L">年龄</label><input type="text" id="fAge" placeholder="10岁" data-page-node-id="5iEsEUmtNLuKAkBbJ3ngax"></div>
+        <div class="field req" data-page-node-id="imgWdccxKB6IlIUbZkc2iw"><label data-page-node-id="IUaoCjtH3Gx8jr5xGMAt3P">科别</label><input type="text" id="fDept" list="deptList" placeholder="儿科门诊" data-page-node-id="9RDKRmSq1fcQwfuHTTs3QA"></div>
+        <div class="field" data-page-node-id="n55XJBOQldiWvIYpAgERei"><label data-page-node-id="bH0yNF5mgA0nmGPlHDXMuB">就诊卡</label><input type="text" id="fCard" data-page-node-id="YSmyzhDVWYtc9xoJwhSIrv"></div>
+        <div class="field" data-page-node-id="PONuYz1mrOTJjF9nfqCVbm"><label data-page-node-id="Nuzw1MQcr87JFe4mGsnpsa">病历号</label><input type="text" id="fMrn" data-page-node-id="b4wQbAsSkzOXiNJXPvSeqY"></div>
+        <div class="field" style="grid-column:1 / -1" data-page-node-id="zu2AnKAHx4sY8J13aDacCd"><label data-page-node-id="4MM5kFNoCPS217MiGDebVz">患者地址</label><input type="text" id="fAddress" placeholder="XX省XX市XX县XX镇XX村" data-page-node-id="nquRHNFB7o5SuYnwVLMnoo"></div>
       </div>
-      <div class="field" style="margin-top:8px"><label>科别快捷选择（下拉）</label>
-        <select id="deptSel"><option value="">— 快捷选择科别 —</option></select>
+      <div class="field req" style="margin-top:8px" data-page-node-id="OLjDC8P53yP0bTQduBXy9C"><label data-page-node-id="Q0r8A2vDZXig38DaFskYZB">病情及诊断（已选诊断，可拖动排序、删除）</label>
+        <div class="diag-selected" id="diagSelected" data-page-node-id="oxRpdZdExxBCi9oKwOZYIv"></div>
       </div>
-      <div class="field req" style="margin-top:8px"><label>病情及诊断（已选诊断，可拖动排序、删除）</label>
-        <div class="diag-selected" id="diagSelected"></div>
-      </div>
-      <div class="field" style="margin-top:8px"><label>手动添加诊断</label>
-        <div class="diag-add">
-          <input type="text" id="diagInput" placeholder="输入诊断名称后回车或点添加" autocomplete="off">
-          <button class="btn-mini" onclick="addDiagFromInput()">＋ 添加</button>
+      <div class="field" style="margin-top:8px" data-page-node-id="ezZhZl4MiEsBdcOcG0n9rW"><label data-page-node-id="FafIdB8E3EQ9c3zAE48HgE">手动添加诊断</label>
+        <div class="diag-add" data-page-node-id="SCqd7YpZfMZV542hFvDar7">
+          <input type="text" id="diagInput" placeholder="输入诊断名称后回车或点添加" autocomplete="off" data-page-node-id="FXvl0dAzoxT6KJGH8CXcDY">
+          <button class="btn-mini" onclick="addDiagFromInput()" data-page-node-id="Rhuoje5n2O0V6Kbq28nrHn">＋ 添加</button>
         </div>
       </div>
-      <div class="field" style="margin-top:6px"><label>常用诊断（下拉选择，可编辑 / 删除 / 排序）</label>
-        <div class="diag-selbar">
-          <select id="diagSel"><option value="">— 从常用诊断中选择添加 —</option></select>
-          <button class="btn-mini" id="diagManageBtn" onclick="toggleDiagManage()">管理</button>
-        </div>
-        <div class="diag-manage" id="diagManage">
-          <div class="dm-hint">拖动条目可排序；双击文字可直接修改；点「✕」删除</div>
-          <ul class="dm-list" id="diagManageList"></ul>
-          <div class="diag-add">
-            <input type="text" id="diagNewItem" placeholder="新增常用诊断，回车或点添加" autocomplete="off">
-            <button class="btn-mini" onclick="addCommonDiag()">＋ 添加</button>
-          </div>
+      <div class="field" style="margin-top:6px" data-page-node-id="ZNTtrkm5tQnNyFIMfxdDCh"><label data-page-node-id="Um5YgMXizApMJAWjhT4cry">常用诊断（下拉选择）</label>
+        <div class="diag-selbar" data-page-node-id="5jGSogqqvmt6h0Sb4t8yPQ">
+          <select id="diagSel" data-page-node-id="df5EigQsjH0KtXU8nqMDLG"><option value="" data-page-node-id="ObwOJ1yFAiIsRF7G8Jv9yq">— 从常用诊断中选择添加 —</option></select>
         </div>
       </div>
-      <datalist id="deptList">
-        <option>儿科门诊</option><option>普通内科</option><option>呼吸内科</option><option>消化内科</option>
-        <option>心血管内科</option><option>神经内科</option><option>内分泌科</option><option>普外科</option>
-        <option>骨科</option><option>皮肤科</option><option>眼科</option><option>耳鼻喉科</option>
-        <option>口腔科</option><option>妇产科</option><option>急诊科</option><option>发热门诊</option>
-      </datalist>
+      <!-- 科别候选项由「设置」页统一维护，启动时动态填充 -->
+      <datalist id="deptList"></datalist>
     </div>
 
     <!-- 药品 -->
-    <div class="card">
-      <h2>处方药品（Rp） <span class="hint">频次 / 用法 / 单位可直接下拉或点选</span></h2>
-      <div class="field" style="margin-bottom:9px"><label>从药品清单搜索添加（<span id="dbCount">0</span> 种企业商品，支持名称/品牌/助记码/厂家）</label>
-        <div style="position:relative">
-          <input type="text" id="dbSearch" placeholder="输入药品名 / 品牌 / 拼音首字母 / 厂家，如 阿莫西林、AMXL、乐药师" autocomplete="off">
-          <div id="dbResults" class="db-results"></div>
+    <div class="card" data-page-node-id="VCkHX7eWMPZSWKxssDA38c">
+      <h2 data-page-node-id="QilHRv27d0lFTE4ZRAKLHw">处方药品（Rp） <span class="hint" data-page-node-id="xAa8qInYbRJ9tvkAej6DXd">频次 / 用法 / 单位可直接下拉或点选</span></h2>
+      <div class="field" style="margin-bottom:9px" data-page-node-id="FZBs1t00xmFJ2XcYPNLNSZ"><label data-page-node-id="9UiBvjW5cJ4Ls48gzWAV7H">从药品清单搜索添加（<span id="dbCount" data-page-node-id="armbV19ueFvaKOqBqs2FAT">0</span> 种企业商品，支持名称/品牌/助记码/厂家）</label>
+        <div style="position:relative" data-page-node-id="392OGOhCeXeVjjxrAqxjqK">
+          <input type="text" id="dbSearch" placeholder="输入药品名 / 品牌 / 拼音首字母 / 厂家，如 阿莫西林、AMXL、乐药师" autocomplete="off" data-page-node-id="sDOyezahND9Amn6KEsNsWE">
+          <div id="dbResults" class="db-results" data-page-node-id="EzmUnFRwCIfK7WVnwkCO3Q"></div>
         </div>
       </div>
-      <div id="drugList"></div>
-      <button class="add-drug" onclick="addDrug()">＋ 添加药品</button>
+      <div id="drugList" data-page-node-id="PFYP6AyNl8kFNI3iqjpuqr"></div>
+      <button class="add-drug" onclick="addDrug()" data-page-node-id="LY8TgqlZ7Is38EhUfjFLVA">＋ 添加药品</button>
     </div>
 
     <!-- 签发 -->
-    <div class="card">
-      <h2>签发信息</h2>
-      <div class="grid3">
-        <div class="field req"><label>处方医师</label><input type="text" id="fDoctor" placeholder="（签字或盖章有效）"></div>
-        <div class="field req"><label>日期</label>
-          <div class="date-wrap">
-            <input type="date" id="fDate">
-            <button type="button" class="btn-today" id="btnToday" onclick="setToday()" title="填入今天日期">今天</button>
+    <div class="card" data-page-node-id="hBDk647BGwhrmppU0TBmOR">
+      <h2 data-page-node-id="yg7dmqpxoCONo1xq6S83ai">签发信息</h2>
+      <div class="grid3" data-page-node-id="0vx8ZQx1CPPsIS0gAvQi0Z">
+        <div class="field req" data-page-node-id="O2mxZyOf4tlHzA1UTnFJ4z"><label data-page-node-id="pntcH8gVDHvZEmRmXtQzub">处方医师</label><input type="text" id="fDoctor" placeholder="（签字或盖章有效）" data-page-node-id="MIGGhjv55f0zxmRFScujye"></div>
+        <div class="field req" data-page-node-id="9OUyGxwI7cVnEY8VCnFpRg"><label data-page-node-id="xDT5FvVizuOtuP17DcNWtU">日期</label>
+          <div class="date-wrap" data-page-node-id="NPLaLD2ZYDvQGsl7aF5sm0">
+            <input type="date" id="fDate" data-page-node-id="uoycpsccxa970nRzBD8d6P">
+            <button type="button" class="btn-today" id="btnToday" onclick="setToday()" title="填入今天日期" data-page-node-id="vHlCgcCnCAZTZhWxQXq68h">今天</button>
           </div>
         </div>
-        <div class="field"><label>发药药房</label><input type="text" id="fPharmacy" placeholder="儿科门诊药房"></div>
+        <div class="field" data-page-node-id="w2n2aHBDsrPMglHthAMtZU"><label data-page-node-id="yHbMnHzivRbMDWP5DAg8wa">发药药房</label><input type="text" id="fPharmacy" placeholder="儿科门诊药房" data-page-node-id="nJnmevoZKF0jsNTicibsm1"></div>
       </div>
-      <div class="field" style="margin-top:8px"><label>底部说明文字</label><textarea id="fNote" style="height:70px;font-size:11px"></textarea></div>
+      <div class="field" style="margin-top:8px" data-page-node-id="3vzJeXGEYaZ3py16KrPQfh"><label data-page-node-id="FAiyFaZimCVcBXa8HpS4tO">底部说明文字</label><textarea id="fNote" style="height:70px;font-size:11px"></textarea></div>
+    </div>
+
+    <!-- 版权信息 -->
+    <div class="app-footer" data-page-node-id="F2A3pA7syFjnTxuA0uyr2X">
+      <div class="cp" data-page-node-id="dBC2EFmG9GtWEOjshvdIsq">© <span id="cpYear" data-page-node-id="keolUt2VvfEW7FsRH3sc1h">2026</span> <b data-page-node-id="qEznrXb4KhnUORWMHZhDeS">火舞狂沙</b> · 处方打印助手</div>
+      <div style="opacity:.7;margin-top:1px" data-page-node-id="cTQWivdbhQVQRDixoQHeJ8">本工具仅供内部使用 · 数据本地保存不上传</div>
     </div>
 
   </div>
 
-  <div class="resizer" id="resizer" title="拖动调整左右宽度（双击恢复默认）">
-    <span class="dots"><i></i><i></i><i></i><i></i><i></i></span>
+  <div class="resizer" id="resizer" title="拖动调整左右宽度（双击恢复默认）" data-page-node-id="Rh9psMzqipug2zDykABnqk">
+    <span class="dots" data-page-node-id="XyfMJoM7by6m1A6Vc32ElV"><i data-page-node-id="12zkf0tJeIFyI8iHb9iHfJ"></i><i data-page-node-id="dBemDibGZfmrXFPmHL35Yq"></i><i data-page-node-id="pAHKa0v3YaEc7YQwmN5vdN"></i><i data-page-node-id="A27vHOeJY6wk5FUxwr5NfF"></i><i data-page-node-id="sHGltnHBhjLW9beUNodOec"></i></span>
   </div>
 
-  <div class="preview-area" id="previewArea">
-    <div class="preview-bar">
-      <span class="pv-label">预览</span>
-      <span class="pv-size" id="pvSize">210 × 148 mm（A5横）</span>
-      <span class="pv-spacer"></span>
-      <span class="pv-label">缩放</span>
-      <button class="pv-btn" onclick="stepZoom(-10)" title="缩小">－</button>
-      <span class="pv-zoom" id="pvZoom">100%</span>
-      <button class="pv-btn" onclick="stepZoom(10)" title="放大">＋</button>
+  <div class="preview-area" id="previewArea" data-page-node-id="CalxYfOrHsjYWQ3dXrF2WL">
+    <div class="preview-bar" data-page-node-id="RGaInKJbQzLfdNxumrEYHE">
+      <span class="pv-label" data-page-node-id="1LUD6QP1FJMRQbODNF55RE">预览</span>
+      <span class="pv-size" id="pvSize" data-page-node-id="sN9b5CNDbH67T8SczABmXR">210 × 148 mm（A5横）</span>
+      <span class="pv-spacer" data-page-node-id="QWtcclFfADYhMR9drrnLMM"></span>
+
+      <!-- A4 纸张方向（拼版时才有意义） -->
+      <span class="pv-label pv-multi" title="打印用的 A4 纸方向">A4 纸张</span>
+      <div class="seg pv-multi" id="orientSeg">
+        <button class="seg-btn" data-orient="landscape" onclick="setOrient('landscape')" title="A4 横向 297×210mm">横向</button>
+        <button class="seg-btn" data-orient="portrait" onclick="setOrient('portrait')" title="A4 纵向 210×297mm">纵向</button>
+      </div>
+
+      <!-- 处方内容方向（横排 / 竖排） -->
+      <span class="pv-label" title="处方内容的排版方向">内容</span>
+      <div class="seg" id="rxOrientSeg">
+        <button class="seg-btn" data-rxorient="landscape" onclick="setRxOrient('landscape')" title="横向内容 210×148mm">横</button>
+        <button class="seg-btn" data-rxorient="portrait" onclick="setRxOrient('portrait')" title="竖向内容 148×210mm">竖</button>
+      </div>
+
+      <!-- A4 拼版：一张 A4 打印几张处方（切换时自动套用方向组合） -->
+      <span class="pv-label pv-multi" title="一张 A4 纸上并排打印几张处方">一张 A4 打印</span>
+      <div class="seg pv-multi" id="multiSeg">
+        <button class="seg-btn on" data-multi="1" onclick="setMultiUp(1)" title="1 张：A4 横向 + 内容横向">1 张</button>
+        <button class="seg-btn" data-multi="2" onclick="setMultiUp(2)" title="2 张：A4 横向 + 内容竖向并排">2 张</button>
+        <button class="seg-btn" data-multi="4" onclick="setMultiUp(4)" title="4 张：A4 横向 + 内容横向 2×2">4 张</button>
+      </div>
+
+      <span class="pv-spacer" data-page-node-id="9q9ffBs65M8RTpBdMr7Oac"></span>
+      <span class="pv-label" data-page-node-id="PjAS2Z4GIAp8u9JQocT8to">缩放</span>
+      <button class="pv-btn" onclick="stepZoom(-10)" title="缩小" data-page-node-id="LSHQlYs7itVaxcJikpbPIM">－</button>
+      <span class="pv-zoom" id="pvZoom" data-page-node-id="VABmfJq2GCm2jdmJyF39L6">100%</span>
+      <button class="pv-btn" onclick="stepZoom(10)" title="放大" data-page-node-id="ClnQtHi5Gfu0EsBNH1DEmG">＋</button>
     </div>
-    <div class="preview-scroll">
-      <div id="scaler">
-        <div id="page"></div>
+    <div class="preview-scroll" data-page-node-id="IBAI13s1VEXAYmTO6HybGs">
+      <div id="scaler" data-page-node-id="G0pff5f12GDPotnqys8nBC">
+        <div id="sheetWrap">
+          <div id="sheet">
+            <!-- 处方纸本体：单张模式直接显示，拼版模式由 JS 移入格子 -->
+            <div id="page" class="rx-page"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<datalist id="freqList">
-  <option>每日一次</option><option>每日两次</option><option>每日三次</option><option>每日四次</option>
-  <option>每8小时一次</option><option>每6小时一次</option><option>每12小时一次</option>
-  <option>必要时服用</option><option>隔日一次</option><option>每晚一次</option><option>睡前一次</option><option>顿服</option>
+<!-- 频次/ 用法 / 数量单位 / 剂量单位 的候选项由「设置」页统一维护，启动时动态填充 -->
+<datalist id="hospitalList"></datalist>
+<datalist id="freqList"></datalist>
+<datalist id="useList"></datalist>
+<datalist id="catList" data-page-node-id="r38NY9oF5qcni5ciWT9KXx">
+  <option data-page-node-id="Y8p0FClwnCg5wHblIVMyXD">Rp</option><option data-page-node-id="aASLG0ljU82cHm0lRu2h1e">西药</option><option data-page-node-id="nRGeXNCnRhDBtyTDcDnyzr">中药</option><option data-page-node-id="ao9CHYPOawM0FYrvjNNoNl">成药</option><option data-page-node-id="EOf36jgbDP3TjYJJAySi4p">输液</option><option data-page-node-id="HUIEsXDdrP2iHk4RBY89IT">草约</option>
 </datalist>
-<datalist id="useList">
-  <option>口服</option><option>静脉滴注</option><option>静脉注射</option><option>肌肉注射</option>
-  <option>皮下注射</option><option>雾化吸入</option><option>外用</option><option>含服</option>
-  <option>冲服</option><option>滴眼</option><option>滴鼻</option><option>吸入</option><option>灌肠</option>
-</datalist>
-<datalist id="catList">
-  <option>Rp</option><option>西药</option><option>中药</option><option>成药</option><option>输液</option><option>草约</option>
-</datalist>
-<datalist id="packList">
-  <option>瓶</option><option>盒</option><option>支</option><option>袋</option><option>片</option><option>粒</option><option>贴</option><option>丸</option><option>包</option><option>罐</option>
-</datalist>
+<datalist id="packList"></datalist>
 
 <!-- 企业商品清单数据（4000+ 条药品，含通用名/品牌别名/规格/单位/厂家/分类） -->
 <script src="药品清单库.js"></script>
 <script>
 /* ================= 状态 ================= */
-const DEFAULT_NOTE = "药师提示： 1、请遵医嘱服药；2、请在窗口处请药品；3、处方当日有效(如有特殊情况可延长至三日)；4、发出药品不予退换。注：实行双对方、双划价；医保患者、离、退休人员患高血压、糖尿病、冠心病、慢性肝炎、肝硬化、结核病、精神病、癌症、脑血管病、前列腺肥大疾病，且病情稳定需长期服用同一类药物的，药量可放宽到不超过一个月量。";
+const DEFAULT_NOTE = "药师提示： 1、请遵医嘱服药；2、请在窗口处请药品；3、处方当日有效(如有特殊情况可延长至三日)；4、发出药品不予退换。";
 
 /* ===== 本地日期工具（避免 toISOString 的 UTC 偏移，东八区凌晨会少一天） ===== */
 function todayStr(){
@@ -651,18 +888,105 @@ function setToday(){
   if(el) el.value=state.date;
   save(); renderPreview(); updateReqState(); syncTodayBtn();
 }
+/* 版权年份自动跟随当前年份 */
+(function initCopyright(){
+  const y=document.getElementById("cpYear");
+  if(y) y.textContent=new Date().getFullYear();
+})();
+
+/* 新建处方时的默认值：科别普通内科（可在设置页调整对应项的顺序，不影响此默认值） */
+const DEFAULT_DEPT="普通内科";
 
 let state = {
-  paper:{w:210, h:148, orient:"landscape", margin:8, zoom:100},
-  hospital:"", card:"", dept:"", mrn:"", address:"",
+  paper:{w:210, h:148, orient:"landscape", rxOrient:"landscape", multi:1, margin:8, zoom:100},
+  hospital:"", card:"", dept:DEFAULT_DEPT, mrn:"", address:"",
   name:"", gender:"", age:"", diag:"",
   doctor:"", date:"", pharmacy:"", note:DEFAULT_NOTE,
   skin:"classic",
-  drugs:[]
+  drugs:[],
+  /* ===== 多联拼版：每张 A4 上的每一联都是一份独立处方 =====
+   * rxs[i] 存第 i 联的「患者 + 药品」；抬头（医院/医师/药房/说明）全联共享。
+   * 为兼容旧数据，第 0 联始终映射到 state 顶层的 name/drugs 等字段。 */
+  rxs:[],
+  activeRx:0
 };
 
+/* ---------- 联（处方份）的读写 ---------- */
+/** 第 i 联的患者字段容器：第 0 联返回 state（兼容旧结构），其余返回 rxs[i] */
+function rxOf(i){
+  if(i===0){
+    /* 第0 联直接用 state 顶层字段，避免双份数据不同步 */
+    return state;
+  }
+  if(!Array.isArray(state.rxs)) state.rxs=[];
+  if(!state.rxs[i]) state.rxs[i]={
+    name:"", gender:"", age:"", diag:"", card:"", mrn:"", address:"",
+    date:state.date||todayStr(), drugs:[blankDrug()]
+  };
+  return state.rxs[i];
+}
+/** 当前正在编辑的联 */
+function curRx(){ return rxOf(state.activeRx||0); }
+/** 本次拼版实际容纳的联数 */
+function rxCount(){
+  const n=multiPerSheet();
+  return n>1 ? Math.max(1, (()=>{ const s=a4Sheet(); return calcGrid(rxPaper(), n, s.w, s.h).count; })()) : 1;
+}
+/** 该联是否已有实质内容 */
+function rxHasContent(i){
+  const r=rxOf(i);
+  const drugs = i===0 ? state.drugs : (r.drugs||[]);
+  return !!(r.name||"").trim() || (drugs||[]).some(d=>(d.name||"").trim());
+}
+/** 取该联的药品列表（可直接修改） */
+function rxDrugs(i){
+  if(i===0) return state.drugs;
+  const r=rxOf(i);
+  if(!Array.isArray(r.drugs) || !r.drugs.length) r.drugs=[blankDrug()];
+  return r.drugs;
+}
+/** 渲染所有联到格子中
+ *  主 #page 节点跟着「当前编辑联」走，因此要先判断节点身份再决定渲染哪一联。
+ *  通过节点上记录的 data-rx-index 判定它承载的是第几联。 */
+function renderRxPages(){
+  const total=rxCount();
+  const sheet=document.getElementById("sheet");
+  if(!sheet) return;
+  const cur=state.activeRx||0;
+  const cells=sheet.querySelectorAll(".sheet-cell");
+  cells.forEach((cell)=>{
+    const page=cell.querySelector(".rx-page");
+    if(!page) return;
+    /* 该节点承载的联号：主节点=当前编辑联，克隆节点=自身编号 */
+    const isMain = (page.id==="page");
+    const idx = isMain ? cur : (+page.id.replace("page-","") || 0);
+    page.innerHTML=rxHtml(idx);
+    const old=cell.querySelector(".rx-badge"); if(old) old.remove();
+    if(total>1){
+      const badge=document.createElement("span");
+      badge.className="rx-badge";
+      badge.textContent=rxHasContent(idx) ? ("第 "+(idx+1)+" 联") : ("第 "+(idx+1)+" 联 · 空");
+      cell.appendChild(badge);
+    }
+    cell.classList.toggle("active", idx===cur);
+    cell.dataset.rxIdx=idx;
+  });
+}
+/* 克隆节点池：重建格子时复用，避免反复创建/丢失 */
+const _rxNodePool = [];
+/** 取第 slot 个克隆节点（slot 从 0 起，不含主节点） */
+function rxCloneNode(slot){
+  while(_rxNodePool.length <= slot){
+    const el=document.createElement("div");
+    el.className="rx-page";
+    _rxNodePool.push(el);
+  }
+  return _rxNodePool[slot];
+}
+
 function blankDrug(){
-  return {cat:"Rp", name:"", spec:"", dose:"", dunit:"", freq:"", usage:"", skin:false, price:"", qty:"", unit:"盒"};
+  /* 新药品行的默认值：单位盒、剂量单位片、频次每日一次、用法口服 */
+  return {cat:"Rp", name:"", spec:"", dose:"", dunit:"片", freq:"每日一次", usage:"口服", price:"", qty:"", unit:"盒"};
 }
 
 /* ================= 表单渲染 ================= */
@@ -670,7 +994,7 @@ const drugList = document.getElementById("drugList");
 
 function renderDrugs(){
   drugList.innerHTML = "";
-  state.drugs.forEach((d,i)=>{
+  rxDrugs(state.activeRx||0).forEach((d,i)=>{
     const div = document.createElement("div");
     div.className = "drug-row";
     div.innerHTML = `
@@ -690,8 +1014,7 @@ function renderDrugs(){
         <input type="text" list="useList" placeholder="用法 *" value="${esc(d.usage)}" style="flex:1" class="req-inp${d.usage?"":" empty"}" data-i="${i}" data-k="usage" title="服用方法（必填）">
       </div>
       <div class="quick-freq">
-        ${["每日一次","每日两次","每日三次","每日四次","每8小时一次","必要时服用"].map(f=>`<button class="chip ${d.freq===f?"on":""}" onclick="setDrug(${i},'freq','${f}',this)">${f}</button>`).join("")}
-        <label style="font-size:11.5px;display:flex;align-items:center;gap:3px;margin-left:4px"><input type="checkbox" ${d.skin?"checked":""} onchange="setDrug(${i},'skin',this.checked)" style="padding:0">皮试</label>
+        ${QUICK_FREQ().map(f=>`<button class="chip ${d.freq===f?"on":""}" onclick="setDrug(${i},'freq','${esc(f)}',this)">${esc(f)}</button>`).join("")}
       </div>
       <div class="row-top" style="margin-top:6px;margin-bottom:0">
         <input type="number" step="0.01" min="0" placeholder="单价" value="${esc(d.price)}" class="mini" data-i="${i}" data-k="price">
@@ -702,9 +1025,26 @@ function renderDrugs(){
     drugList.appendChild(div);
   });
 }
+/* 剂量单位 datalist（候选项来自「设置」页） */
 const dunitDl = document.createElement("datalist"); dunitDl.id="dunitList";
-dunitDl.innerHTML = ["ML","MG","G","μg","IU","片","粒","袋","支","喷","丸","贴"].map(u=>`<option>${u}</option>`).join("");
 document.body.appendChild(dunitDl);
+/* 常用频次快捷标签：取「设置」里频次列表的前 6 项 */
+/* 快捷频次按钮：只显示这几种常用频次（用户可自行输入其他频次，如"每12小时一次"）
+   顺序即按钮排列顺序 */
+const QUICK_FREQ_LIST=["每日一次","每日两次","每日三次","必要时服用"];
+const QUICK_FREQ=()=>QUICK_FREQ_LIST.filter(f=>opts("freq").includes(f));
+/** 把 OPTION_SETS 的内容写进各个 <datalist>，保证下拉顺序与设置页一致 */
+function fillOptionLists(){
+  const put=(id, key)=>{
+    const dl=document.getElementById(id);
+    if(dl) dl.innerHTML=opts(key).map(v=>`<option value="${esc(v)}"></option>`).join("");
+  };
+  put("dunitList","dunit");
+  put("packList","pack");
+  put("useList","usage");
+  put("freqList","freq");
+  put("deptList","dept");
+}
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");}
 function num(v){const n=parseFloat(v); return isNaN(n)?0:n;}
@@ -722,47 +1062,287 @@ function refreshReqInputs(){
 }
 drugList.addEventListener("input", e=>{
   const t=e.target; const i=t.dataset.i, k=t.dataset.k;
-  if(i!==undefined && k){ state.drugs[i][k]= t.type==="number"? t.value : t.value; save(); renderPreview(); }
+  const list=rxDrugs(state.activeRx||0);
+  if(i!==undefined && k && list[i]){ list[i][k]= t.type==="number"? t.value : t.value; save(); renderPreview(); }
   if(t.classList.contains("req-inp")) t.classList.toggle("empty", !(t.value||"").trim());
 });
-function addDrug(){ state.drugs.push(blankDrug()); renderDrugs(); save(); }
-function delDrug(i){ state.drugs.splice(i,1); renderDrugs(); renderPreview(); save(); }
+function addDrug(){ rxDrugs(state.activeRx||0).push(blankDrug()); renderDrugs(); save(); }
+function delDrug(i){ const list=rxDrugs(state.activeRx||0); list.splice(i,1); if(!list.length) list.push(blankDrug()); renderDrugs(); renderPreview(); save(); }
 
-/* 绑定普通字段 */
+/* 绑定普通字段
+ * 分两类：
+ *  - 共享字段（医院/科别/医师/药房/说明）→ 写入 state，所有联共享
+ *  - 联字段（姓名/年龄/卡号/病历号/地址/日期）→ 写入当前编辑的联 */
+const SHARED_KEYS = new Set(["hospital","dept","doctor","pharmacy","note"]);
 const fieldMap = {fHospital:"hospital", fName:"name", fAge:"age", fDept:"dept", fCard:"card", fMrn:"mrn", fAddress:"address", fDoctor:"doctor", fDate:"date", fPharmacy:"pharmacy", fNote:"note"};
+/** 字段应写入 state 还是当前联 */
+function fieldTarget(key){
+  return SHARED_KEYS.has(key) ? state : curRx();
+}
 Object.entries(fieldMap).forEach(([id,key])=>{
-  document.getElementById(id).addEventListener("input", e=>{
-    state[key]=e.target.value;
-    if(key==="dept") syncDeptSel();
+  const el=document.getElementById(id);
+  el.addEventListener("input", e=>{
+    fieldTarget(key)[key]=e.target.value;
     if(key==="date") syncTodayBtn();
+    /* 医院名称：输入停顿后记入历史，下次可直接下拉选择 */
+    if(key==="hospital") scheduleRememberHospital(e.target.value);
     save(); renderPreview();
   });
+  /* 失焦时立即记录（无需等待防抖） */
+  if(key==="hospital"){
+    el.addEventListener("blur", ()=>{ clearTimeout(_hospTimer); rememberHospital(el.value); });
+    el.addEventListener("change", ()=>{ rememberHospital(el.value); });
+  }
 });
 /* 性别 chips */
 document.getElementById("genderChips").addEventListener("click", e=>{
   if(!e.target.classList.contains("chip")) return;
-  state.gender = state.gender===e.target.dataset.v ? "" : e.target.dataset.v;
+  const r=curRx();
+  r.gender = r.gender===e.target.dataset.v ? "" : e.target.dataset.v;
   syncGender(); save(); renderPreview();
 });
 function syncGender(){
-  document.querySelectorAll("#genderChips .chip").forEach(c=>c.classList.toggle("on", c.dataset.v===state.gender));
+  const r=curRx();
+  document.querySelectorAll("#genderChips .chip").forEach(c=>c.classList.toggle("on", c.dataset.v===r.gender));
 }
 
-/* ===== 科别（下拉选择）与诊断（多选点击） ===== */
-const DEPTS=["儿科门诊","普通内科","呼吸内科","消化内科","心血管内科","神经内科","内分泌科","普外科","骨科","皮肤科","眼科","耳鼻喉科","口腔科","妇产科","急诊科","发热门诊","中医科","康复科","泌尿外科","精神心理科","感染科","肛肠科","乳腺外科","疼痛科","老年科","全科"];
-const DEFAULT_DIAGS=["发热","咳嗽","咳痰","喘息","感冒","流行性感冒","急性上呼吸道感染","支气管炎","支气管肺炎","肺炎","哮喘","急性胃肠炎","腹泻","腹痛","腹胀","便秘","恶心","呕吐","咽炎","扁桃体炎","喉炎","过敏性鼻炎","鼻窦炎","中耳炎","结膜炎","口腔溃疡","尿路感染","湿疹","荨麻疹","皮疹","过敏性皮炎","接触性皮炎","头痛","头晕","偏头痛","失眠","贫血","软组织损伤","擦伤","挫伤","烧烫伤","高血压","2型糖尿病","高脂血症","冠心病","颈椎病","腰椎间盘突出","骨关节炎","关节痛"];
-/* 常用诊断库：用户可增删改排序，存 localStorage */
-let DIAGS=DEFAULT_DIAGS.slice();
-function loadDiags(){
+/* ===== 可配置下拉选项：科别/ 常用诊断 / 剂量单位 / 数量单位 / 用法 / 频次 =====
+ * 全部由 OPTION_SETS 统一管理，可在「设置」页拖拽排序、增删改，
+ * 顺序与内容持久化到 localStorage（键 rxOptionSets_v1）。 */
+const OPTION_KEY="rxOptionSets_v1";
+const OPTION_SETS={
+  dept:{ label:"科别", tip:"患者所属科室，用于快速选择", items:[
+    "儿科门诊","普通内科","呼吸内科","消化内科","心血管内科","神经内科","内分泌科","普外科","骨科","皮肤科",
+    "眼科","耳鼻喉科","口腔科","妇产科","急诊科","发热门诊","中医科","康复科","泌尿外科","精神心理科",
+    "感染科","肛肠科","乳腺外科","疼痛科","老年科","全科"
+  ]},
+  diag:{ label:"常用诊断", tip:"病情及诊断的候选词", items:[
+    "发热","咳嗽","咳痰","喘息","感冒","流行性感冒","急性上呼吸道感染","支气管炎","支气管肺炎","肺炎",
+    "哮喘","急性胃肠炎","腹泻","腹痛","腹胀","便秘","恶心","呕吐","咽炎","扁桃体炎","喉炎",
+    "过敏性鼻炎","鼻窦炎","中耳炎","结膜炎","口腔溃疡","尿路感染","湿疹","荨麻疹","皮疹","过敏性皮炎",
+    "接触性皮炎","头痛","头晕","偏头痛","失眠","贫血","软组织损伤","擦伤","挫伤","烧烫伤",
+    "高血压","2型糖尿病","高脂血症","冠心病","颈椎病","腰椎间盘突出","骨关节炎","关节痛"
+  ]},
+  dunit:{ label:"剂量单位", tip:"每次剂量的单位", items:[
+    "片","粒","丸","袋","支","ML","MG","G","μg","IU","喷","贴"
+  ]},
+  pack:{ label:"数量单位", tip:"药品包装数量单位", items:[
+    "盒","瓶","袋","支","包","板","罐","贴"
+  ]},
+  usage:{ label:"用法", tip:"服用或给药方法", items:[
+    "口服","静脉滴注","静脉注射","肌肉注射","皮下注射","雾化吸入","外用","含服","冲服","滴眼","滴鼻","吸入","灌肠","栓剂"
+  ]},
+  freq:{ label:"频次", tip:"用药频次", items:[
+    "每日一次","每日两次","每日三次","每日四次","每8小时一次","每6小时一次","每12小时一次",
+    "隔日一次","每晚一次","睡前一次","必要时服用","顿服"
+  ]}
+};
+/* 内置默认值的快照：供「恢复默认」功能使用（深拷贝，切页后仍可取用） */
+const OPTION_DEFAULTS=JSON.parse(JSON.stringify(
+  Object.fromEntries(Object.entries(OPTION_SETS).map(([k,v])=>[k, v.items.slice()]))
+));
+/* 读取用户排序；无存档或存档不完整时用默认值补齐 */
+function loadOptions(){
   try{
-    const raw=localStorage.getItem("rxDiagList_v1");
-    if(raw){ const arr=JSON.parse(raw); if(Array.isArray(arr)&&arr.length) DIAGS=arr.filter(x=>typeof x==="string"&&x.trim()); }
+    const raw=localStorage.getItem(OPTION_KEY);
+    if(!raw) return;
+    const saved=JSON.parse(raw);
+    Object.keys(OPTION_SETS).forEach(k=>{
+      const arr=saved[k];
+      if(Array.isArray(arr) && arr.length){
+        /* 就地替换内容，保持数组引用不变（DIAGS 等别名仍指向同一数组） */
+        const cur=OPTION_SETS[k].items;
+        cur.length=0;
+        arr.filter(x=>typeof x==="string"&&x.trim()).forEach(x=>cur.push(x));
+      }
+    });
   }catch(e){}
 }
-function saveDiags(){ try{ localStorage.setItem("rxDiagList_v1", JSON.stringify(DIAGS)); }catch(e){} }
-function buildChips(){
-  document.getElementById("deptSel").innerHTML='<option value="">— 快捷选择科别 —</option>'+DEPTS.map(d=>`<option>${d}</option>`).join("");
-  renderDiagSel(); renderDiagManage();
+function saveOptions(){
+  try{
+    const out={};
+    Object.keys(OPTION_SETS).forEach(k=>{ out[k]=OPTION_SETS[k].items; });
+    localStorage.setItem(OPTION_KEY, JSON.stringify(out));
+  }catch(e){}
+}
+/** 取某组选项：key 为 OPTION_SETS 的键 */
+function opts(k){ return OPTION_SETS[k] ? OPTION_SETS[k].items : []; }
+/* 诊断列表：与 OPTION_SETS.diag.items 共享同一数组，排序/增删自动同步 */
+let DIAGS = OPTION_SETS.diag.items;
+
+/* ===== 医院名称记忆 =====
+ * 输入过的医院名称会被记住，输入框变成可下拉选择，
+ * 下拉顺序为「最近使用在前」。与主state 分开存储，不受清空影响。 */
+const HOSPITAL_KEY="rxHospitalHistory_v1";
+const HOSPITAL_MAX=20;
+/** 读取医院名称历史（最近使用在前） */
+function loadHospitals(){
+  try{
+    const raw=localStorage.getItem(HOSPITAL_KEY);
+    if(!raw) return [];
+    const arr=JSON.parse(raw);
+    return Array.isArray(arr) ? arr.filter(x=>typeof x==="string"&&x.trim()) : [];
+  }catch(e){ return []; }
+}
+/** 把医院名称记入历史（去重、置顶、限长） */
+function rememberHospital(name){
+  name=(name||"").trim();
+  if(!name) return;
+  const list=loadHospitals().filter(x=>x!==name);
+  list.unshift(name);
+  try{ localStorage.setItem(HOSPITAL_KEY, JSON.stringify(list.slice(0, HOSPITAL_MAX))); }catch(e){}
+  renderHospitalList();
+}
+/** 渲染医院名称候选项 */
+function renderHospitalList(){
+  const dl=document.getElementById("hospitalList");
+  if(dl) dl.innerHTML=loadHospitals().map(h=>`<option value="${esc(h)}"></option>`).join("");
+}
+/* 失焦或输入停顿后记录（防抖 600ms，避免每敲一个字就存一次） */
+let _hospTimer=null;
+function scheduleRememberHospital(v){
+  clearTimeout(_hospTimer);
+  _hospTimer=setTimeout(()=>rememberHospital(v), 600);
+}
+
+/* 旧版诊断存档迁移：首次升级时把 rxDiagList_v1 合并进新结构 */
+function migrateDiagStore(){
+  try{
+    if(localStorage.getItem(OPTION_KEY)) return;      /* 已有新存档，跳过 */
+    const raw=localStorage.getItem("rxDiagList_v1");
+    if(raw){
+      const arr=JSON.parse(raw);
+      if(Array.isArray(arr)&&arr.length){
+        /* 就地替换内容，保持数组引用不变（DIAGS 指向它） */
+        const cur=OPTION_SETS.diag.items;
+        cur.length=0;
+        arr.filter(x=>typeof x==="string"&&x.trim()).forEach(x=>cur.push(x));
+      }
+    }
+  }catch(e){}
+}
+/* ================= 设置页：下拉选项排序 ================= */
+let setCurKey="dept";        /* 当前编辑的选项组 */
+let setSelIdx=-1;            /* 选中的条目下标（用于上移/下移） */
+let setDragFrom=null;        /* 拖拽排序的源下标 */
+
+/** 打开设置弹窗 */
+function openSettings(){
+  document.getElementById("setMask").classList.add("on");
+  setSelIdx=-1;
+  renderSetTabs(); renderSetList();
+}
+/** 关闭设置弹窗 */
+function closeSettings(){
+  document.getElementById("setMask").classList.remove("on");
+}
+/** 渲染左侧选项组标签 */
+function renderSetTabs(){
+  const box=document.getElementById("setTabs");
+  if(!box) return;
+  box.innerHTML=Object.keys(OPTION_SETS).map(k=>
+    `<button class="set-tab${k===setCurKey?" on":""}" data-k="${k}" onclick="switchSetTab('${k}')">${esc(OPTION_SETS[k].label)}</button>`
+  ).join("");
+}
+/** 切换当前编辑的选项组 */
+function switchSetTab(k){
+  if(!OPTION_SETS[k]) return;
+  setCurKey=k; setSelIdx=-1;
+  renderSetTabs(); renderSetList();
+}
+/** 渲染当前组的条目列表 */
+function renderSetList(){
+  const ul=document.getElementById("setList");
+  const title=document.getElementById("setCurTitle");
+  const tip=document.getElementById("setCurTip");
+  const cnt=document.getElementById("setCount");
+  if(!ul) return;
+  const set=OPTION_SETS[setCurKey];
+  title.textContent=set.label;
+  tip.textContent=set.tip||"";
+  cnt.textContent=`共 ${set.items.length} 项`;
+  if(!set.items.length){
+    ul.innerHTML='<li class="dm-empty">暂无选项，请在下方添加</li>';
+    return;
+  }
+  ul.innerHTML=set.items.map((v,i)=>`<li class="dm-item${i===setSelIdx?" picked":""}" draggable="true" data-i="${i}"
+      onclick="pickSetItem(${i})">
+    <span class="grip" title="拖动排序">⣿</span>
+    <span class="num">${i+1}</span>
+    <span class="nm" data-i="${i}" title="双击可修改">${esc(v)}</span>
+    <button class="del" data-i="${i}" title="删除">✕</button></li>`).join("");
+  ul.querySelectorAll(".del").forEach(b=>b.addEventListener("click", e=>{
+    e.stopPropagation();
+    delSetItem(+b.dataset.i);
+  }));
+}
+/** 选中某条目（上移/下移用） */
+function pickSetItem(i){
+  setSelIdx = (setSelIdx===i) ? -1 : i;
+  renderSetList();
+}
+/** 某选项组发生变化后：保存 + 刷新所有界面 */
+function commitOptions(msg){
+  saveOptions();
+  syncOptionViews();
+  renderSetTabs(); renderSetList();
+  const st=document.getElementById("setStatus");
+  if(st) st.textContent=msg||"已自动保存";
+}
+/** 新增选项 */
+function addSetItem(){
+  const inp=document.getElementById("setNewItem");
+  const v=(inp.value||"").trim();
+  if(!v) return;
+  const arr=OPTION_SETS[setCurKey].items;
+  if(arr.includes(v)){ inp.value=""; alert("「"+v+"」已存在"); return; }
+  arr.push(v);
+  inp.value="";
+  commitOptions("已添加「"+v+"」");
+}
+/** 删除选项 */
+function delSetItem(i){
+  const arr=OPTION_SETS[setCurKey].items;
+  if(i<0||i>=arr.length) return;
+  const v=arr[i];
+  if(!confirm("确定删除「"+v+"」？")) return;
+  arr.splice(i,1);
+  setSelIdx=-1;
+  commitOptions("已删除「"+v+"」");
+}
+/** 上移/下移选中条目 */
+function moveSetItem(dir){
+  const arr=OPTION_SETS[setCurKey].items;
+  if(setSelIdx<0){ alert("请先点击选中要移动的条目"); return; }
+  const from=setSelIdx, to=from+dir;
+  if(to<0||to>=arr.length) return;
+  const [m]=arr.splice(from,1);
+  arr.splice(to,0,m);
+  setSelIdx=to;
+  commitOptions("已调整顺序");
+}
+/** 排序：按拼音 / 恢复默认 */
+function sortSetItem(mode){
+  const arr=OPTION_SETS[setCurKey].items;
+  if(mode==="reset"){
+    const def=OPTION_DEFAULTS[setCurKey]||[];
+    if(!confirm("确定恢复「"+OPTION_SETS[setCurKey].label+"」为默认顺序？自定义的条目将丢失。")) return;
+    arr.length=0; def.forEach(x=>arr.push(x));
+    setSelIdx=-1;
+    commitOptions("已恢复默认");
+    return;
+  }
+  /* 中文按拼音排序：Intl.Collator 对 zh-Hans-CN 默认按拼音 */
+  arr.sort((a,b)=>new Intl.Collator("zh-Hans-CN",{numeric:true}).compare(a,b));
+  setSelIdx=-1;
+  commitOptions("已按拼音排序");
+}
+/** 设置项变更后，刷新所有依赖它的界面（下拉、快捷标签、诊断列表） */
+function syncOptionViews(){
+  fillOptionLists();   /* 刷新各datalist（科别/剂量单位/数量单位/用法/频次） */
+  renderDiagSel();     /* 常用诊断下拉 */
+  renderDrugs();       /* 药品行的快捷频次标签 */
+  updateReqState();
 }
 /* 下拉：常用诊断选项 */
 function renderDiagSel(){
@@ -773,84 +1353,6 @@ function renderDiagSel(){
     + DIAGS.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join("");
   if(DIAGS.includes(cur)) sel.value=cur;
 }
-/* 管理面板列表 */
-function renderDiagManage(){
-  const ul=document.getElementById("diagManageList");
-  if(!ul) return;
-  if(!DIAGS.length){ ul.innerHTML='<li class="dm-empty">暂无常用诊断，请在下方添加</li>'; return; }
-  ul.innerHTML=DIAGS.map((d,i)=>`<li class="dm-item" draggable="true" data-i="${i}">
-    <span class="grip" title="拖动排序">⣿</span>
-    <span class="num">${i+1}</span>
-    <span class="nm" data-i="${i}" title="双击可修改">${esc(d)}</span>
-    <button class="del" data-i="${i}" title="删除">✕</button></li>`).join("");
-}
-function toggleDiagManage(){
-  const box=document.getElementById("diagManage");
-  box.classList.toggle("on");
-  document.getElementById("diagManageBtn").textContent=box.classList.contains("on")?"收起":"管理";
-}
-/* 新增常用诊断 */
-function addCommonDiag(){
-  const inp=document.getElementById("diagNewItem");
-  const vs=(inp.value||"").split(/[，,、;；\s]+/).map(s=>s.trim()).filter(Boolean);
-  if(!vs.length) return;
-  vs.forEach(v=>{ if(!DIAGS.includes(v)) DIAGS.push(v); });
-  inp.value=""; saveDiags(); renderDiagSel(); renderDiagManage();
-}
-/* 删除 / 双击改名 */
-document.getElementById("diagManageList").addEventListener("click", e=>{
-  const btn=e.target.closest(".del"); if(!btn) return;
-  DIAGS.splice(+btn.dataset.i,1);
-  saveDiags(); renderDiagSel(); renderDiagManage();
-});
-document.getElementById("diagManageList").addEventListener("dblclick", e=>{
-  const nm=e.target.closest(".nm"); if(!nm) return;
-  nm.setAttribute("contenteditable","true"); nm.focus();
-  document.execCommand&&document.execCommand("selectAll",false,null);
-  const i=+nm.dataset.i;
-  const commit=()=>{
-    nm.removeAttribute("contenteditable");
-    const v=(nm.textContent||"").trim();
-    if(!v){ nm.textContent=DIAGS[i]; return; }
-    if(v===DIAGS[i]) return;
-    DIAGS[i]=v; saveDiags(); renderDiagSel(); renderDiagManage();
-  };
-  nm.addEventListener("blur", commit, {once:true});
-  nm.addEventListener("keydown", ev=>{
-    if(ev.key==="Enter"){ ev.preventDefault(); nm.blur(); }
-    if(ev.key==="Escape"){ nm.textContent=DIAGS[i]; nm.blur(); }
-  });
-});
-/* 管理列表拖动排序 */
-let dmDragFrom=null;
-const dmList=document.getElementById("diagManageList");
-dmList.addEventListener("dragstart", e=>{
-  const it=e.target.closest(".dm-item"); if(!it) return;
-  dmDragFrom=+it.dataset.i; it.classList.add("dragging");
-  e.dataTransfer.effectAllowed="move";
-  try{ e.dataTransfer.setData("text/plain", String(dmDragFrom)); }catch(err){}
-});
-dmList.addEventListener("dragover", e=>{
-  const it=e.target.closest(".dm-item"); if(!it) return;
-  e.preventDefault(); e.dataTransfer.dropEffect="move";
-  dmList.querySelectorAll(".dm-item").forEach(x=>x.classList.remove("drop-target"));
-  it.classList.add("drop-target");
-});
-dmList.addEventListener("dragleave", e=>{
-  const it=e.target.closest(".dm-item"); if(it) it.classList.remove("drop-target");
-});
-dmList.addEventListener("drop", e=>{
-  const it=e.target.closest(".dm-item"); if(!it) return;
-  e.preventDefault();
-  const to=+it.dataset.i;
-  if(dmDragFrom===null||dmDragFrom===to) return;
-  const [m]=DIAGS.splice(dmDragFrom,1); DIAGS.splice(to,0,m);
-  dmDragFrom=null; saveDiags(); renderDiagSel(); renderDiagManage();
-});
-dmList.addEventListener("dragend", ()=>{
-  dmDragFrom=null;
-  dmList.querySelectorAll(".dm-item").forEach(x=>x.classList.remove("dragging","drop-target"));
-});
 /* 下拉选中即添加到已选诊断 */
 document.getElementById("diagSel").addEventListener("change", e=>{
   const v=e.target.value; if(!v) return;
@@ -858,9 +1360,63 @@ document.getElementById("diagSel").addEventListener("change", e=>{
   renderDiagSelected(); renderPreview(); syncForm();
   e.target.value="";
 });
-/* 新增项回车 */
-document.getElementById("diagNewItem").addEventListener("keydown", e=>{
-  if(e.key==="Enter"){ e.preventDefault(); addCommonDiag(); }
+
+/* ===== 设置列表：拖拽排序 / 双击改名 / 新增 ===== */
+const setListEl=document.getElementById("setList");
+setListEl.addEventListener("dragstart", e=>{
+  const it=e.target.closest(".dm-item"); if(!it) return;
+  setDragFrom=+it.dataset.i; it.classList.add("dragging");
+  e.dataTransfer.effectAllowed="move";
+  try{ e.dataTransfer.setData("text/plain", String(setDragFrom)); }catch(err){}
+});
+setListEl.addEventListener("dragover", e=>{
+  const it=e.target.closest(".dm-item"); if(!it) return;
+  e.preventDefault(); e.dataTransfer.dropEffect="move";
+  setListEl.querySelectorAll(".dm-item").forEach(x=>x.classList.remove("drop-target"));
+  it.classList.add("drop-target");
+});
+setListEl.addEventListener("dragleave", e=>{
+  const it=e.target.closest(".dm-item"); if(it) it.classList.remove("drop-target");
+});
+setListEl.addEventListener("drop", e=>{
+  const it=e.target.closest(".dm-item"); if(!it) return;
+  e.preventDefault();
+  const to=+it.dataset.i;
+  if(setDragFrom===null || setDragFrom===to) return;
+  const arr=OPTION_SETS[setCurKey].items;
+  const [m]=arr.splice(setDragFrom,1);
+  arr.splice(to,0,m);
+  setDragFrom=null; setSelIdx=-1;
+  commitOptions("已调整顺序");
+});
+setListEl.addEventListener("dragend", ()=>{
+  setDragFrom=null;
+  setListEl.querySelectorAll(".dm-item").forEach(x=>x.classList.remove("dragging","drop-target"));
+});
+setListEl.addEventListener("dblclick", e=>{
+  const nm=e.target.closest(".nm"); if(!nm) return;
+  const i=+nm.dataset.i;
+  const arr=OPTION_SETS[setCurKey].items;
+  const old=arr[i]; if(old===undefined) return;
+  nm.contentEditable="true"; nm.focus();
+  const commit=()=>{
+    nm.contentEditable="false";
+    const v=(nm.textContent||"").trim();
+    if(!v){ nm.textContent=old; return; }
+    if(v===old) return;
+    if(arr.includes(v)){ alert("「"+v+"」已存在"); nm.textContent=old; return; }
+    arr[i]=v;
+    commitOptions("已重命名为「"+v+"」");
+  };
+  nm.addEventListener("blur", commit, {once:true});
+  nm.addEventListener("keydown", ev=>{
+    if(ev.key==="Enter"){ ev.preventDefault(); nm.blur(); }
+    if(ev.key==="Escape"){ nm.textContent=old; nm.blur(); }
+  });
+});
+/* 设置页新增框回车 */
+document.getElementById("setNewItem").addEventListener("keydown", e=>{
+  if(e.key==="Enter"){ e.preventDefault(); addSetItem(); }
 });
 
 /* ===== 药品清单搜索：支持名称/品牌别名/助记码/厂家模糊匹配，选中自动带出全部字段 ===== */
@@ -939,27 +1495,18 @@ document.getElementById("dbResults").addEventListener("mousedown", e=>{
 document.addEventListener("click", e=>{
   if(!e.target.closest("#dbResults") && e.target!==dbInp) document.getElementById("dbResults").classList.remove("on");
 });
-function guessGroup(n){
-  if(/注射|输液|氯化钠|葡萄糖|曲松/.test(n)) return "注射 / 输液";
-  if(/乳膏|软膏|滴眼|滴鼻|气雾|喷雾/.test(n)) return "外用 / 五官科";
-  if(/片|丸|胶囊|颗粒|散|口服液|合剂|溶液|滴剂|咀嚼片|肠溶/.test(n)) return "口服制剂 / 中成药";
-  return "其他";
-}
-function diagTerms(){ return (state.diag||"").split(/[，,、;；\s]+/).filter(t=>t); }
-function syncDeptSel(){ document.getElementById("deptSel").value = DEPTS.includes(state.dept)?state.dept:""; }
-document.getElementById("deptSel").addEventListener("change", e=>{
-  state.dept=e.target.value;   /* 选择即填入，也同步到输入框 */
-  document.getElementById("fDept").value=state.dept;
-  save(); renderPreview();
-});
+function diagTerms(){ return (curRx().diag||"").split(/[，,、;；\s]+/).filter(t=>t); }
 
 /* ===== 诊断：已选标签渲染（支持拖动排序、删除）+ 常用点击增删 ===== */
+/* 多个诊断之间的分隔符用顿号「、」（旧数据的逗号仍能解析） */
 function setDiagTerms(terms){
   /* 去重并保持顺序 */
   const seen=new Set(), out=[];
   terms.forEach(t=>{ t=(t||"").trim(); if(t && !seen.has(t)){ seen.add(t); out.push(t); } });
-  state.diag=out.join("，");
+  curRx().diag=out.join("、");
   save();
+  /* 立即刷新预览，确保顿号分隔符显示出来 */
+  renderPreview();
 }
 function renderDiagSelected(){
   const box=document.getElementById("diagSelected");
@@ -968,20 +1515,28 @@ function renderDiagSelected(){
     <span class="ord">${i+1}</span><span class="txt">${esc(t)}</span>
     <button class="rm" data-i="${i}" title="删除该诊断">✕</button></span>`).join("");
 }
-/* 从输入框添加 */
+/* 从输入框添加：同时加入已选诊断与常用诊断列表 */
 function addDiagFromInput(){
   const inp=document.getElementById("diagInput");
   const v=(inp.value||"").trim();
   if(!v) return;
-  setDiagTerms(diagTerms().concat(v.split(/[，,、;；\s]+/).filter(Boolean)));
-  inp.value=""; renderDiagSelected(); renderPreview(); syncForm();
+  /* 支持一次输入多个（逗号/顿号/分号/空格分隔） */
+  const terms=v.split(/[，,、;；\s]+/).map(s=>s.trim()).filter(Boolean);
+  if(!terms.length) return;
+  setDiagTerms(diagTerms().concat(terms));
+  /* 记入常用诊断，方便下次直接下拉选择 */
+  const added=[];
+  terms.forEach(t=>{ if(!DIAGS.includes(t)) DIAGS.push(t); added.push(t); });
+  if(added.length){ saveOptions(); renderDiagSel(); }
+  inp.value="";
+  renderDiagSelected(); syncForm();   /* 预览由setDiagTerms 内部刷新 */
 }
 /* 已选标签区：删除 + 拖动排序 */
 const diagBox=document.getElementById("diagSelected");
 diagBox.addEventListener("click", e=>{
   const btn=e.target.closest(".rm"); if(!btn) return;
   const terms=diagTerms(); terms.splice(+btn.dataset.i,1);
-  setDiagTerms(terms); renderDiagSelected(); renderPreview(); updateReqState();
+  setDiagTerms(terms); renderDiagSelected(); updateReqState();   /* 预览由 setDiagTerms 内部刷新 */
 });
 let diagDragFrom=null;
 diagBox.addEventListener("dragstart", e=>{
@@ -1009,7 +1564,7 @@ diagBox.addEventListener("drop", e=>{
   const [moved]=terms.splice(diagDragFrom,1);
   terms.splice(to,0,moved);
   diagDragFrom=null;
-  setDiagTerms(terms); renderDiagSelected(); renderPreview(); updateReqState();
+  setDiagTerms(terms); renderDiagSelected(); updateReqState();   /* 预览由 setDiagTerms 内部刷新 */
 });
 diagBox.addEventListener("dragend", ()=>{
   diagDragFrom=null;
@@ -1020,46 +1575,312 @@ document.getElementById("diagInput").addEventListener("keydown", e=>{
   if(e.key==="Enter"){ e.preventDefault(); addDiagFromInput(); }
 });
 
-/* ================= 纸张（固定 A5 处方纸）+ 预览缩放 ================= */
-const FIXED_PAPER={w:210, h:148, margin:8};   /* A4 的一半（A5）横放：宽210 × 高148 */
+/* ================= 纸张（横竖向 + A4 拼版）+ 预览缩放 =================
+ * 两个独立维度：
+ *   rxOrient —— 处方纸自身方向（内容排版横/竖）
+ *   orient   —— A4 纸方向（打印纸张横/竖）
+ * 拼版张数决定二者组合，例如「2 张」= A4 横向 + 内容竖向。 */
+const A5_LAND={w:210, h:148};         /* 横向内容 */
+const A5_PORT={w:148, h:210};         /* 竖向内容 */
+const A4_SHEET={w:210, h:297};        /* A4 纵向基准 */
+const FIXED_MARGIN=8;                 /* 处方页边距 mm */
+const MM2PX=96/25.4;
+
+/* 各拼版张数对应的默认方向组合：{A4 纸张方向, 内容方向}
+ *   1 张 → 纸张横 + 内容横
+ *   2 张 → 纸张横 + 内容竖（竖向处方并排 2 联）
+ *   4 张 → 纸张横 + 内容横（2×2 四联） */
+const MULTI_PRESET={
+  1:{sheet:"landscape", rx:"landscape"},
+  2:{sheet:"landscape", rx:"portrait"},
+  4:{sheet:"landscape", rx:"landscape"}
+};
+
+/** 当前处方纸尺寸（由内容方向决定） */
+function rxPaper(){
+  return (state.paper.rxOrient==="portrait") ? A5_PORT : A5_LAND;
+}
+/** 当前 A4 纸尺寸（由纸张方向决定） */
+function a4Sheet(){
+  return (state.paper.orient==="portrait") ? {w:210, h:297} : {w:297, h:210};
+}
+function multiPerSheet(){
+  const n=parseInt(state.paper.multi||1,10);
+  return [1,2,4].includes(n) ? n : 1;
+}
 function stepZoom(delta){
   state.paper.zoom=Math.min(200, Math.max(30, (state.paper.zoom||100)+delta));
   syncZoom(); save(); fitPreview();
 }
+/* 切换 A4 纸张方向（内容方向保持不变） */
+function setOrient(o){
+  if(o!=="portrait" && o!=="landscape") o="landscape";
+  if(state.paper.orient===o) return;
+  state.paper.orient=o;
+  applyPaper(); save();
+}
+/* 切换处方内容方向（独立于纸张方向） */
+function setRxOrient(o){
+  if(o!=="portrait" && o!=="landscape") o="landscape";
+  if(state.paper.rxOrient===o) return;
+  state.paper.rxOrient=o;
+  applyPaper(); save();
+}
+/* ================= 打印 =================
+ * 桌面版（exe）：走 IPC，由主进程按当前 A4 纸张方向显式指定横向/纵向
+ *   —— Electron 的 webContents.print() 默认用 Letter 且不理会 CSS @page，
+ *      不显式传 pageSize 的话横竖切换对打印无效。
+ * 浏览器版：回退到 window.print()，此时由 CSS 的 @page 决定。 */
+function doPrint(){
+  if(window.desktopAPI && typeof window.desktopAPI.print==="function"){
+    window.desktopAPI.print().catch(()=>window.print());
+    return;
+  }
+  window.print();
+}
+/* 桌面版拦截 Ctrl+P，改走统一打印入口，保证纸张方向生效 */
+document.addEventListener("keydown", e=>{
+  if((e.ctrlKey||e.metaKey) && (e.key==="p"||e.key==="P")){
+    if(window.desktopAPI){ e.preventDefault(); doPrint(); }
+  }
+}, true);
+
+/* 设置一张 A4 打印的处方张数；切换时套用该张数的默认方向组合 */
+function setMultiUp(n){
+  n=parseInt(n,10);
+  if(![1,2,4].includes(n)) n=1;
+  const pre=MULTI_PRESET[n];
+  state.paper.multi=n;
+  if(pre){ state.paper.orient=pre.sheet; state.paper.rxOrient=pre.rx; }
+  document.body.classList.toggle("multi-up", n>1);
+  applyPaper(); save();
+}
 function syncZoom(){
   const el=document.getElementById("pvZoom"); if(el) el.textContent=(state.paper.zoom||100)+"%";
-  const sz=document.getElementById("pvSize"); if(sz) sz.textContent=FIXED_PAPER.w+" × "+FIXED_PAPER.h+" mm";
+  const p=rxPaper(), n=multiPerSheet();
+  const rxTxt = state.paper.rxOrient==="portrait" ? "竖向" : "横向";
+  const sz=document.getElementById("pvSize");
+  if(sz){
+    if(n>1){
+      const sh=a4Sheet();
+      sz.textContent = `A4 ${sh.w}×${sh.h}mm（${state.paper.orient==="portrait"?"纵向":"横向"}）· ${n} 张联排 · 内容${p.w}×${p.h}（${rxTxt}）`;
+    } else {
+      sz.textContent = `处方纸 ${p.w} × ${p.h} mm（内容${rxTxt}）`;
+    }
+  }
+  document.querySelectorAll("#orientSeg .seg-btn").forEach(b=>b.classList.toggle("on", b.dataset.orient===state.paper.orient));
+  document.querySelectorAll("#rxOrientSeg .seg-btn").forEach(b=>b.classList.toggle("on", b.dataset.rxorient===state.paper.rxOrient));
+  document.querySelectorAll("#multiSeg .seg-btn").forEach(b=>b.classList.toggle("on", +b.dataset.multi===multiPerSheet()));
 }
+
+/* 计算 A4 上如何排布 N 张处方
+ * 选型优先级（同样能放下 N 张时，取最易读的一档）：
+ *   1. 正向原尺寸  —— 缩放 100%，最优
+ *   2. 旋转原尺寸  —— 缩放 100%，但文字需侧转（次选）
+ *   3. 正向等比缩小 —— 不旋转，字号略小
+ * 例如 A4 横向排 2 张 A5 横放处方：正向放不下 2 张，
+ * 旋转可原尺寸放下，但选择「正向缩到70.7%」可读性更好。
+ * sheetW/sheetH 为当前 A4 纸尺寸，随纸张方向变化。 */
+function calcGrid(p, n, sheetW, sheetH){
+  const SW = sheetW||A4_SHEET.w, SH = sheetH||A4_SHEET.h;
+  /* 1) 原尺寸：正向 /旋转 90° 两种摆法 */
+  const evalFull=(rotated)=>{
+    const cw = rotated ? p.h : p.w;
+    const ch = rotated ? p.w : p.h;
+    const maxCols=Math.floor(SW/cw);
+    const maxRows=Math.floor(SH/ch);
+    if(maxCols<1 || maxRows<1) return null;
+    const need=Math.min(n, maxCols*maxRows);
+    let best=null;
+    for(let cols=1; cols<=maxCols; cols++){
+      const rows=Math.ceil(need/cols);
+      if(rows>maxRows) continue;
+      if(cols*rows < need) continue;
+      if(!best || cols*rows - need < best.slack) best={cols, rows, slack:cols*rows-need};
+    }
+    if(!best) return null;
+    return {cols:best.cols, rows:best.rows, count:need, rotated, scale:1, cw, ch, tier:rotated?2:1};
+  };
+  const a=evalFull(false), b=evalFull(true);
+  /* 正向原尺寸最优；若只有旋转能原尺寸放下，记为候选（tier2）先留着 */
+  if(a && a.count>=n) return a;
+  const rotFull = (b && b.count>=n) ? b : null;
+
+  /* 2) 正向等比缩小：找一个 行列数×行数 >= n 的网格，按 A4 均分格子并缩放
+   * 优先选接近正方形的排布（2×2 而非 1×4），更符合 A4 观感 */
+  let cand=null;
+  for(const cols of [1,2,3,4]){
+    const rows=Math.ceil(n/cols);
+    if(cols*rows<n) continue;
+    const cw=SW/cols, ch=SH/rows;
+    /* 缩放后处方需能放进格子 */
+    const k=Math.min(cw/p.w, ch/p.h);
+    if(k>=0.999) continue;                    /* 不缩也能放下，前面已处理 */
+    /* 正方形偏好：|cols-rows| 越小越好；同分时取缩放更大的 */
+    const score=Math.abs(cols-rows);
+    if(!cand || score<cand.score || (score===cand.score && k>cand.scale))
+      cand={cols, rows, count:n, rotated:false, scale:k, cw, ch, score, tier:3};
+  }
+  /* 3) 决策：正向缩到 70% 以上时，优先于旋转（不旋转更易读）；
+   *    缩得太小则改用旋转原尺寸 */
+  if(cand && cand.scale>=0.7) return cand;
+  if(rotFull) return rotFull;
+  if(cand) return cand;
+  /* 4) 兜底：用原尺寸能放的最大数量 */
+  return (a&&a.count>=1 ? a : null) || rotFull
+      || {cols:1, rows:1, count:1, rotated:false, scale:1, cw:p.w, ch:p.h, tier:1};
+}
+
+/* 应用纸张布局：单张模式直接显示 #page；拼版模式用 #sheet 排布 */
 function applyPaper(){
-  const w=FIXED_PAPER.w, h=FIXED_PAPER.h;
-  state.paper.w=w; state.paper.h=h; state.paper.orient="landscape"; state.paper.margin=FIXED_PAPER.margin;
+  const p=rxPaper(), n=multiPerSheet();
+  state.paper.w=p.w; state.paper.h=p.h; state.paper.margin=FIXED_MARGIN;
+
   const page=document.getElementById("page");
-  page.style.width=w+"mm"; page.style.minHeight=h+"mm";
-  page.style.padding=state.paper.margin+"mm";
-  /* 动态 @page */
+  const sheet=document.getElementById("sheet");
+  const wrap=document.getElementById("sheetWrap");
+  /* DOM 尚未就绪时（脚本在 body 尾部之前被调用）只记录状态，等布局后再套用 */
+  if(!page || !sheet || !wrap){
+    document.body.classList.toggle("multi-up", n>1);
+    syncZoom();
+    return;
+  }
+  document.body.classList.toggle("multi-up", n>1);
+
+  if(n>1){
+    const sh=a4Sheet();                    /* A4 纸随方向旋转 */
+    const best=calcGrid(p, n, sh.w, sh.h);
+    const cw=sh.w/best.cols, ch=sh.h/best.rows;
+    /* 先取出主节点引用，再清空容器（清空会让 getElementById 失效） */
+    const mainPage=page;
+    sheet.style.width=sh.w+"mm";
+    sheet.style.height=sh.h+"mm";
+    sheet.innerHTML="";
+    /* 主节点跟随当前编辑联走，保证「正在录的那份」始终在可编辑节点上 */
+    const cur=Math.min(state.activeRx||0, best.count-1);
+    state.activeRx=cur;
+    for(let i=0;i<best.count;i++){
+      const cell=document.createElement("div");
+      cell.className="sheet-cell"+(best.rotated?" rot":"");
+      cell.style.width=cw+"mm";
+      cell.style.height=ch+"mm";
+      cell.dataset.rx=i;
+      /* 激活联用主节点（保证输入联动），其余格子用克隆节点 */
+      const isMainCell = (i===cur);
+      const pg = isMainCell ? mainPage : rxCloneNode(i);
+      /* 克隆节点按格子下标固定 id，renderRxPages依此判定承载的联号 */
+      if(!isMainCell) pg.id="page-"+i;
+      /* 每个联节点都要独立设定尺寸与变换，不能只设主节点 */
+      if(pg){
+        pg.classList.add("rx-page");
+        pg.classList.toggle("rot", !!best.rotated);
+        /* 先清干净，避免上一轮残留 */
+        pg.removeAttribute("data-scaled");
+        pg.removeAttribute("data-small");
+        pg.style.removeProperty("--rx-w");
+        pg.style.removeProperty("--rx-h");
+        pg.style.removeProperty("--rx-scale");
+        pg.style.removeProperty("--k");
+        if(best.rotated){
+          /* 旋转：保持原始尺寸，由 CSS 旋转 90° 填满格子 */
+          pg.style.setProperty("--rx-w", p.w+"mm");
+          pg.style.setProperty("--rx-h", p.h+"mm");
+          pg.style.width=p.w+"mm"; pg.style.height=p.h+"mm"; pg.style.minHeight=p.h+"mm";
+        } else if(best.scale<1){
+          /* 缩小：格子按 A4 均分，版式结构不变、字号按比例调小 */
+          pg.style.width=cw+"mm";
+          pg.style.height=ch+"mm";
+          pg.style.minHeight=ch+"mm";
+          pg.setAttribute("data-small","1");
+          /* 字号缩放比= 格子宽 / 处方原宽（取 0.35~1 之间的合理值） */
+          pg.style.setProperty("--k", Math.max(0.35, Math.min(1, best.scale)).toFixed(3));
+        } else {
+          pg.style.width=cw+"mm"; pg.style.height=ch+"mm"; pg.style.minHeight=ch+"mm";
+        }
+        pg.style.padding=FIXED_MARGIN+"mm";
+      }
+      cell.appendChild(pg);
+      sheet.appendChild(cell);
+    }
+    if(best.count<n){
+      const tip=document.createElement("div");
+      tip.className="sheet-tip";
+      tip.textContent=`当前纸张方向下，一张 A4 仅能容纳 ${best.count} 张处方`;
+      sheet.appendChild(tip);
+    }
+    wrap.style.width=sh.w+"mm";
+    /* 各联节点的尺寸已在上面的循环中逐个设置完毕，此处不再重复覆盖 */
+    page.style.padding=FIXED_MARGIN+"mm";
+  } else {
+    const mainPage=page;              /* 同上：先取引用再清空 */
+    /* 单联模式固定编辑第 1 联 */
+    state.activeRx=0;
+    sheet.innerHTML="";
+    /* 单张模式：主 page 复位所有拼版样式 */
+    page.classList.remove("rot");
+    page.removeAttribute("data-scaled");
+    page.removeAttribute("data-small");
+    page.style.removeProperty("--rx-w");
+    page.style.removeProperty("--rx-h");
+    page.style.removeProperty("--rx-scale");
+    page.style.removeProperty("--k");
+    if(page.parentElement!==sheet) sheet.appendChild(page);
+    sheet.style.width=p.w+"mm";
+    sheet.style.height="auto";
+    wrap.style.width=p.w+"mm";
+    page.style.width=p.w+"mm";
+    page.style.height="auto";
+    page.style.minHeight=p.h+"mm";
+    page.style.padding=FIXED_MARGIN+"mm";
+  }
+
+  /* 动态 @page
+   * 注意：直接写 `size:210mm 148mm` 这类非标准尺寸，浏览器会判定为未知纸张
+   * 并回退到默认 Letter，导致横/竖向打不出来。
+   * 因此单张模式改用标准的 A4 + landscape/portrait 关键字：
+   *   - A4 横向 = 297×210mm，正好容纳 210×148 的处方纸并留出裁切余量
+   *   - A4 纵向 = 210×297mm */
   let ps=document.getElementById("pageStyle");
   if(!ps){ ps=document.createElement("style"); ps.id="pageStyle"; document.head.appendChild(ps); }
-  ps.textContent=`@page{size:${w}mm ${h}mm;margin:0;} @media print{#page{min-height:${h}mm !important;}}`;
-  syncZoom(); fitPreview(); renderPreview();
+  if(n>1){
+    /* 拼版：A4 跟随纸张方向（4 张自动横向 → A4 landscape） */
+    const sh=a4Sheet();
+    const lsc = sh.w>=sh.h ? "landscape" : "portrait";
+    ps.textContent=`@page{size:A4 ${lsc};margin:0;}
+      @media print{ #sheet{width:${sh.w}mm !important; height:${sh.h}mm !important;} }`;
+  } else if(state.paper.orient==="portrait"){
+    /* 单张竖向：A4 纵向 */
+    ps.textContent=`@page{size:A4 portrait;margin:0;}`;
+  } else {
+    /* 单张横向：A4 横向（297×210），处方纸 210×148 居中，打印后裁切 */
+    ps.textContent=`@page{size:A4 landscape;margin:0;}`;
+  }
+  syncZoom(); renderPreview(); fitPreview(); syncRxBar();
 }
 function fitPreview(){
-  const w=FIXED_PAPER.w;
-  const pxW=w*96/25.4, area=document.getElementById("previewArea");
+  const scaler=document.getElementById("scaler");
+  if(!scaler) return;
+  const n=multiPerSheet();
+  const sh = n>1 ? a4Sheet() : rxPaper();
+  const wmm = sh.w, hmm = sh.h;
+  const pxW=wmm*MM2PX;
+  const area=document.getElementById("previewArea");
   const avail=(area?area.clientWidth:800)-36;
   let s=Math.min(avail/pxW, (state.paper.zoom||100)/100);
-  const scaler=document.getElementById("scaler");
   if(!scaler) return;
   scaler.style.transform=`scale(${s})`;
   scaler.style.width=pxW+"px";
-  scaler.style.height=(document.getElementById("page").offsetHeight*s)+"px";
+  const sheet=document.getElementById("sheet");
+  scaler.style.height=(((sheet&&sheet.offsetHeight)||hmm*MM2PX))*s+"px";
   scaler.style.margin="0 auto";
 }
 window.addEventListener("resize", ()=>{ applyPaneWidth(); fitPreview(); });
 
 /* ================= 左右栏可拖动调整宽度 ================= */
 const SIDEBAR_MIN=320;              /* 左栏最小宽度 */
+const SIDEBAR_DEFAULT=520;          /* 左栏默认宽度（双击分割条恢复到此值） */
 const SIDEBAR_KEY="rxSidebarWidth_v1";
-let sidebarW=520;                   /* 当前左栏宽度（px） */
+let sidebarW=SIDEBAR_DEFAULT;       /* 当前左栏宽度（px） */
 let dragging=false, dragStartX=0, dragStartW=0;
 
 function sidebarMax(){
@@ -1117,7 +1938,7 @@ function initResizer(){
   window.addEventListener("mouseup", onUp);
   window.addEventListener("touchend", onUp);
   /* 双击恢复默认宽度 */
-  rz.addEventListener("dblclick", ()=>setPaneWidth(520, true));
+  rz.addEventListener("dblclick", ()=>setPaneWidth(SIDEBAR_DEFAULT, true));
 }
 function loadPaneWidth(){
   try{
@@ -1125,7 +1946,6 @@ function loadPaneWidth(){
     if(!isNaN(v) && v>=SIDEBAR_MIN) sidebarW=v;
   }catch(e){}
 }
-function resetPaneWidth(){ sidebarW=520; }
 
 /* ================= 智能识别解析 ================= */
 /* 频次：中文全称优先识别；同时兼容旧文本中的拉丁缩写，识别后统一输出中文全称 */
@@ -1369,7 +2189,6 @@ function isUiWord(line){
 }
 /* 小票中出现的"非药名"词库：测试语、厂家、设备、结算、会员等级等 */
 const POS_STOPWORDS=["检测","正确识别","是否正确","测试","识别","是否","正确","示例","样例","请识别","验证","试验","会员","普通会员","收银","收银员","操作员","营业员","药师","医师","护士","折价","无折价","销售","退货","换货","处方药","非处方药","企业","公司","药房","药店","医院","门诊","收据","小票","清单","底联","第","联"];
-function hasStopword(s){ return POS_STOPWORDS.some(w=>s.includes(w)); }
 /* 药名不得以此类"非药品词"结尾（列名、操作项、单据用语等）——防止"商品信息/查看/序号"被当药名
    注意：仅做"结尾匹配"，避免"乐药师""药剂师"等含"药师"的合法药名被误伤 */
 const DRUG_SUFFIX_REJECT=/(?:信息|内容|详情|明细|记录|编号|号码|方式|时间|日期|金额|单价|实价|售价|原价|合计|总计|小计|数量|单位|规格|批号|厂家|产地|备注|状态|类型|分类|操作|查看|删除|编辑|修改|确认|取消|提交|保存|打印|返回|会员|客户|顾客|医生|医师|收银|销售)$|^(?:序号|条码|追溯|医保|处方|支付|折扣|优惠|积分|余额|姓名|性别|年龄|电话|手机|地址|卡号|账号|密码|验证|识别|检测|测试|检查|是否|可否|正确|错误|成功|失败|异常|提示|警告|说明|注意|请|第[一二三四五六七八九十\d]|联)$/;
@@ -1461,6 +2280,8 @@ function extractHeadInfo(lines, patch, report, bump){
 /* 从"会员/患者信息块"提取姓名：小票首部常形如
    设备名/时间/会员名/件数/金额/患者名/电话/单据号…
    取信息块内所有"纯中文短词且未命中清单"的候选，后者优先（患者名通常紧随会员名） */
+/* 表格列名/表头特征词：像人名但其实是表头，不能当患者姓名 */
+const TABLE_HEAD_WORDS=/(品名|药名|规格|规[格怡直]|生产|厂家|企业|单位|数量|单价|零售价|金额|类别|分类|用法|频次|每次剂量|剂型|条码|批号|库存|售价|进价)/;
 function extractNameFromBlock(lines, patch, report, bump){
   const limit=Math.min(lines.length, 20);
   const cands=[];
@@ -1468,6 +2289,7 @@ function extractNameFromBlock(lines, patch, report, bump){
     const t=lines[i].trim();
     if(!t || /\d/.test(t)) continue;
     if(!/^[\u4e00-\u9fa5·•]{2,4}$/.test(t)) continue;
+    if(TABLE_HEAD_WORDS.test(t)) continue;       /* 表头列名，排除 */
     if(POS_UI_WORDS.includes(t) || badDrugName(t) || stopwordAsNoise(t)) continue;
     if(POS_NOISE.some(re=>re.test(t))) continue;   /* 列名/表头（销售员/批号/数量…） */
     if(matchDrug(t)) continue;
@@ -1485,6 +2307,7 @@ function collectNameCandidates(lines){
     const t=line.trim();
     if(!t || /\d/.test(t) || /[：:]/.test(t)) return;
     if(!/^[\u4e00-\u9fa5·•]{2,4}$/.test(t)) return;
+    if(TABLE_HEAD_WORDS.test(t)) return;
     if(POS_UI_WORDS.includes(t)) return;
     if(badDrugName(t) || stopwordAsNoise(t)) return;
     if(matchDrug(t)) return;
@@ -1494,15 +2317,16 @@ function collectNameCandidates(lines){
 }
 /* 在第 1 遍药品识别后回填：把曾误判为药品的患者姓名行剔除，并从重复短行中推断患者姓名 */
 function verifyNames(lines, newDrugs, patch, report, bump){
+  const _r=curRx();
   const cands=collectNameCandidates(lines);
   /* 反复出现的纯中文短行 → 会员/患者姓名（如"孙杏娟"出现 2 次） */
   let topName="";
-  if(!patch.name && !state.name){
+  if(!patch.name && !_r.name){
     let best=0;
     cands.forEach((cnt,nm)=>{ if(cnt>best){ best=cnt; topName=nm; } });
     if(best>=2){ patch.name=topName; report.push("✔ 姓名："+topName); bump(); }
   }
-  const known=new Set([patch.name, state.name, topName].filter(Boolean));
+  const known=new Set([patch.name, _r.name, topName].filter(Boolean));
   /* 从已识别药品项反推患者姓名（如"陈小娟 女"） */
   newDrugs.forEach(d=>{
     const m=(d.name||"").trim().match(/^([\u4e00-\u9fa5·•]{2,4})(?:\s*(男|女))?$/);
@@ -1544,12 +2368,6 @@ function splitSpecTail(line){
   return { head, tail };
 }
 /* 判断一段文字是否像药品名称（用于过滤非药品噪音行） */
-function looksLikeDrugName(s){
-  if(!s) return false;
-  if(/\d/.test(s)) return false;
-  if(!/[\u4e00-\u9fa5]/.test(s)) return false;
-  return /片|胶囊|颗粒|丸|散|膏|液|剂|栓|贴|喷雾|滴眼|口服液|糖浆|混悬|注射|凝胶|乳|酊|胶浆|含片|泡腾|软|硬|素|酯|酸|碱|盐|唑|啶|芬|林|康|星|松|灵|普|坦|韦|肽|酶|锌|钙|铁|钠|钾|镁|铝|溴|碘|氨|酚|醚|醇|油$/i.test(s) || /[\u4e00-\u9fa5]{3,}$/.test(s);
-}
 /* 数字转紧凑字符串：12.00 → "12"，12.50 → "12.5" */
 function trimNum(n){
   if(n==null || isNaN(n)) return "";
@@ -1621,10 +2439,16 @@ function doParse(){
   const hospitalM = text.match(/([\u4e00-\u9fa5]{2,12}医院)/);
   if(hospitalM && !state.hospital){ patch.hospital=hospitalM[1]; report.push("✔ 医院："+hospitalM[1]); hitCount++; }
   const kv=(re,label,key)=>{ const m=text.match(re); if(m&&m[1]&&m[1].trim()){ patch[key]=m[1].trim(); report.push(`✔ ${label}：${m[1].trim()}`); hitCount++; } };
-  { /* 姓名：支持"姓名：X / 姓名 X / 姓名X / 患者姓名X"，并在粘连时截断于下一个字段词 */
-    const nm=text.match(/(?:患者)?姓\s*名[：:]?\s*([\u4e00-\u9fa5][\u4e00-\u9fa5·•]{0,11})/);
-    if(nm){ const n=nm[1].split(/性别|年龄|科别|就诊|病历|诊断|医院|门诊|处方|药/)[0];
-      if(n){ patch.name=n; report.push("✔ 姓名："+n); hitCount++; } }
+  { /* 姓名：支持"姓名：X / 姓名 X / 姓名X / 患者姓名X"，并在粘连时截断于下一个字段词
+       注意用 [^\n] 限制在同一行内，避免把表格里的"生产正业"等行误当姓名 */
+    const nm=text.match(/(?:患者)?姓\s*名[：:]?[ \t]*([^\n\r]{1,14})/);
+    if(nm){
+      const n=nm[1].trim().split(/性别|年龄|科别|就诊|病历|诊断|医院|门诊|处方|药/)[0].trim();
+      /* 必须是像人名的中文（2-6 字），且不含"企业/表格列名"等特征词 */
+      if(n && /^[\u4e00-\u9fa5·•]{2,6}$/.test(n) && !/(公司|厂|企业|品名|规格|数量|单位|生产)/.test(n)){
+        patch.name=n; report.push("✔ 姓名："+n); hitCount++;
+      }
+    }
   }
   kv(/性\s*别[：:]\s*(男|女)/,"性别","gender");
   kv(/年\s*龄[：:]\s*([0-9]{1,3}\s*(?:岁|月|天|日)?)/,"年龄","age");
@@ -1644,8 +2468,7 @@ function doParse(){
   let newDrugs=[];
   /* 药名悬挂状态：等待后续行（规格/价格/数量）归属的药品 */
   let pending=null;
-  const flushPending=()=>{
-    if(!pending) return;
+  const flushPending=()=>{    if(!pending) return;
     const p=pending; pending=null;
     /* POS 小票结构化定价："查看" 之后为 单价 / 数量 / 金额，
        块尾可能还跟一个"下一个商品的序号"整数，需排除后再校验 金额=单价×数量。 */
@@ -1687,6 +2510,258 @@ function doParse(){
       hitCount++;
     }
   };
+
+  /* ---------- 【竖排记录】Excel 纵向粘贴：每种药占多行 ----------
+   * 典型形态（从 Excel 按行复制）：
+   *   品名 / 规格 / 生产企业     ← 表头（横着分开或逐行）
+   *   雷贝拉唑钠肠溶片
+   *   20mg*28片
+   *   江苏安必生制药有限公司
+   *   盒
+   *   1.
+   *   ……
+   * 这种数据走自然语言解析会把「盒」当药名、「1.」当单价，故单独处理。 */
+  /* 表头识别用「前缀 + 模糊」匹配，容忍错别字（如"规怡"≈规格、"生产正业"≈生产企业） */
+  const headKind=(s)=>{
+    if(/^(品名|药品名|通用名|名称|名字)/.test(s)) return "name";
+    if(/^规\s*格|^规[格怡直]/.test(s)) return "spec";
+    if(/^(生产企业|生产厂家|生产正业|厂家|制造商|厂商|企业)/.test(s)) return "maker";
+    if(/^单位/.test(s)) return "unit";
+    if(/^(数量|数目|个数)/.test(s)) return "qty";
+    if(/^(单价|零售价|售价)/.test(s)) return "price";
+    if(/^(用法|服法)/.test(s)) return "usage";
+    if(/^(频次|次数)/.test(s)) return "freq";
+    if(/^(类别|分类)/.test(s)) return "cat";
+    return null;
+  };
+  const isQtyCell=(c)=>/^\d+(\.\d+)?\s*[.。]?$/.test(c)||/^\d+(\.\d+)?$/.test(c);
+/* 杂质行：序号残留、Excel 拆分符号、单元格式错误（如 "e."、"#N/A"）等，非字段内容
+     注意不能误伤合法数量（"1."、"3."）——先排除纯数字带尾点的形式 */
+const isJunkLine=(s)=>{
+  if(!s) return true;
+  if(/^\d+(\.\d+)?\s*[.。]?$/.test(s)) return false;   /* 数量行（如 "1."、"3."、"2"），不是杂质 */
+  return /^[-–—=*#]+$/.test(s) || /^e[.。]?$/i.test(s)
+    || /^#(N\/A|REF|VALUE|DIV\/0|NAME)/i.test(s) || /^null$/i.test(s) || /^[0-9a-z]{1,3}[.。]$/i.test(s);
+};
+  /* 纯单位词（盒/瓶/袋…），在扫描时用于区分「单位行」与「药名行」 */
+  const UNIT_ONLY=/^(盒|瓶|袋|支|片|粒|丸|代|包|贴|套|罐|板|瓶装|盒装|袋装)$/;
+  /** 尝试按「竖排记录」解析；成功返回药品数组，失败返回 null */
+  function tryVerticalRecords(allLines){
+    const L=allLines.map(s=>s.trim()).filter(Boolean);
+    if(L.length<4) return null;
+    /* 定位表头：开头连续的列名行（可能有、也可能没有） */
+    const kinds=[];
+    for(let i=0;i<Math.min(L.length,8);i++){
+      const k=headKind(L[i]);
+      if(k) kinds.push(k); else break;
+    }
+    /* 有表头：必须是「品名」开头 */
+    const hasHead = kinds.length>=2 && kinds[0]==="name";
+    /* 无表头时，用「记录结构特征」判断：
+       必须是「药名行 → 规格行 → 单位行 → 数量行」反复出现，
+       且至少 2 个药名能匹配药品库 */
+    const looksLikeRecord=(lines)=>{
+      /* 找「数量行」出现的位置，至少 2 处才像清单 */
+      let qtyCount=0;
+      for(let i=1;i<lines.length;i++){
+        if(isQtyCell(lines[i])) qtyCount++;
+      }
+      if(qtyCount<2) return false;
+      /* 药名行（中文、非单位、非数量、非厂家）至少 2 条 */
+      let nameCount=0, specCount=0;
+      for(let i=0;i<lines.length;i++){
+        const s=lines[i];
+        if(UNIT_ONLY.test(s) || isQtyCell(s)) continue;
+        if(/(公司|厂|制药|药业|有限)$/.test(s)) continue;
+        if(!/[\u4e00-\u9fa5]/.test(s)) continue;
+        if(/[\d]/.test(s) && /[*xX×\/]/.test(s)){ specCount++; continue; }   /* 规格行 */
+        nameCount++;
+      }
+      return nameCount>=2 && specCount>=1;
+    };
+    if(!hasHead && !looksLikeRecord(L)) return null;
+    const body = hasHead ? L.slice(kinds.length) : L;
+    if(body.length<3) return null;
+    const idx=(k)=>kinds.indexOf(k);
+    const iName=idx("name"), iSpec=idx("spec"), iMaker=idx("maker"),
+          iUnit=idx("unit"), iQty=idx("qty");
+
+    /* 逐组扫描：每条记录的字段个数不固定（可能有厂家、可能没有），
+       因此按「药名 + 后续若干属性行」贪心切分，而不是固定步长。 */
+    const isHeadLine=(s)=>!!headKind(s);
+    const recs=[];
+    let k=0;
+    /** 从位置 p 起跳过杂质/表头/空行，找到第一个有效内容行的下标；没有则返回 body.length */
+    const skipJunk=(p)=>{
+      let j=p;
+      while(j<body.length && (isHeadLine(body[j]) || isJunkLine(body[j]))) j++;
+      return j;
+    };
+    while(k<body.length){
+      const nm=body[k];
+      /* 跳过表头残留、纯数字行、杂质行（如 "e."、"-"、序号等） */
+      if(isHeadLine(nm) || !/[\u4e00-\u9fa5]/.test(nm) || isQtyCell(nm) || isJunkLine(nm)){ k++; continue; }
+      const r={name:nm, spec:"", maker:"", unit:"", qty:""};
+      let m=k+1;
+      /* 规格：短串、含数字且带规格符号（* / × / x / /） */
+      const isSpecLine=(s)=>!isHeadLine(s) && !isQtyCell(s) && !UNIT_ONLY.test(s)
+                          && !isJunkLine(s) && s.length<=32 && /[\d]/.test(s);
+      if(m<body.length && isSpecLine(body[m]) && !/(公司|厂|制药|药业|有限)$/.test(body[m])){
+        r.spec=body[m]; m++;
+      }
+      /* 厂家：以公司/厂/制药/药业结尾（允许中间夹杂质行） */
+      m=skipJunk(m);
+      if(m<body.length && /(公司|厂|制药|药业|有限)/.test(body[m])){ r.maker=body[m]; m++; }
+      /* 单位（允许中间夹杂质行，如 Excel 残留的 "e."） */
+      m=skipJunk(m);
+      if(m<body.length && UNIT_ONLY.test(body[m])){ r.unit=body[m]; m++; }
+      /* 数量：允许带尾点，如 "1." */
+      m=skipJunk(m);
+      if(m<body.length && isQtyCell(body[m])){ r.qty=body[m].replace(/[.。]+$/,""); m++; }
+      recs.push(r);
+      k=m>k+1 ? m : k+1;
+    }
+    const valid=recs.filter(r=>r.name && !headKind(r.name) && !UNIT_ONLY.test(r.name));
+    if(valid.length<2) return null;
+
+    /* 转换为药品对象；同名合并数量 */
+    const list=[];
+    /** 取药品库标准名，用于识别同一药品的不同写法 */
+    const canon=(nm)=>{ const h=matchDrug(nm); return h ? h.db.n : nm; };
+    valid.forEach(r=>{
+      const name=r.name.replace(/[\s　]+/g,"");
+      if(!name || !/[\u4e00-\u9fa5]/.test(name)) return;
+      const qty=parseFloat(r.qty);
+      /* 同名（含通用名/别名等价的写法）→ 合并数量 */
+      const key=canon(name);
+      const exist=list.find(d=>canon(d.name)===key);
+      if(exist){
+        if(isFinite(qty)) exist.qty=String((parseFloat(exist.qty)||0)+qty);
+        return;
+      }
+      const d=blankDrug();
+      d.name=name;
+      if(r.spec) d.spec=r.spec;
+      if(r.unit) d.unit=r.unit;
+      if(isFinite(qty)) d.qty=String(qty);
+      const hit=matchDrug(name);
+      if(hit){
+        /* 清单未给单价时，用药品库参考价补全，方便算金额 */
+        if(d.price==="" && hit.db.p!=null) d.price=trimNum(hit.db.p);
+        /* 补全剂量/频次/用法，但清单已给的规格与单价不被覆盖 */
+        fillFromDB(d, hit.db).forEach(f=>{
+          if(f==="规格" && d.spec) return;
+          if(f==="单价" && d.price) return;
+        });
+        d.name=canonicalName(name, hit.db);
+        d.matched=true;
+        if(r.maker && !d.maker) d.maker=r.maker;
+      }
+      list.push(d);
+    });
+    return list.length ? {drugs:list, recs:valid} : null;
+  }
+  const vertical=tryVerticalRecords(lines);
+  if(vertical){
+    const list=rxDrugs(state.activeRx||0).filter(d=>d.name||d.dose||d.price).concat(vertical.drugs);
+    if(state.activeRx===0) state.drugs=list; else curRx().drugs=list;
+    /* 合并情况提示 */
+    const merged=vertical.recs.length-vertical.drugs.length;
+    report.unshift(`✔ 解析 ${vertical.recs.length} 条记录`+(merged?`，同名合并 ${merged} 条（数量已累加）`:""));
+    renderAll(); save();
+    const rep=document.getElementById("parseReport");
+    rep.innerHTML=`<b>识别完成：按纵向表格解析</b>\n`+report.join("\n");
+    rep.classList.add("ok");
+    syncForm();
+    return;
+  }
+
+  /* ---------- 【表格行】Excel/表格复制的「名称 规格 单位 数量」 ----------
+   * 从 Excel 复制出来是制表符或连续空格分隔的固定列。这类数据不能走自然语言解析，
+   * 否则规格/单位会被吞进药名、数量会被误当成单价。
+   * 因此在正式解析前先判断是否为表格，全部命中则走列解析并直接返回。 */
+  const UNIT_RE=/^(盒|瓶|袋|支|片|粒|丸|代|包|贴|套|罐|板|瓶装|盒装|袋装|片装|粒装|瓶盒|支瓶|ml|ML|mg|MG|g|G|kg|KG)$/;
+  const isNumCell=(c)=>/^\d+(\.\d+)?$/.test(c);
+  /* 优先按制表符切分（Excel 复制的真实列界），无制表符时按连续空格切 */
+  const splitCells=(line)=>{
+    if(line.indexOf("\t")>=0) return line.split("\t").map(c=>c.trim());
+    return line.split(/\s{2,}/).map(c=>c.trim());
+  };
+  const isTableRow=(line)=>{
+    const cells=splitCells(line);
+    if(cells.length<3) return false;
+    const first=cells[0];
+    /* 第一格须是药名：含中文、非纯数字、且不是表头 */
+    if(!/[\u4e00-\u9fa5]/.test(first) || isNumCell(first)) return false;
+    if(/^(类别|药品名称|品名|通用名|名称|规格|单位|数量|单价|金额|用法|频次|每次剂量)$/.test(first)) return false;
+    /* 末列必须是数量（纯数字），这是「清单/表格」的强特征 */
+    const last=cells.filter(c=>c!=="")[cells.filter(c=>c!=="").length-1];
+    if(!isNumCell(last||"")) return false;
+    /* 中间至少有一格是规格或单位，避免把普通处方行误判为表格 */
+    const middle=cells.slice(1,-1).filter(c=>c!=="");
+    return middle.some(c=>UNIT_RE.test(c) || /[\u4e00-\u9fa5\d]/.test(c));
+  };
+  const tableRows=lines.filter(isTableRow);
+
+  if(tableRows.length && tableRows.length===lines.length){
+    /* 探测列结构：统计各行「单位格」与「末列数字」的出现情况，
+       判定末列数字到底是数量还是单价。 */
+    const parsed=tableRows.map(line=>{
+      const cells=splitCells(line);
+      let name=cells[0];
+      let nameUnit="";
+      /* 药名尾部粘连的单位（如「消炎止咳片 盒」） */
+      const tail=name.match(/[\s　]+([^\s　]+)$/);
+      if(tail && UNIT_RE.test(tail[1])){ nameUnit=tail[1]; name=name.slice(0, tail.index).trim(); }
+      const rest=cells.slice(1).filter(c=>c!=="");
+      const units=rest.filter(c=>UNIT_RE.test(c));
+      const specs=rest.filter(c=>!UNIT_RE.test(c) && !isNumCell(c));
+      const nums=rest.filter(isNumCell);
+      return {name, nameUnit, spec: specs[0]||"", unit: units[0]||nameUnit, nums};
+    });
+    /* 末列数字：若各行都只有一个数字，且其单位语义与「每盒价格」更吻合，则判为单价。
+       经验规则：规格里已含数量单位（如 10袋/12片）时，末列数字通常是单价。 */
+    const allOneNum = parsed.every(p=>p.nums.length<=1);
+    const specHasQty = parsed.every(p=>!p.spec || /[\d]/.test(p.spec));
+    const numIsPrice = allOneNum && specHasQty;
+
+    parsed.forEach(p=>{
+      flushPending();
+      const d=blankDrug();
+      /*关键：交给 flushPending 结算，必须挂到 pending 上 */
+      pending=d;
+      d.name=p.name;
+      if(p.spec) d.spec=p.spec;
+      if(p.unit) d.unit=p.unit;
+      if(p.nums.length>=2){ d.qty=trimNum(p.nums[0]); d.price=trimNum(p.nums[1]); }
+      else if(p.nums.length===1){
+        if(numIsPrice) d.price=trimNum(p.nums[0]);
+        else if(/^(盒|瓶|袋|包|套|板|罐|盒装|袋装|瓶装)$/.test(d.unit)) d.qty=trimNum(p.nums[0]);
+        else d.price=trimNum(p.nums[0]);
+      }
+      /* 对照药品清单补全（规格以本行提供的为准） */
+      const hit=matchDrug(d.name);
+      if(hit){
+        const hasOwnSpec = d.spec && d.spec!==hit.db.s;
+        const filled=fillFromDB(d, hit.db).filter(x=>!(hasOwnSpec && x==="规格"));
+        d.name=canonicalName(d.name, hit.db);
+        d.matched=true;
+        if(filled.length) report.push(`✔ 匹配清单【${hit.keyword}】→ ${d.name}｜补全：${filled.join("、")}`);
+      } else {
+        report.push(`✔ 表格行：${d.name}${d.spec?"（"+d.spec+"）":""}${d.qty?"｜数量 "+d.qty+" "+(d.unit||""):""}${d.price?"｜单价 ￥"+d.price:""}`);
+      }
+      flushPending();
+    });
+    /* 直接落库到当前联 */
+    const list=rxDrugs(state.activeRx||0).filter(d=>d.name||d.dose||d.price).concat(newDrugs);
+    if(state.activeRx===0) state.drugs=list; else curRx().drugs=list;
+    renderAll(); save();
+    const rep=document.getElementById("parseReport");
+    rep.innerHTML=`<b>识别完成：按表格列解析 ${newDrugs.length} 行</b>\n`+report.join("\n");
+    rep.classList.add("ok");
+    syncForm();
+    return;
+  }
 
   lines.forEach(line=>{
     if(/类别|药品名称|每次剂量|频次|用法|单价|数量|金额/.test(line) && newDrugs.length===0 && !/\d+\s*(ml|mg)/i.test(line)) { flushPending(); return; } // 表头
@@ -1916,7 +2991,9 @@ function doParse(){
       const re=new RegExp("(^|[\\s,，、;；])"+u+"(?=$|[\\s,，、;；])");
       if(re.test(s)){ d.usage=u; s=s.replace(re,"$1 "); break; }
     }
-    if(/免皮试|皮试/.test(s)){ d.skin=/免皮试/.test(s)?false:true; if(/免皮试/.test(s)){ d.skin=false; } s=s.replace(/说明[：:]?免皮试/," "); }
+    /* 「皮试/免皮试」已下线：不记录该字段，但仍要把文字从待解析串里清掉，
+       否则会残留在规格或备注里 */
+    s=s.replace(/说明[：:]?\s*免?皮试/g," ").replace(/免?皮试/g," ");
 
     /* 中文与数字之间插入空格，便于自动拆分"药名+粘连规格"（仅当中文字符紧邻数字，避免误拆 2ml:1mg 这类规格） */
     s=s.replace(/([\u4e00-\u9fa5）)])(?:[:：,，、])?(\d)/g,"$1 $2");
@@ -2064,10 +3141,16 @@ function doParse(){
   /* 二次校验：剔除误判为药品的患者/会员姓名行，并尽量补全患者姓名 */
   verifyNames(lines, newDrugs, patch, report, ()=>hitCount++);
 
-  /* 规格 副行（形如“规格:2g 100ML/瓶”单独一行） */
-  Object.keys(patch).forEach(k=>{ state[k]=patch[k]; });
+  /* 规格 副行（形如“规格:2g 100ML/瓶”单独一行）
+   * 识别结果写入当前编辑的联；共享字段仍写 state */
+  const target=curRx(), drugs=rxDrugs(state.activeRx||0);
+  Object.keys(patch).forEach(k=>{
+    if(SHARED_KEYS.has(k)) state[k]=patch[k]; else target[k]=patch[k];
+  });
   if(newDrugs.length){
-    state.drugs = state.drugs.filter(d=>d.name||d.dose||d.price).concat(newDrugs);
+    const kept=drugs.filter(d=>d.name||d.dose||d.price);
+    if(state.activeRx===0) state.drugs=kept.concat(newDrugs);
+    else target.drugs=kept.concat(newDrugs);
   }
   renderDrugs(); renderAll(); save();
 
@@ -2087,13 +3170,19 @@ function hideReport(){ document.getElementById("pasteBox").value=""; const r=doc
 document.getElementById("pasteBox").addEventListener("paste", ()=>{ setTimeout(doParse, 60); });
 
 function syncForm(){
-  Object.entries(fieldMap).forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.value=state[key]??""; });
-  syncGender(); syncDeptSel(); renderDiagSelected(); updateReqState(); refreshReqInputs(); syncTodayBtn();
+  const r=curRx();
+  Object.entries(fieldMap).forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    const src = SHARED_KEYS.has(key) ? state : r;
+    el.value = src[key] ?? "";
+  });
+  syncGender(); renderDiagSelected(); updateReqState(); refreshReqInputs(); syncTodayBtn(); syncRxBar();
 }
 /* 「今天」按钮高亮：当前日期 == 今天 */
 function syncTodayBtn(){
   const b=document.getElementById("btnToday");
-  if(b) b.classList.toggle("on", state.date===todayStr());
+  if(b) b.classList.toggle("on", (curRx().date||state.date)===todayStr());
 }
 /* ===== 必填项状态：未填写时红色高亮（.empty），填写后恢复 ===== */
 const REQ_FIELDS=[
@@ -2107,54 +3196,58 @@ const REQ_FIELDS=[
   {key:"date",     id:"fDate"},
 ];
 function updateReqState(){
+  const r=curRx();
   REQ_FIELDS.forEach(f=>{
     const el=document.getElementById(f.id);
     if(!el) return;
     const box=el.closest(".field");
     if(!box) return;
-    const v=(state[f.key]??"").toString().trim();
+    const src = SHARED_KEYS.has(f.key) ? state : r;
+    const v=(src[f.key]??"").toString().trim();
     box.classList.toggle("empty", !v);
   });
   /* 性别 chips：未选时红色边框 */
   const gc=document.getElementById("genderChips");
-  if(gc){ gc.classList.toggle("req-empty", !(state.gender||"").trim()); }
+  if(gc){ gc.classList.toggle("req-empty", !(r.gender||"").trim()); }
 }
 /* 输入/选择即时刷新必填状态 */
 document.addEventListener("input", e=>{ if(e.target.closest(".field")) updateReqState(); }, true);
 document.addEventListener("change", e=>{ if(e.target.closest(".field")) updateReqState(); }, true);
 
 /* ================= 预览渲染 ================= */
-function renderPreview(){
-  const p=document.getElementById("page");
-  const total=state.drugs.reduce((s,d)=>s+num(d.price)*num(d.qty),0);
-  const today=state.date||todayStr();
-  const [Y,M,D]=today.split("-");
+/** 生成第 i 联的处方 HTML（与纸张方向/拼版无关，纯内容） */
+function rxHtml(i){
+  const r=rxOf(i);
+  const drugs=rxDrugs(i);
+  const total=drugs.reduce((s,d)=>s+num(d.price)*num(d.qty),0);
+  const today=r.date||state.date||todayStr();
+  const [Y,M,D]=String(today).split("-");
   let rows="";
-  state.drugs.filter(d=>d.name||d.dose||d.price).forEach(d=>{
+  drugs.filter(d=>d.name||d.dose||d.price).forEach(d=>{
     rows+=`<tr>
       <td>${esc(d.cat)||"Rp"}</td>
       <td>${esc(d.name)||"&nbsp;"}${d.spec?`<div class="spec">规格:${esc(d.spec)}</div>`:""}</td>
       <td style="white-space:nowrap">${d.dose?esc(d.dose)+" "+esc(d.dunit):""}</td>
       <td style="white-space:nowrap">${esc(d.freq)}</td>
-      <td style="white-space:nowrap">${esc(d.usage)}${d.usage&&d.skin?'<div class="use-note">说明:皮试</div>':""}</td>
+      <td style="white-space:nowrap">${esc(d.usage)}</td>
       <td class="num">${d.price?num(d.price).toFixed(2).replace(/\.00$/,""):""}</td>
       <td style="white-space:nowrap">${d.qty?esc(d.qty)+" "+esc(d.unit):""}</td>
       <td class="num">${num(d.price)*num(d.qty)?(num(d.price)*num(d.qty)).toFixed(2).replace(/\.00$/,""):""}</td>
     </tr>`;
   });
-  p.innerHTML=`
+  return `
     <div class="p-head">
       <div class="p-title">${esc(state.hospital)||"（医院名称）"} 处方</div>
       <div class="p-lian">(底联)</div>
     </div>
-    <div class="p-cardline">就诊卡：( ${esc(state.card)} )　科别：${esc(state.dept)}　病历号：${esc(state.mrn)}</div>
+    <div class="p-cardline">就诊卡：( ${esc(r.card)} )　科别：${esc(state.dept)}　病历号：${esc(r.mrn)}</div>
     <div class="p-info">
-      姓名：<span class="underline">${esc(state.name)}</span>
-      　性别：<span class="underline" style="min-width:40px">${esc(state.gender)}</span>
-      　年龄：<span class="underline" style="min-width:48px">${esc(state.age)}</span>
+      姓名：<span class="underline">${esc(r.name)}</span>
+      　性别：<span class="underline" style="min-width:40px">${esc(r.gender)}</span>
+      　年龄：<span class="underline" style="min-width:48px">${esc(r.age)}</span>
     </div>
-    <div class="p-info">患者地址：<span class="underline" style="min-width:300px;text-align:left">${esc(state.address)}</span></div>
-    <div class="p-info">病情及诊断：<span class="underline" style="min-width:180px;text-align:left">${esc(state.diag)}</span></div>
+    <div class="p-info">患者地址：<span class="underline" style="min-width:300px;text-align:left">${esc(r.address||state.address)}</span></div>
+    <div class="p-info">病情及诊断：<span class="underline" style="min-width:180px;text-align:left">${esc(r.diag)}</span></div>
     <hr>
     <table>
       <thead><tr><th style="width:9%">类别</th><th style="width:33%">药品名称</th><th style="width:12%">每次剂量</th><th style="width:11%">频次</th><th style="width:11%">用法</th><th style="width:8%;text-align:right">单价</th><th style="width:8%">数量</th><th style="width:8%;text-align:right">金额</th></tr></thead>
@@ -2174,6 +3267,18 @@ function renderPreview(){
     </div>
     <div class="p-fee"><b>药费：</b><b>￥${total.toFixed(2)}</b></div>
     <div class="p-note">${esc(state.note)}</div>`;
+}
+function renderPreview(){
+  const p=document.getElementById("page");
+  const total=multiPerSheet();
+  if(total>1){
+    /* 多联：主节点渲染当前编辑联，其余联由克隆节点承载 */
+    p.innerHTML=rxHtml(state.activeRx||0);
+    renderRxPages();
+  } else {
+    /* 单联：始终是第 1 联 */
+    p.innerHTML=rxHtml(0);
+  }
   fitPreview();
 }
 /* 统一重绘：表单回填 + 药品行重绘 + 预览刷新（loadSample/clearAll/导入后均需重绘药品行） */
@@ -2209,6 +3314,30 @@ function restore(){
   const t=todayStr();
   if(!state.date || /^\d{4}-\d{2}-\d{2}$/.test(state.date)===false || state.date < t) state.date=t;
   setSkin(state.skin||"classic", true);
+  /* 清理旧版本遗留的说明文字：去掉已下线的「注：实行双对方…」整段。
+     只在该段仍完整存在时才替换，不动用户自己改过的内容。 */
+  if(typeof state.note==="string" && /实行双对方|双划价|长期服用同一类药物|前列腺肥大/.test(state.note)){
+    state.note=DEFAULT_NOTE;
+  }
+  /* 旧数据没有 rxOrient（内容方向）：按当前拼版张数套用默认组合 */
+  if(!state.paper.rxOrient){
+    const pre=MULTI_PRESET[multiPerSheet()] || MULTI_PRESET[1];
+    state.paper.rxOrient=pre.rx;
+    if(!state.paper.orient) state.paper.orient=pre.sheet;
+  }
+  /* 科别为空时填入默认值（老存档里可能是空串） */
+  if(!state.dept) state.dept=DEFAULT_DEPT;
+  /* 旧药品行可能缺 dose/dunit/freq/usage 或带已下线的 skin 字段：补默认值并清理 */
+  const fixDrug=(d)=>{
+    if(!d) return d;
+    if(!d.dunit) d.dunit="片";
+    if(!d.freq)  d.freq="每日一次";
+    if(!d.usage) d.usage="口服";
+    if("skin" in d) delete d.skin;              /* 皮试选项已下线 */
+    return d;
+  };
+  if(Array.isArray(state.drugs)) state.drugs.forEach(fixDrug);
+  if(Array.isArray(state.rxs)) state.rxs.forEach(r=>{ if(Array.isArray(r.drugs)) r.drugs.forEach(fixDrug); });
 }
 /* 跨天守护：页面长时间开着跨过零点时，日期自动跟进今天 */
 let _lastDay=todayStr();
@@ -2216,14 +3345,18 @@ setInterval(()=>{
   const d=todayStr();
   if(d!==_lastDay){
     _lastDay=d;
-    /* 仅当用户没有手动指定未来日期时才覆盖 */
-    if(!state.date || state.date < d){ state.date=d; syncForm(); renderPreview(); save(); }
+    /* 仅当用户没有手动指定未来日期时才覆盖；各联同步跟进 */
+    if(!state.date || state.date < d){
+      state.date=d;
+      (state.rxs||[]).forEach(r=>{ if(!r.date || r.date<d) r.date=d; });
+      syncForm(); renderPreview(); save();
+    }
   }
 }, 30000);
 function loadSample(){
   state.hospital="北京大学第一医院";
   state.name="梁雅遥"; state.gender="男"; state.age="10岁";
-  state.dept="儿科门诊"; state.diag="发热，咳嗽"; state.card=""; state.mrn="";
+  state.dept="儿科门诊"; state.diag="发热、咳嗽"; state.card=""; state.mrn="";
   state.doctor=""; state.pharmacy="儿科门诊药房"; state.date=todayStr();
   state.drugs=[
     {cat:"Rp",name:"美林混悬液/布洛芬混悬液",spec:"2g 100ML/瓶",dose:"10",dunit:"ML",freq:"必要时",usage:"口服",skin:false,price:"17.85",qty:"1",unit:"瓶"},
@@ -2232,11 +3365,127 @@ function loadSample(){
   ];
   renderAll(); save();
 }
+/* 载入「表格清单」示例：演示从 Excel 复制的「名称 规格 单位 单价」清单直接识别 */
+const SAMPLE_TABLE_TEXT=[
+  "通宣理肺颗粒\t10袋\t\t20",
+  "对乙酰氨基酚片\t12片\t盒\t10",
+  "止嗽立效丸\t6代\t盒\t15",
+  "复方桔梗止咳片\t48片\t\t10",
+  "复方氨酚烷胺胶囊（双克）\t10粒\t盒\t10",
+  "消炎止咳片\t24片\t盒\t12"
+].join("\n");
+function loadSampleTable(){
+  /* 自动切到单联，避免误录进多联的其他格子 */
+  if(multiPerSheet()>1) setMultiUp(1);
+  state.hospital = state.hospital || "示例医院";
+  state.dept    = state.dept    || "全科门诊";
+  /* 注意：先填内容再识别，hideReport() 会清空粘贴框 */
+  document.getElementById("pasteBox").value=SAMPLE_TABLE_TEXT;
+  doParse();
+}
 function clearAll(){
   if(!confirm("确定清空所有内容？")) return;
   const paper=state.paper, skin=state.skin;
-  state={ paper, skin, hospital:"", card:"", dept:"", mrn:"", address:"", name:"", gender:"", age:"", diag:"", doctor:"", date:todayStr(), pharmacy:"", note:DEFAULT_NOTE, drugs:[blankDrug()] };
+  state={ paper, skin, hospital:"", card:"", dept:DEFAULT_DEPT, mrn:"", address:"", name:"", gender:"", age:"", diag:"", doctor:"", date:todayStr(), pharmacy:"", note:DEFAULT_NOTE, drugs:[blankDrug()], rxs:[], activeRx:0 };
   renderAll(); save();
+}
+/* ================= 新建处方 =================
+ * 保留开单机构等长期不变的抬头信息，只重置患者与药品，日期自动更新为当天。
+ *
+ * 多联拼版（如一张 A4 打印 2/4 张）时行为不同：
+ *   点击「＋新处方」跳到下一联并清空它，可连续录多张后一次打印；
+ *   到最后一联后回到第 1 联重新开始。 */
+function newPrescription(){
+  const total=rxCount();
+
+  /* ---------- 多联模式：交给 nextRx 处理 ---------- */
+  if(total>1){ nextRx(); return; }
+
+  /* ---------- 单联模式：原地开新单 ---------- */
+  if(rxHasContent(0) && !confirm("开始新处方？\n\n将保留医院、药房、医师等信息，清空当前患者与药品内容。")) return;
+
+  const keep = {
+    paper: state.paper, skin: state.skin,
+    hospital: state.hospital, dept: state.dept,
+    address: state.address, doctor: state.doctor,
+    pharmacy: state.pharmacy, note: state.note
+  };
+  state = {
+    paper: keep.paper, skin: keep.skin,
+    hospital: keep.hospital, card:"", dept: DEFAULT_DEPT, mrn:"", address: keep.address,
+    name:"", gender:"", age:"", diag:"", doctor: keep.doctor,
+    date: todayStr(),                    /* 新处方自动带上当天日期 */
+    pharmacy: keep.pharmacy, note: keep.note,
+    drugs: [blankDrug()],                /* 预置一个空药品行，直接可录 */
+    rxs: [], activeRx: 0
+  };
+  hideReport();                /* 清掉粘贴识别框与报告 */
+  renderAll(); save();
+  focusNameInput();
+}
+/* 焦点落到患者姓名，便于连续开方 */
+function focusNameInput(){
+  const nm=document.getElementById("fName");
+  if(nm) setTimeout(()=>{ nm.focus(); nm.scrollIntoView({block:"center"}); }, 60);
+}
+/* 切换到指定联 */
+function goRx(i){
+  const total=rxCount();
+  if(total<=1){ state.activeRx=0; renderAll(); save(); return; }
+  i=Math.max(0, Math.min(total-1, i));
+  state.activeRx=i;
+  /* 主节点要挪到新激活联所在的格子，故重跑一次布局 */
+  applyPaper();
+  renderAll(); save();
+}
+/* 联切换栏：仅多联模式显示 */
+function syncRxBar(){
+  const bar=document.getElementById("rxBar");
+  if(!bar) return;
+  const total=rxCount();
+  if(total<=1){ bar.style.display="none"; bar.innerHTML=""; return; }
+  bar.style.display="flex";
+  bar.innerHTML=`<span class="rxbar-lbl">正在录入</span>` + Array.from({length:total},(_,i)=>{
+    const has=rxHasContent(i);
+    const on=i===(state.activeRx||0);
+    return `<button class="rxbar-item${on?" on":""}${has?" filled":""}" data-i="${i}" onclick="goRx(${i})"
+      title="${has?"点击切换到这一联":"这一联还是空白，可点击「下一联」开始录入"}">第${i+1}联${has?"":" ·空"}</button>`;
+  }).join("")
+  + `<button class="rxbar-next" onclick="nextRx()" title="清空下一联并跳过去继续录入（末联后回到第1 联）">下一联 →</button>`;
+}
+/* 跳到下一联开始录下一张处方；末联后回到第 1 联 */
+function nextRx(){
+  const total=rxCount();
+  if(total<=1) return;
+  const cur=state.activeRx||0;
+  const next=(cur+1)%total;
+  /* 目标联已有内容时先确认，避免误点丢数据 */
+  if(rxHasContent(next)){
+    const wrap=next===0 && cur===total-1;
+    const msg=wrap
+      ? `已到最后一联。\n\n第 1 联已有内容，是否清空第 1 联重新开始？`
+      : `第 ${next+1} 联已有内容，是否清空并重新录入？`;
+    if(!confirm(msg)) return;
+  }
+  clearRx(next);
+  state.activeRx=next;
+  applyPaper();
+  renderAll(); save();
+  focusNameInput();
+}
+/** 清空第 i 联的患者与药品信息（保留抬头） */
+function clearRx(i){
+  if(i===0){
+    state.name=""; state.gender=""; state.age=""; state.diag="";
+    state.card=""; state.mrn="";
+    state.drugs=[blankDrug()];
+  } else {
+    state.rxs[i]={
+      name:"", gender:"", age:"", diag:"", card:"", mrn:"", address:state.address,
+      date:todayStr(), drugs:[blankDrug()]
+    };
+  }
+  hideReport();
 }
 
 /* ================= 导入数据库文件 ================= */
@@ -2262,6 +3511,20 @@ let impRows=[];     /* 解析出的原始行对象数组 */
 let impHeader=[];   /* 表头 */
 let impAutoMap={};  /* 自动匹配结果：字段键 -> 源列名 */
 let impFieldOn={};  /* 勾选状态：字段键 -> bool */
+let impManual={};   /* 手动指定：字段键 -> 源列名 */
+let impManualMode=false;/* 是否开启手动匹配模式 */
+
+/* 取某列的首行样例值（用于下拉旁展示，便于核对） */
+function impSample(col){
+  if(!col || !impRows.length) return "";
+  for(let i=0;i<Math.min(impRows.length,30);i++){
+    const v=String(impRows[i][col]==null?"":impRows[i][col]).trim();
+    if(v) return v.length>16 ? v.slice(0,16)+"…" : v;
+  }
+  return "";
+}
+/* 字段当前生效的来源列：手动优先于自动 */
+function impCol(k){ return impManual[k] || impAutoMap[k] || ""; }
 
 function openImport(){
   document.getElementById("importMask").classList.add("on");
@@ -2270,11 +3533,68 @@ function openImport(){
   document.getElementById("impTip").textContent="选择药品数据文件后，可勾选需要导入的字段，再点击「开始导入」。";
   document.getElementById("impFieldsStep").style.display="none";
   document.getElementById("impModeStep").style.display="none";
+  document.getElementById("impManualHint").style.display="none";
+  const mb=document.getElementById("impManual"); if(mb) mb.checked=false;
   document.getElementById("impConfirm").disabled=true;
   document.getElementById("impStatus").textContent="";
-  impRows=[]; impHeader=[]; impAutoMap={}; impFieldOn={};
+  impRows=[]; impHeader=[]; impAutoMap={}; impFieldOn={}; impManual={}; impManualMode=false;
 }
 function closeImport(){ document.getElementById("importMask").classList.remove("on"); }
+
+/* 切换手动匹配模式 */
+function toggleManualMap(on){
+  impManualMode=!!on;
+  document.getElementById("impManualHint").style.display=on?"block":"none";
+  renderImportFields();
+}
+/* 用户在下拉框里选列 */
+function setManualCol(k, col){
+  if(col){ impManual[k]=col; impFieldOn[k]=true; }
+  else { delete impManual[k]; impFieldOn[k]=false; }
+  /* 整表重绘：确保 sample 标签等动态元素同步更新 */
+  renderImportFields();
+}
+/* 清空所有手动匹配 */
+function clearManualMap(){
+  impManual={};
+  renderImportFields();
+}
+/* 对未匹配的字段，按列名再做一次宽松匹配 */
+function autoFillUnmatched(){
+  let hit=0;
+  IMPORT_FIELDS.forEach(f=>{
+    if(impCol(f.k)) return;
+    const cands=[f.label.replace(/[\s/／].*$/,"")].concat(f.aliases).map(normHeader).filter(Boolean);
+    const hitCol=impHeader.find(h=>cands.some(c=>c.length>=2 && (normHeader(h).includes(c)||c.includes(normHeader(h)))));
+    if(hitCol){ impAutoMap[f.k]=hitCol; hit++; }
+  });
+  renderImportFields();
+  document.getElementById("impTip").textContent = hit
+    ? `已为 ${hit} 个字段补上匹配，请确认无误后开始导入。`
+    : "没有更多可自动匹配的字段，可手动指定来源列。";
+}
+/* 刷新单个字段行的显示状态 */
+function updateImpRow(k){
+  const el=document.querySelector(`.imp-field[data-fk="${k}"]`);
+  if(!el) return;
+  const col=impCol(k);
+  el.classList.toggle("mapped", !impManual[k] && !!impAutoMap[k]);
+  el.classList.toggle("manual", !!impManual[k]);
+  const fk=el.querySelector(".fkey");
+  const sm=el.querySelector(".sample");
+  const sel=el.querySelector(".col-sel");
+  if(sel) sel.value=col||"";
+  if(fk){
+    const f=IMPORT_FIELDS.find(x=>x.k===k);
+    if(f&&f.required) fk.textContent="必选";
+    else if(impManual[k]){ fk.textContent="手动"; fk.className="fkey manual-tag"; }
+    else if(col){ fk.textContent="("+col+")"; fk.className="fkey"; }
+    else { fk.textContent="未匹配"; fk.className="fkey"; }
+  }
+  if(sm) sm.textContent = col ? ("例："+impSample(col)) : "";
+  const cb=el.querySelector("input[type=checkbox]");
+  if(cb && !(IMPORT_FIELDS.find(x=>x.k===k)||{}).required) cb.checked=!!impFieldOn[k];
+}
 
 /* 把源表头文字归一化用于匹配 */
 function normHeader(h){
@@ -2330,37 +3650,62 @@ function onImportFile(ev){
   else reader.readAsText(file, "utf-8");
 }
 
-/* 渲染字段勾选列表 */
+/* 渲染字段勾选列表（含手动列映射下拉） */
 function renderImportFields(){
   const box=document.getElementById("impFields");
-  impFieldOn={};
+  if(!impFieldOn) impFieldOn={};
+  const opts = ['<option value="">— 不导入 —</option>']
+    .concat(impHeader.map(h=>`<option value="${esc(h)}">${esc(h)}</option>`)).join("");
+
   box.innerHTML=IMPORT_FIELDS.map(f=>{
-    const srcCol=impAutoMap[f.k];
-    const on=!!srcCol;
-    impFieldOn[f.k]=on || !!f.required;
-    const attr=(f.required)?"checked disabled":"";
-    const tip=f.required?"必选字段":(srcCol?("对应列："+srcCol):"未匹配到列，勾选后不会导入");
-    return `<label class="imp-field${f.required?" required":""}" title="${tip}">
-      <input type="checkbox" data-k="${f.k}" ${srcCol?"checked":""} ${attr} onchange="toggleImportField('${f.k}', this.checked)">
+    const autoCol=impAutoMap[f.k]||"";
+    const col=impCol(f.k);
+    const isManual=!!impManual[f.k];
+    impFieldOn[f.k]=impFieldOn[f.k]!==undefined ? impFieldOn[f.k] : (!!col || !!f.required);
+
+    const cls=["imp-field"];
+    if(f.required) cls.push("required");
+    if(isManual) cls.push("manual");
+    else if(autoCol) cls.push("mapped");
+
+    const tip = f.required ? "必选字段"
+      : isManual ? "手动指定：来自列「"+col+"」"
+      : autoCol ? "自动匹配：来自列「"+autoCol+"」"
+      : "未匹配到列，可在下方下拉中手动指定";
+
+    /* 下拉框仅在手动模式显示，避免默认界面过于拥挤 */
+    const selHtml = impManualMode
+      ? `<select class="col-sel" onchange="setManualCol('${f.k}', this.value)" onclick="event.stopPropagation()">${opts}</select>`
+      : "";
+
+    const fkeyHtml = f.required
+      ? '<span class="fkey req">必选</span>'
+      : isManual ? '<span class="fkey manual-tag">手动</span>'
+      : autoCol ? `<span class="fkey">(${esc(autoCol)})</span>`
+      : '<span class="fkey">未匹配</span>';
+
+    const sampleHtml = (impManualMode && col) ? `<span class="sample" title="${esc(col)}">例：${esc(impSample(col))}</span>` : "";
+
+    const attr = f.required ? "checked disabled" : (impFieldOn[f.k]?"checked":"");
+    return `<div class="${cls.join(" ")}" data-fk="${f.k}" title="${esc(tip)}">
+      <input type="checkbox" data-k="${f.k}" ${attr} onchange="toggleImportField('${f.k}', this.checked)">
       <span>${f.label}${f.required?'<b style="color:var(--req)"> *</b>':""}</span>
-      <span class="fkey${f.required?" req":""}">${f.required?"必选":(srcCol?("("+srcCol+")"):"未匹配")}</span>
-    </label>`;
+      ${selHtml}
+      ${sampleHtml}
+      ${fkeyHtml}
+    </div>`;
   }).join("");
+
+  /* 下拉框回填当前选中列 */
+  IMPORT_FIELDS.forEach(f=>updateImpRow(f.k));
 }
 function toggleImportField(k, on){ impFieldOn[k]=on; }
 function toggleAllImportFields(){
-  const anyOn=IMPORT_FIELDS.some(f=>!f.required && impAutoMap[f.k] && impFieldOn[f.k]);
-  IMPORT_FIELDS.forEach(f=>{
-    if(f.required) return;
-    if(!impAutoMap[f.k]) return;
-    impFieldOn[f.k]=!anyOn;
-  });
-  document.querySelectorAll("#impFields input[type=checkbox]").forEach(cb=>{
-    const k=cb.dataset.k;
-    const f=IMPORT_FIELDS.find(x=>x.k===k);
-    if(f && f.required) return;
-    if(impAutoMap[k]) cb.checked=impFieldOn[k];
-  });
+  /* 以「已匹配的字段」当前是否全选为基准取反 */
+  const matched=IMPORT_FIELDS.filter(f=>!f.required && impCol(f.k));
+  const anyOn=matched.some(f=>impFieldOn[f.k]);
+  matched.forEach(f=>{ impFieldOn[f.k]=!anyOn; });
+  renderImportFields();
 }
 
 /* ---- Excel 解析（xlsx = zip + XML，浏览器原生能力手写解析，无需外部库） ---- */
@@ -2518,7 +3863,7 @@ function splitCsvLine(line, delim){
 /* 把导入行映射为药品记录 */
 function mapRow(row){
   const rec={};
-  const raw=k=>{ const col=impAutoMap[k]; return (col && impFieldOn[k]!==false)? String(row[col]||"").trim() : ""; };
+  const raw=k=>{ const col=impCol(k); return (col && impFieldOn[k]!==false)? String(row[col]||"").trim() : ""; };
   /* 通用名优先；为空时回退到商品名称 */
   let name=raw("n");
   let specBrand="";
@@ -2603,11 +3948,15 @@ function refreshBrandNames(){
 }
 
 /* ================= 启动 ================= */
-restore();
-loadDiags();
+/* 顺序要求：先迁移/加载选项数据，再建立依赖它们的界面 */
+migrateDiagStore();
+loadOptions();
+fillOptionLists();          /* 把选项写入各datalist */
+renderHospitalList();       /* 医院名称历史 */
+restore();                  /* 读取处方状态（含医院名称等） */
 loadUserDB();
 if(USER_DB.length){ buildDrugDB(); refreshBrandNames(); }
-buildChips(); buildDrugSelect();
+buildDrugSelect(); renderDiagSel();
 syncZoom(); syncForm();
 /* 先保证至少有一条空药品行，再渲染，避免首次打开时列表区空白 */
 if(!Array.isArray(state.drugs) || state.drugs.length===0) state.drugs=[blankDrug()];

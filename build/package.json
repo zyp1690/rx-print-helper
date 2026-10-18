@@ -1,0 +1,56 @@
+{
+  "name": "rx-print-assistant",
+  "productName": "处方打印助手",
+  "version": "1.4.0",
+  "description": "面向药店与基层医疗机构的处方录入、识别与打印工具",
+  "author": "火舞狂沙",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test-features.js",
+    "shot": "electron screenshot.js",
+    "dist": "electron-builder --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "22.3.27",
+    "electron-builder": "^24.13.3",
+    "jsdom": "^30.1.3"
+  },
+  "build": {
+    "appId": "com.hwhs.rxprint",
+    "productName": "处方打印助手",
+    "copyright": "Copyright © 2026 火舞狂沙",
+    "asar": true,
+    "directories": {
+      "output": "dist",
+      "buildResources": "res"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "处方打印助手.html",
+      "药品清单库.js",
+      "!**/node_modules/**/*",
+      "!test-features.js",
+      "!screenshot.js",
+      "!make-icon.js",
+      "!make-ico.js",
+      "!shots/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "res/icon.ico"
+    },
+    "portable": {
+      "artifactName": "处方打印助手-${version}-win7portable.exe"
+    }
+  }
+}
