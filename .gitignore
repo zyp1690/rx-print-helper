@@ -12,6 +12,8 @@ build/dist/
 build/*.txt
 build/shots/
 build/*.js.bak
+# 打包出的可执行文件（通过 GitHub Release 分发，不进仓库）
+*.exe
 __pycache__/
 *.pyc
 
